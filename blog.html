@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BMY Digital Store Blog - Latest insights on AI, digital marketing, and content creation">
+    <title>Blog | BMY Digital Store & Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e91e63;
+            --secondary: #ffeb3b;
+            --dark: #000000;
+            --light: #ffffff;
+            --gray: #f5f5f5;
+            --text: #333333;
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--light);
+            line-height: 1.6;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--light);            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;            cursor: pointer;
+        }
+
+        /* Blog Header */
+        .blog-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--light);
+            padding: 160px 0 80px;
+            text-align: center;
+        }
+
+        .blog-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .blog-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Blog Posts */
+        .blog-section {
+            padding: 80px 0;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .blog-card {
+            background: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .blog-image {
+            height: 220px;            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .blog-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .blog-excerpt {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .read-more i {
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Single Post View */        .single-post {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .single-post.active {
+            display: block;
+        }
+
+        .single-post .blog-image {
+            height: 300px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .single-post h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .single-post .blog-content-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .single-post .blog-content-body h3 {
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            color: var(--dark);
+        }
+
+        .single-post .blog-content-body h4 {
+            font-size: 1.4rem;
+            margin: 25px 0 10px;
+            color: var(--primary);
+        }
+
+        .single-post .blog-content-body p {
+            margin-bottom: 20px;
+        }
+
+        .single-post .blog-content-body ol,
+        .single-post .blog-content-body ul {            margin: 20px 0 20px 30px;
+        }
+
+        .single-post .blog-content-body li {
+            margin-bottom: 10px;
+        }
+
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+
+        .back-to-blog i {
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--light);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--light);
+                width: 80%;
+                height: calc(100vh - 80px);
+                padding: 20px;                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .single-post {
+                padding: 25px;
+            }
+
+            .single-post h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">BMY<span>DSS</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#courses">Courses</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="index.html#blog">Blog</a></li>
+                <li><a href="index.html#community">Community</a></li>
+            </ul>
+            <div class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <header class="blog-header">
+        <div class="container">            <h1>BMY Digital Store Blog</h1>
+            <p>Latest insights on AI, digital marketing, and content creation strategies</p>
+        </div>
+    </header>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <!-- Blog Grid (List of posts) -->
+            <div id="blogGrid" class="blog-grid"></div>
+
+            <!-- Single Post View -->
+            <div id="singlePost" class="single-post">
+                <div class="back-to-blog" onclick="showBlogGrid()">
+                    <i class="fas fa-arrow-left"></i> Back to All Posts
+                </div>
+                <div id="postContent"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 BMY Digital Store & Studio. All rights reserved.</p>
+            <p><a href="index.html">Back to Main Site</a></p>
+        </div>
+    </footer>
+
+    <!-- Load Blog Data -->
+    <script src="blog-data.js"></script>
+
+    <script>
+        // Display all blog posts
+        function displayBlogPosts() {
+            const blogGrid = document.getElementById('blogGrid');
+            
+            blogPosts.forEach((post, index) => {
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                card.onclick = () => showSinglePost(index);
+                
+                card.innerHTML = `
+                    <div class="blog-image" style="background: ${post.color}">
+                        <i class="fas ${post.icon}"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-clock"></i> ${post.date}</span>
+                            <span><i class="far fa-comments"></i> ${post.comments}</span>                        </div>
+                        <h3>${post.title}</h3>
+                        <p class="blog-excerpt">${post.excerpt}</p>
+                        <span class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                `;
+                
+                blogGrid.appendChild(card);
+            });
+        }
+
+        // Show single post
+        function showSinglePost(index) {
+            const post = blogPosts[index];
+            const blogGrid = document.getElementById('blogGrid');
+            const singlePost = document.getElementById('singlePost');
+            const postContent = document.getElementById('postContent');
+            
+            postContent.innerHTML = `
+                <div class="blog-image" style="background: ${post.color}">
+                    <i class="fas ${post.icon}"></i>
+                </div>
+                <div class="blog-meta">
+                    <span><i class="far fa-clock"></i> ${post.date}</span>
+                    <span><i class="far fa-comments"></i> ${post.comments}</span>
+                </div>
+                <h1>${post.title}</h1>
+                <div class="blog-content-body">
+                    ${post.content}
+                </div>
+            `;
+            
+            blogGrid.style.display = 'none';
+            singlePost.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Show blog grid
+        function showBlogGrid() {
+            const blogGrid = document.getElementById('blogGrid');
+            const singlePost = document.getElementById('singlePost');
+            
+            blogGrid.style.display = 'grid';
+            singlePost.classList.remove('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');        });
+
+        // Initialize
+        displayBlogPosts();
+    </script>
+</body>
+</html>
