@@ -14,7 +14,6 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
         :root {
             --wa-header: #075E54; --wa-bg: #ECE5DD; --wa-white: #FFFFFF; --wa-green-btn: #25D366;
@@ -32,7 +31,6 @@
         
         .main-view { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; background-color: var(--wa-white); position: relative; }
         
-        /* User Profile Bar */
         .user-profile { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #f8f9fa; border-bottom: 1px solid var(--wa-border); }
         .user-info { display: flex; align-items: center; gap: 10px; }
         .user-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--wa-header); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
@@ -42,16 +40,14 @@
         .stat-value { font-weight: 800; font-size: 16px; color: var(--wa-text); }
         .stat-label { font-size: 10px; color: var(--wa-text-light); text-transform: uppercase; }
         
-        /* Wikicat Banner */
         .wikicat-banner { background: linear-gradient(90deg, #0a0a2a, #1a1a4a); color: var(--millionaire-gold); padding: 10px 15px; text-align: center; font-size: 13px; font-weight: 600; border-bottom: 2px solid var(--millionaire-gold); }
         .wikicat-banner i { margin-right: 5px; }
 
-        /* Millionaire Banner Ad Style */
-        .millionaire-banner { margin: 15px; padding: 20px; background: linear-gradient(135deg, #1a1a4a 0%, #0a0a2a 100%); border: 3px solid var(--millionaire-gold); border-radius: 12px; text-align: center; cursor: pointer; box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3); transition: transform 0.2s; position: relative; overflow: hidden; }        .millionaire-banner:active { transform: scale(0.98); }
+        .millionaire-banner { margin: 15px; padding: 20px; background: linear-gradient(135deg, #1a1a4a 0%, #0a0a2a 100%); border: 3px solid var(--millionaire-gold); border-radius: 12px; text-align: center; cursor: pointer; box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3); transition: transform 0.2s; position: relative; overflow: hidden; }
+        .millionaire-banner:active { transform: scale(0.98); }
         .millionaire-banner::before { content: 'SPONSORED'; position: absolute; top: 5px; left: 10px; font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 600; }
         .millionaire-title { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; color: var(--millionaire-gold); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .millionaire-subtitle { color: white; font-size: 15px; margin-bottom: 15px; }
-        .millionaire-cta { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #000; padding: 10px 25px; border-radius: 25px; font-weight: 700; font-size: 14px; display: inline-block; }
+        .millionaire-subtitle { color: white; font-size: 15px; margin-bottom: 15px; }        .millionaire-cta { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #000; padding: 10px 25px; border-radius: 25px; font-weight: 700; font-size: 14px; display: inline-block; }
         
         .menu-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid var(--wa-border); cursor: pointer; transition: background 0.2s; }
         .menu-item:active { background-color: #f5f5f5; }
@@ -59,7 +55,6 @@
         .menu-title { font-size: 16px; font-weight: 600; color: var(--wa-text); margin-bottom: 3px; }
         .menu-subtitle { font-size: 13px; color: var(--wa-text-light); }
         
-        /* Advert Banners */
         .ad-banner { margin: 15px; padding: 20px; border-radius: 10px; text-align: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; }
         .ad-banner:active { transform: scale(0.98); }
         .ad-banner-white { background: #ffffff; border: 2px solid #8B4513; }
@@ -71,7 +66,6 @@
         .price-white { background: #f9f9f9; color: #333; border-left: 4px solid #8B4513; }
         .price-black { background: #333; color: var(--millionaire-gold); border-left: 4px solid var(--millionaire-gold); }
 
-        /* Detail View */
         .detail-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--wa-bg); background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E"); display: none; flex-direction: column; z-index: 50; }
         .detail-view.active { display: flex; }
         .chat-header { background-color: var(--wa-header); color: var(--wa-white); padding: 10px 15px; display: flex; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.2); flex-shrink: 0; }
@@ -95,19 +89,18 @@
         .book-link:active { background: #e0e0e0; transform: translateX(5px); }
         .book-link i { margin-right: 10px; color: var(--red-accent); font-size: 18px; }
 
-        /* Course Detail View */
-        .course-detail { padding: 20px; }        .course-header { text-align: center; margin-bottom: 25px; }
+        .course-detail { padding: 20px; }
+        .course-header { text-align: center; margin-bottom: 25px; }
         .course-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; color: var(--wa-header); }
         .course-price { font-size: 18px; font-weight: 700; color: var(--red-accent); margin: 10px 0; }
         .course-original-price { text-decoration: line-through; color: #999; font-size: 14px; margin-top: 5px; }
         .course-description { margin-bottom: 20px; line-height: 1.6; color: var(--wa-text); }
         .course-learn { margin-bottom: 25px; }
-        .course-learn h3 { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: var(--wa-header); }
-        .course-learn ul { padding-left: 20px; }
+        .course-learn h3 { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: var(--wa-header); }        .course-learn ul { padding-left: 20px; }
         .course-learn li { margin-bottom: 10px; position: relative; }
         .course-learn li::before { content: "✓"; position: absolute; left: -15px; color: var(--green-accent); font-weight: bold; }
         
-        .enrol-btn { display: inline-block; background: var(--red-accent); color: white; padding: 15px 30px; border-radius: 25px; font-size: 18px; font-weight: bold; width: 100%; text-align: center; margin-top: 15px; cursor: pointer; }
+        .enrol-btn { display: inline-block; background: var(--red-accent); color: white; padding: 15px 30px; border-radius: 25px; font-size: 18px; font-weight: bold; width: 100%; text-align: center; margin-top: 15px; cursor: pointer; border: none; }
         .enrol-btn i { margin-right: 8px; }
         
         .form-container { background: #f8f9fa; border-radius: 15px; padding: 20px; margin-top: 25px; }
@@ -116,6 +109,7 @@
         .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--wa-text); }
         .form-input { width: 100%; padding: 12px; border: 2px solid var(--wa-border); border-radius: 10px; font-size: 16px; }
         .form-submit { background: var(--green-accent); color: white; border: none; padding: 15px; border-radius: 10px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 10px; }
+        .form-submit:active { transform: scale(0.98); }
         
         .payment-details { background: #e8f5e9; border-radius: 15px; padding: 20px; margin-top: 25px; }
         .payment-title { text-align: center; font-size: 18px; font-weight: 600; margin-bottom: 15px; color: var(--wa-header); }
@@ -123,12 +117,7 @@
         .payment-method h4 { font-size: 16px; font-weight: 600; margin-bottom: 10px; color: var(--wa-header); }
         .payment-method p { margin: 8px 0; line-height: 1.5; }
         .payment-note { font-size: 14px; color: #666; margin-top: 20px; text-align: center; }
-        
-        .course-image-container { display: none; }
-        .course-image { width: 100%; border-radius: 15px; }
-        .image-note { text-align: center; font-size: 14px; color: #666; margin-top: 15px; }
 
-        /* Bottom Navigation */
         .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 480px; background: var(--wa-white); display: flex; justify-content: space-around; padding: 10px 0; border-top: 3px solid var(--wa-header); z-index: 100; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); flex-shrink: 0; }
         .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; font-size: 11px; font-weight: 600; cursor: pointer; flex: 1; }
         .nav-item i { font-size: 20px; margin-bottom: 4px; }
@@ -138,14 +127,14 @@
         .nav-item:nth-child(4) { color: var(--red-accent); }
         .nav-item:nth-child(5) { color: var(--black-accent); }
 
-        /* CBT Styles */
         .cbt-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--millionaire-bg); z-index: 200; display: none; flex-direction: column; color: white; }
         .cbt-overlay.active { display: flex; }
         .cbt-header { background: linear-gradient(180deg, #1a1a4a 0%, #0a0a2a 100%); padding: 20px; text-align: center; border-bottom: 2px solid var(--millionaire-gold); position: relative; flex-shrink: 0; }
         .cbt-header h2 { color: var(--millionaire-gold); font-family: 'Montserrat', sans-serif; font-size: 1.2rem; }
         .cbt-content { flex: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; overflow-y: auto; }
         .cbt-input { width: 100%; max-width: 350px; padding: 12px; margin: 10px 0; border-radius: 25px; border: 2px solid var(--millionaire-gold); background: rgba(255,255,255,0.1); color: white; }
-        .cbt-btn { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 800; margin: 10px 0; cursor: pointer; width: 100%; max-width: 350px; }        .cbt-timer { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 20px; border: 1px solid var(--millionaire-gold); margin: 10px 0; font-weight: bold; color: var(--millionaire-gold); }
+        .cbt-btn { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 800; margin: 10px 0; cursor: pointer; width: 100%; max-width: 350px; }
+        .cbt-timer { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 20px; border: 1px solid var(--millionaire-gold); margin: 10px 0; font-weight: bold; color: var(--millionaire-gold); }
         .cbt-question { background: linear-gradient(180deg, #1a1a4a 0%, #0a0a2a 100%); border: 2px solid var(--millionaire-gold); border-radius: 15px; padding: 20px; width: 100%; max-width: 350px; text-align: center; margin: 10px 0; }
         .cbt-option { background: linear-gradient(90deg, #0a0a2a, #1a1a4a); border: 1px solid #4a4a8a; border-radius: 25px; padding: 12px; margin: 8px 0; color: white; cursor: pointer; text-align: left; }
         .cbt-option span { color: var(--millionaire-gold); font-weight: bold; margin-right: 10px; }
@@ -154,15 +143,12 @@
         .cbt-score { position: absolute; top: 15px; right: 15px; background: var(--millionaire-gold); color: #000; padding: 5px 12px; border-radius: 15px; font-weight: bold; }
         .cat-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--millionaire-gold); color: white; padding: 15px; margin: 5px 0; border-radius: 10px; cursor: pointer; width: 100%; max-width: 350px; }
 
-        /* Modals */
         .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 300; display: none; align-items: center; justify-content: center; }
         .modal-overlay.active { display: flex; }
-        .modal-box { background: white; width: 90%; max-width: 350px; border-radius: 15px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .modal-box h2 { color: var(--wa-header); margin-bottom: 15px; }
+        .modal-box { background: white; width: 90%; max-width: 350px; border-radius: 15px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }        .modal-box h2 { color: var(--wa-header); margin-bottom: 15px; }
         .modal-box p { margin-bottom: 20px; color: #555; }
         .modal-input { width: 100%; padding: 12px; border: 2px solid var(--wa-border); border-radius: 25px; margin-bottom: 15px; font-size: 16px; text-align: center; }
         .modal-btn { background: var(--wa-green-btn); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; font-size: 16px; cursor: pointer; width: 100%; }
-        
         .reward-coin { font-size: 50px; margin: 10px 0; animation: bounce 1s infinite; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
@@ -175,7 +161,6 @@
         </div>
         
         <div class="main-view" id="mainView">
-            <!-- User Profile & Stats -->
             <div class="user-profile">
                 <div class="user-info">
                     <div class="user-avatar" id="userAvatar">?</div>
@@ -193,27 +178,23 @@
                 </div>
             </div>
 
-            <!-- Wikicat Coin Banner -->
-            <div class="wikicat-banner">                <i class="fas fa-rocket"></i> Coming Soon: 1 BMY = 1 Wikicat Coin! Keep using the app daily to earn more!
+            <div class="wikicat-banner">
+                <i class="fas fa-rocket"></i> Coming Soon: 1 BMY = 1 Wikicat Coin! Keep using the app daily to earn more!
             </div>
             
-            <!-- Millionaire Banner Ad -->
             <div class="millionaire-banner" onclick="startCBT()">
                 <div class="millionaire-title">🏆 Who Wants to Be a Millionaire?</div>
                 <div class="millionaire-subtitle">IQ Questions & Brain Teasers</div>
                 <div class="millionaire-cta">Play Now & Win Rewards!</div>
             </div>
             
-            <!-- Regular Menu Items -->
             <div id="menuList"></div>
             
-            <!-- Two Advert Banners -->
             <div class="ad-banner ad-banner-white" onclick="openAdvertPlacement()">
                 <div class="ad-handwritten">Click Here to</div>
                 <div class="ad-handwritten-red">Place Your Advert!</div>
                 <div class="ad-price-box price-white">⬜ Big White Banner: $5 / 1 Week</div>
-            </div>
-            <div class="ad-banner ad-banner-black" onclick="openAdvertPlacement()">
+            </div>            <div class="ad-banner ad-banner-black" onclick="openAdvertPlacement()">
                 <div class="ad-handwritten" style="color: white;">Premium Spot</div>
                 <div class="ad-handwritten-white">Place Your Advert!</div>
                 <div class="ad-price-box price-black">⬛ Premium Black Banner: $10 / 1 Month</div>
@@ -237,22 +218,23 @@
             <div class="chat-header">
                 <div class="back-btn" onclick="goBackToCourses()"><i class="fas fa-arrow-left"></i></div>
                 <div class="chat-header-info">
-                    <div class="chat-header-icon" id="courseIcon" style="background-color: #e91e63; width: 35px; height: 35px;"><i class="fas fa-book"></i></div>
+                    <div class="chat-header-icon" id="courseIcon" style="background-color: #e91e63;"><i class="fas fa-book"></i></div>
                     <div class="chat-header-title" id="courseTitle">Course Detail</div>
                 </div>
             </div>
             <div class="chat-area" id="courseDetailArea"></div>
         </div>
-        <!-- Course Image View -->
-        <div class="detail-view" id="courseImageView" style="display:none;">
+
+        <!-- Contact Us View -->
+        <div class="detail-view" id="contactUsView" style="display:none;">
             <div class="chat-header">
-                <div class="back-btn" onclick="goBackToCourses()"><i class="fas fa-arrow-left"></i></div>
+                <div class="back-btn" onclick="closeContactUs()"><i class="fas fa-arrow-left"></i></div>
                 <div class="chat-header-info">
-                    <div class="chat-header-icon" id="imageIcon" style="background-color: #e91e63; width: 35px; height: 35px;"><i class="fas fa-file"></i></div>
-                    <div class="chat-header-title" id="imageTitle">Payment Confirmation</div>
+                    <div class="chat-header-icon" style="background-color: #25D366;"><i class="fas fa-headset"></i></div>
+                    <div class="chat-header-title">Contact Us</div>
                 </div>
             </div>
-            <div class="chat-area" id="courseImageArea"></div>
+            <div class="chat-area" id="contactUsArea"></div>
         </div>
 
         <!-- CBT Overlay -->
@@ -261,11 +243,10 @@
                 <h2>Who Wants to Be a Millionaire?</h2>
                 <div class="cbt-score" id="cbtScore" style="display:none;">0/10</div>
                 <div class="back-btn" onclick="closeCBT()" style="position:absolute; left:15px; top:15px;"><i class="fas fa-times"></i></div>
-            </div>
-            <div class="cbt-content" id="cbtContent"></div>
+            </div>            <div class="cbt-content" id="cbtContent"></div>
         </div>
 
-        <!-- Setup Modal (First Time) -->
+        <!-- Setup Modal -->
         <div class="modal-overlay" id="setupModal">
             <div class="modal-box">
                 <h2>Welcome to BMY Store! </h2>
@@ -288,21 +269,15 @@
 
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
-            <div class="nav-item" onclick="window.open('https://wa.me/2349159884244', '_blank')"><i class="fas fa-comments"></i><span>Chat Admin</span></div>
+            <div class="nav-item" onclick="openContactUs()"><i class="fas fa-headset"></i><span>Contact Us</span></div>
             <div class="nav-item" onclick="openBottomNav('courses')"><i class="fas fa-graduation-cap"></i><span>Courses</span></div>
-            <div class="nav-item" onclick="window.open('https://chat.whatsapp.com/E0XfmxCpkX69wMFKqhGT9U', '_blank')"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></div>
+            <div class="nav-item" onclick="window.open('https://chat.whatsapp.com/E0XfmxCpkX69wMFKqhGT9U?s=cl&p=a&ilr=1', '_blank')"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></div>
             <div class="nav-item" onclick="window.open('https://t.me/capacitydotbuild', '_blank')"><i class="fab fa-telegram"></i><span>Telegram</span></div>
-            <div class="nav-item" onclick="openBottomNav('books')"><i class="fas fa-book"></i><span>Free Books</span></div>        </div>
+            <div class="nav-item" onclick="openBottomNav('books')"><i class="fas fa-book"></i><span>Free Books</span></div>
+        </div>
     </div>
 
     <script>
-        // Register Service Worker for PWA
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js').catch(err => console.log('SW registration failed'));
-            });
-        }
-
         // PWA Install Prompt Logic
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -315,22 +290,15 @@
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        document.getElementById('installBtn').style.display = 'none';
-                    }
+                    if (choiceResult.outcome === 'accepted') document.getElementById('installBtn').style.display = 'none';
                     deferredPrompt = null;
-                });
-            } else {
+                });            } else {
                 alert("To install: Tap your browser menu (⋮) and select 'Add to Home Screen' or 'Install App'.");
             }
         }
 
         const myWhatsAppNumber = "2349159884244";
         const adminEmail = "capacitydotbuild@gmail.com";
-
-        // Load courses data
-        const coursesData = [];
-        const bonusPackages = [];
 
         // --- USER & STREAK LOGIC ---
         function initUser() {
@@ -341,16 +309,11 @@
                 processDailyLogin(user);
             }
         }
+
         function completeSetup() {
             const name = document.getElementById('setupName').value.trim();
             if (!name) { alert('Please enter your name'); return; }
-            
-            const newUser = {
-                name: name,
-                streak: 1,
-                coins: 1,
-                lastLogin: new Date().toISOString()
-            };
+            const newUser = { name: name, streak: 1, coins: 1, lastLogin: new Date().toISOString() };
             localStorage.setItem('bmy_user', JSON.stringify(newUser));
             document.getElementById('setupModal').classList.remove('active');
             updateUserUI(newUser);
@@ -363,201 +326,87 @@
             const yesterday = new Date(Date.now() - 86400000).toDateString();
 
             if (lastLogin === today) {
-                // Already logged in today, just show UI
                 updateUserUI(user);
             } else if (lastLogin === yesterday) {
-                // Consecutive day!
-                user.streak++;
-                user.coins++;
-                user.lastLogin = new Date().toISOString();
+                user.streak++; user.coins++; user.lastLogin = new Date().toISOString();
                 localStorage.setItem('bmy_user', JSON.stringify(user));
-                updateUserUI(user);
-                showDailyReward(user.streak);
+                updateUserUI(user); showDailyReward(user.streak);
             } else {
-                // Missed a day, reset streak but keep coins
-                user.streak = 1;
-                user.coins++;
-                user.lastLogin = new Date().toISOString();
+                user.streak = 1; user.coins++; user.lastLogin = new Date().toISOString();
                 localStorage.setItem('bmy_user', JSON.stringify(user));
-                updateUserUI(user);
-                showDailyReward(user.streak);
+                updateUserUI(user); showDailyReward(user.streak);
             }
         }
 
         function updateUserUI(user) {
             document.getElementById('userName').innerText = user.name;
             document.getElementById('userAvatar').innerText = user.name.charAt(0).toUpperCase();
-            document.getElementById('userStreak').innerText = `${user.streak} 🔥`;
-            document.getElementById('userCoins').innerText = `${user.coins} 🪙`;
+            document.getElementById('userStreak').innerText = `${user.streak} 🔥`;            document.getElementById('userCoins').innerText = `${user.coins} 🪙`;
         }
+
         function showDailyReward(streak) {
             document.getElementById('rewardStreak').innerText = streak;
             document.getElementById('rewardModal').classList.add('active');
         }
-
-        function closeRewardModal() {
-            document.getElementById('rewardModal').classList.remove('active');
-        }
+        function closeRewardModal() { document.getElementById('rewardModal').classList.remove('active'); }
 
         // --- COURSES LOGIC ---
-        function loadCoursesData() {
-            // This would normally be loaded from courses-data.js
-            // For demonstration, we'll use the data structure
-            const courseData = [
-                {
-                    title: "CHATGPT MASTERCLASS FOR BEGINNERS",
-                    description: "Master the power of ChatGPT for business and personal growth.",
-                    whatWillBeLearned: [
-                        "Understanding ChatGPT capabilities and limitations",
-                        "Practical prompt engineering techniques",
-                        "Real-world business applications",
-                        "Creating custom workflows for your needs",
-                        "Avoiding common mistakes with AI"
-                    ],
-                    isFree: true,
-                    link: "https://drive.google.com/drive/folders/1Agq4rZIOybiVsoeLs_2A8uYdAyqDOGSu"
-                },
-                {
-                    title: "CAC BUSINESS REGISTRATION COURSE",
-                    description: "Complete guide to registering your business with CAC in Nigeria.",
-                    whatWillBeLearned: [
-                        "Step-by-step business registration process",
-                        "Required documents and forms",
-                        "Common pitfalls and how to avoid them",
-                        "Timeline expectations for registration",
-                        "Post-registration compliance requirements"
-                    ],
-                    isFree: true,
-                    link: "https://drive.google.com/drive/folders/1ScEA4gxH4ZNkne9ytOGdSMy6ueg0ZhbJ"
-                },
-                {
-                    title: "FREELANCE COURSE",
-                    description: "Start your freelance career with confidence and get your first clients.",
-                    whatWillBeLearned: [
-                        "Setting up your freelance profile",
-                        "Finding clients online",
-                        "Pricing your services competitively",
-                        "Managing client relationships",
-                        "Building a sustainable freelance business"
-                    ],                    isFree: true,
-                    link: "https://drive.google.com/drive/folders/1fXPUHtwMmzZq74fJjnquNGysK-KMGVfx"
-                },
-                {
-                    title: "SMART PHONE COMPETE EBOOK CREATION COURSE",
-                    description: "Create professional ebooks using just your smartphone.",
-                    whatWillBeLearned: [
-                        "Ebook formatting basics",
-                        "Content creation and structuring",
-                        "Designing professional covers",
-                        "Publishing and distribution channels",
-                        "Monetization strategies for ebooks"
-                    ],
-                    price: 1000,
-                    originalPrice: 5000,
-                    isFree: false,
-                    link: "https://drive.google.com/drive/folders/1fRyOBKai5g_z-KKyCMHUUBFIJ3fVWeH7"
-                },
-                {
-                    title: "COMPLETE SMART PHONE PHOTO AND VIDEO EDITING COURSE",
-                    description: "Master photo and video editing on your smartphone.",
-                    whatWillBeLearned: [
-                        "Basic and advanced editing techniques",
-                        "Using professional editing apps",
-                        "Color correction and grading",
-                        "Creating professional content for social media",
-                        "Exporting and sharing your content"
-                    ],
-                    price: 2000,
-                    originalPrice: 10000,
-                    isFree: false,
-                    link: "https://drive.google.com/drive/folders/13R05TnojzSTBA5qdZ99uyU1NZIWMp8_y"
-                },
-                {
-                    title: "3 in 1: EBOOK MONEY + FACEBOOK ADS COURSE + SALES FUNNEL DESIGN COURSE",
-                    description: "Complete package for creating ebooks, running Facebook ads, and designing sales funnels.",
-                    whatWillBeLearned: [
-                        "Ebook creation and monetization strategies",
-                        "Facebook ads strategy and execution",
-                        "Sales funnel design and optimization",
-                        "Complete marketing system",
-                        "Tracking and improving your results"
-                    ],
-                    price: 2500,
-                    originalPrice: 15000,
-                    isFree: false,
-                    link: "https://drive.google.com/drive/folders/1Lu8arDy63MgWR_L9An6SBwKt7mevh1-0"
-                }
-            ];
-            const bonusData = [
-                {
-                    title: "FIVERR FREELANCING 2023: SELL LIKE THE TOP 1%",
-                    link: "https://drive.google.com/drive/folders/1H_NxwpXdR2pPT7fFlKyIyg39Vy3QzrrX"
-                },
-                {
-                    title: "START FIVERR WITHOUT ANY SKILL AND BECOME A TOP RATED COURSE",
-                    link: "https://drive.google.com/file/d/1gfBFXnd0lUWNwkLmd4s29GQ0UWe_L-Ql/view"
-                },
-                {
-                    title: "HOW TO MAKE MONEY ON FIVERR",
-                    link: "https://drive.google.com/file/d/1gfBFXnd0lUWNwkLmd4s29GQ0UWe_L-Ql/view"
-                }
-            ];
+        const coursesData = [
+            { title: "CHATGPT MASTERCLASS FOR BEGINNERS", description: "Master the power of ChatGPT for business and personal growth.", whatWillBeLearned: ["Understanding ChatGPT capabilities", "Practical prompt engineering", "Real-world business applications", "Creating custom workflows", "Avoiding common AI mistakes"], isFree: true, link: "https://drive.google.com/drive/folders/1Agq4rZIOybiVsoeLs_2A8uYdAyqDOGSu" },
+            { title: "CAC BUSINESS REGISTRATION COURSE", description: "Complete guide to registering your business with CAC in Nigeria.", whatWillBeLearned: ["Step-by-step registration process", "Required documents and forms", "Common pitfalls to avoid", "Timeline expectations", "Post-registration compliance"], isFree: true, link: "https://drive.google.com/drive/folders/1ScEA4gxH4ZNkne9ytOGdSMy6ueg0ZhbJ" },
+            { title: "FREELANCE COURSE", description: "Start your freelance career with confidence and get your first clients.", whatWillBeLearned: ["Setting up your freelance profile", "Finding clients online", "Pricing your services competitively", "Managing client relationships", "Building a sustainable business"], isFree: true, link: "https://drive.google.com/drive/folders/1fXPUHtwMmzZq74fJjnquNGysK-KMGVfx" },
+            { title: "SMART PHONE COMPETE EBOOK CREATION COURSE", description: "Create professional ebooks using just your smartphone.", whatWillBeLearned: ["Ebook formatting basics", "Content creation and structuring", "Designing professional covers", "Publishing and distribution", "Monetization strategies"], price: 1000, originalPrice: 5000, isFree: false, link: "https://drive.google.com/drive/folders/1fRyOBKai5g_z-KKyCMHUUBFIJ3fVWeH7" },
+            { title: "COMPLETE SMART PHONE PHOTO AND VIDEO EDITING COURSE", description: "Master photo and video editing on your smartphone.", whatWillBeLearned: ["Basic and advanced editing techniques", "Using professional editing apps", "Color correction and grading", "Creating professional social media content", "Exporting and sharing"], price: 2000, originalPrice: 10000, isFree: false, link: "https://drive.google.com/drive/folders/13R05TnojzSTBA5qdZ99uyU1NZIWMp8_y" },
+            { title: "3 in 1: EBOOK MONEY + FACEBOOK ADS + SALES FUNNEL DESIGN", description: "Complete package for creating ebooks, running Facebook ads, and designing sales funnels.", whatWillBeLearned: ["Ebook creation and monetization", "Facebook ads strategy and execution", "Sales funnel design and optimization", "Complete marketing system", "Tracking and improving results"], price: 2500, originalPrice: 15000, isFree: false, link: "https://drive.google.com/drive/folders/1Lu8arDy63MgWR_L9An6SBwKt7mevh1-0" }
+        ];
 
-            // Sort courses - free first, then by price ascending
-            const sortedCourses = [...courseData].sort((a, b) => {
-                if (a.isFree && !b.isFree) return -1;
-                if (!a.isFree && b.isFree) return 1;
-                if (a.isFree && b.isFree) return 0;
-                return a.price - b.price;
-            });
+        // Sort courses: Free first, then by price ascending
+        coursesData.sort((a, b) => {
+            if (a.isFree && !b.isFree) return -1;
+            if (!a.isFree && b.isFree) return 1;
+            if (a.isFree && b.isFree) return 0;
+            return a.price - b.price;
+        });
 
-            coursesData.length = 0;
-            coursesData.push(...sortedCourses);
-            
-            bonusPackages.length = 0;
-            bonusPackages.push(...bonusData);
-        }
-
-        function renderCoursesMenu() {
+        function renderMenu() {
             const container = document.getElementById('menuList');
             container.innerHTML = '';
-            
-            // Add courses menu item
             const coursesItem = document.createElement('div');
             coursesItem.className = 'menu-item';
             coursesItem.onclick = () => openCoursesMenu();
-            coursesItem.innerHTML = `
-                <div class="menu-icon" style="background-color: #000000">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div>
-                    <div class="menu-title">Digital Courses</div>
-                    <div class="menu-subtitle">Tap to view available courses</div>
-                </div>
-            `;
+            coursesItem.innerHTML = `<div class="menu-icon" style="background-color: #000000"><i class="fas fa-graduation-cap"></i></div><div><div class="menu-title">Digital Courses</div><div class="menu-subtitle">Tap to view available courses</div></div>`;
             container.appendChild(coursesItem);
+
+            const menuItems = [
+                { title: "AI Image And Monetizations", subtitle: "Tap to view details", icon: "fa-image", color: "#e91e63", type: "course", price: 5000 },
+                { title: "AI Video Creation and Monetizations", subtitle: "Tap to view details", icon: "fa-video", color: "#2196f3", type: "course", price: 5000 },
+                { title: "Own Your Own Platform (80% Yours)", subtitle: "Tap to view details", icon: "fa-server", color: "#ff9800", type: "platform", price: 15000 },
+                { title: "Reselling License", subtitle: "Tap to view details", icon: "fa-handshake", color: "#9c27b0", type: "license", price: 20000 },
+                { title: "Become an Affiliate (Earn 40%)", subtitle: "Tap to view details", icon: "fa-percentage", color: "#4caf50", type: "affiliate", price: 0 }
+            ];
+
+            menuItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'menu-item';
+                div.onclick = () => showDetail(item);
+                div.innerHTML = `<div class="menu-icon" style="background-color: ${item.color}"><i class="fas ${item.icon}"></i></div><div><div class="menu-title">${item.title}</div><div class="menu-subtitle">${item.subtitle}</div></div>`;
+                container.appendChild(div);            });
         }
+
         function openCoursesMenu() {
             document.getElementById('chatIcon').style.backgroundColor = '#000000';
             document.getElementById('chatIcon').innerHTML = `<i class="fas fa-graduation-cap"></i>`;
             document.getElementById('chatTitle').innerText = 'Digital Courses';
             
-            let html = `<div class="chat-bubble bubble-left"><h3>Digital Courses Library 📚</h3><p>Our courses are sorted by price: Free courses first, then paid courses from lowest to highest price.</p></div>`;
+            let html = `<div class="chat-bubble bubble-left" style="width: 100%; max-width: 100%;"><h3>Digital Courses Library 📚</h3><p>Our courses are sorted by price: Free courses first, then paid courses from lowest to highest.</p></div>`;
             
             coursesData.forEach(course => {
-                html += `
-                    <div class="chat-bubble bubble-left" style="margin-top: 20px; cursor: pointer;" onclick="openCourseDetail('${course.title}')">
-                        <h3 style="margin-bottom: 10px; color: ${course.isFree ? '#4caf50' : '#e91e63'}">${course.title}</h3>
-                        <p style="margin-bottom: 10px;">${course.description}</p>
-                        ${course.isFree ? 
-                            '<p style="color: #4caf50; font-weight: bold;">FREE COURSE</p>' : 
-                            `<p style="color: #e91e63; font-weight: bold;">Price: #${course.price.toLocaleString()}</p>
-                             <p style="color: #999; text-decoration: line-through;">Original: #${course.originalPrice.toLocaleString()}</p>`
-                        }
-                    </div>
-                `;
+                html += `<div class="chat-bubble bubble-left" style="margin-top: 20px; cursor: pointer;" onclick="openCourseDetail('${course.title}')">
+                    <h3 style="margin-bottom: 10px; color: ${course.isFree ? '#4caf50' : '#e91e63'}">${course.title}</h3>
+                    <p style="margin-bottom: 10px;">${course.description}</p>
+                    ${course.isFree ? '<p style="color: #4caf50; font-weight: bold;">FREE COURSE</p>' : `<p style="color: #e91e63; font-weight: bold;">Price: #${course.price.toLocaleString()}</p><p style="color: #999; text-decoration: line-through;">Original: #${course.originalPrice.toLocaleString()}</p>`}
+                </div>`;
             });
-            
             document.getElementById('chatArea').innerHTML = html;
             document.getElementById('detailView').classList.add('active');
         }
@@ -570,29 +419,16 @@
                 <div class="course-detail">
                     <div class="course-header">
                         <h2 class="course-title">${course.title}</h2>
-                        ${course.isFree ? 
-                            '<p class="course-price" style="color: #4caf50;">FREE COURSE</p>' : 
-                            `<p class="course-price">Promo Price: #${course.price.toLocaleString()}</p>
-                             <p class="course-original-price">Original Price: #${course.originalPrice.toLocaleString()}</p>`
-                        }
+                        ${course.isFree ? '<p class="course-price" style="color: #4caf50;">FREE COURSE</p>' : `<p class="course-price">Promo Price: #${course.price.toLocaleString()}</p><p class="course-original-price">Original Price: #${course.originalPrice.toLocaleString()}</p>`}
                     </div>
-                    
-                    <div class="course-description">
-                        <p>${course.description}</p>
-                    </div>
-                    
+                    <div class="course-description"><p>${course.description}</p></div>
                     <div class="course-learn">
                         <h3>What You'll Learn:</h3>
-                        <ul>
-                            ${course.whatWillBeLearned.map(item => `<li>${item}</li>`).join('')}
-                        </ul>
-                    </div>                    
-                    <button class="enrol-btn" onclick="openEnrolForm('${course.title}')">
-                        <i class="fas fa-graduation-cap"></i> Enrol for ${course.isFree ? 'Free' : `#${course.price.toLocaleString()}`}
-                    </button>
+                        <ul>${course.whatWillBeLearned.map(item => `<li>${item}</li>`).join('')}</ul>
+                    </div>
+                    <button class="enrol-btn" onclick="openEnrolForm('${course.title}')"><i class="fas fa-graduation-cap"></i> Enrol for ${course.isFree ? 'Free' : `#${course.price.toLocaleString()}`}</button>
                 </div>
             `;
-            
             document.getElementById('courseTitle').innerText = course.title;
             document.getElementById('courseDetailArea').innerHTML = detailHtml;
             document.getElementById('detailView').style.display = 'none';
@@ -603,40 +439,31 @@
             const course = coursesData.find(c => c.title === courseTitle);
             if (!course) return;
             
-            const formHtml = `
-                <div class="course-detail">
+            const formHtml = `                <div class="course-detail">
                     <div class="course-header">
                         <h2 class="course-title">${course.title}</h2>
-                        ${course.isFree ? 
-                            '<p class="course-price" style="color: #4caf50;">FREE COURSE</p>' : 
-                            `<p class="course-price">Promo Price: #${course.price.toLocaleString()}</p>
-                             <p class="course-original-price">Original Price: #${course.originalPrice.toLocaleString()}</p>`
-                        }
+                        ${course.isFree ? '<p class="course-price" style="color: #4caf50;">FREE COURSE</p>' : `<p class="course-price">Promo Price: #${course.price.toLocaleString()}</p><p class="course-original-price">Original Price: #${course.originalPrice.toLocaleString()}</p>`}
                     </div>
-                    
                     <div class="form-container">
                         <h3 class="form-title">Enrolment Form</h3>
                         <div class="form-group">
-                            <label for="userName">Your Full Name</label>
-                            <input type="text" id="userName" class="form-input" placeholder="Enter your full name" required>
+                            <label for="enrolName">Your Full Name</label>
+                            <input type="text" id="enrolName" class="form-input" placeholder="Enter your full name">
                         </div>
-                        ${course.isFree ? `
-                            <div class="form-group">
-                                <label for="userEmail">Your Email</label>
-                                <input type="email" id="userEmail" class="form-input" placeholder="Enter your email" required>
-                            </div>
-                        ` : `
-                            <div class="form-group">
-                                <label for="userPhone">Your Phone Number</label>
-                                <input type="tel" id="userPhone" class="form-input" placeholder="Enter your phone number" required>
-                            </div>
-                        `}
-                        <button class="form-submit" onclick="submitEnrolmentForm('${course.title}')">
-                            Enrol Now
+                        <div class="form-group">
+                            <label for="enrolEmail">Your Gmail Address</label>
+                            <input type="email" id="enrolEmail" class="form-input" placeholder="Enter your Gmail address">
+                        </div>
+                        <div class="form-group">
+                            <label for="enrolPhone">Your Phone Number</label>
+                            <input type="tel" id="enrolPhone" class="form-input" placeholder="Enter your phone number">
+                        </div>
+                        <button type="button" class="form-submit" onclick="submitEnrolmentForm('${course.title}')">
+                            <i class="fas fa-paper-plane"></i> Enrol Now
                         </button>
                     </div>
-                </div>            `;
-            
+                </div>
+            `;
             document.getElementById('courseDetailArea').innerHTML = formHtml;
         }
 
@@ -644,137 +471,102 @@
             const course = coursesData.find(c => c.title === courseTitle);
             if (!course) return;
             
-            const userName = document.getElementById('userName').value.trim();
-            const userEmail = document.getElementById('userEmail')?.value.trim() || '';
-            const userPhone = document.getElementById('userPhone')?.value.trim() || '';
+            const userName = document.getElementById('enrolName').value.trim();
+            const userEmail = document.getElementById('enrolEmail').value.trim();
+            const userPhone = document.getElementById('enrolPhone').value.trim();
             
-            if (!userName) {
-                alert('Please enter your name');
-                return;
-            }
+            if (!userName) { alert('Please enter your name'); return; }
+            if (!userEmail || !userEmail.includes('@')) { alert('Please enter a valid Gmail address'); return; }
+            if (!userPhone) { alert('Please enter your phone number'); return; }
             
-            if (!course.isFree && !userPhone) {
-                alert('Please enter your phone number');
-                return;
-            }
-            
-            // Hide the form and show the course image container
             document.getElementById('courseDetailArea').innerHTML = `
-                <div class="course-image-container" id="courseImageContainer">
-                    <div style="text-align: center; padding: 20px;">
-                        <h3 style="color: #4caf50; margin-bottom: 20px;">Form Submitted Successfully!</h3>
-                        <p style="margin-bottom: 20px;">Your details are being processed and sent to BMY admin.</p>
-                        <div style="background: #e8f5e9; border-radius: 15px; padding: 20px; margin-top: 20px;">
-                            <h4 style="font-size: 18px; margin-bottom: 15px; color: #e91e63;">Course: ${course.title}</h4>
-                            <p><strong>Name:</strong> ${userName}</p>
-                            ${course.isFree ? `<p><strong>Email:</strong> ${userEmail}</p>` : `<p><strong>Phone:</strong> ${userPhone}</p>`}
-                            <p><strong>Price:</strong> ${course.isFree ? 'FREE' : `#${course.price.toLocaleString()}`}</p>
-                            <p style="margin-top: 20px; font-weight: bold; color: #4caf50;">Your details have been sent to BMY admin!</p>
-                        </div>
-                        
-                        <div class="payment-details">
-                            <h4 class="payment-title">Payment Instructions</h4>
-                            <div class="payment-method">
-                                <h4>Bank Transfer</h4>
-                                <p><strong>Bank:</strong> UBA</p>
-                                <p><strong>Account Name:</strong> Akinsuroju Olubunmi</p>
-                                <p><strong>Account Number:</strong> 2118753131</p>
-                            </div>
-                            <div class="payment-method">
-                                <h4>Mobile Payment</h4>
-                                <p><strong>Platform:</strong> Palmpay</p>
-                                <p><strong>Account Name:</strong> Akinsuroju Olubunmi</p>
-                                <p><strong>Account Number:</strong> 7033143508</p>                            </div>
-                            <p class="payment-note">After payment, send screenshot to BMY admin on WhatsApp.</p>
-                        </div>
-                    </div>
+                <div class="course-detail" style="text-align: center; padding: 40px 20px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 40px; color: var(--wa-header); margin-bottom: 20px;"></i>
+                    <h3>Processing your enrolment...</h3>
+                    <p>Please wait while we prepare your details.</p>
                 </div>
             `;
             
-            // Convert to image and send to WhatsApp
             setTimeout(() => {
-                convertFormToImage(course, userName, userEmail, userPhone);
-            }, 1000);
+                showPaymentAndSendWhatsApp(course, userName, userEmail, userPhone);            }, 1500);
         }
 
-        function convertFormToImage(course, userName, userEmail, userPhone) {
-            const container = document.getElementById('courseImageContainer');
-            
-            // Create a temporary canvas element
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Set canvas dimensions based on container
-            const width = container.offsetWidth;
-            const height = container.offsetHeight;
-            canvas.width = width;
-            canvas.height = height;
-            
-            // Draw the container to canvas
-            html2canvas(container, {
-                onrendered: function(canvas) {
-                    // Convert canvas to data URL
-                    const imgData = canvas.toDataURL('image/png');
-                    
-                    // Create a new image element
-                    const img = new Image();
-                    img.src = imgData;
-                    
-                    // Add to the image container
-                    document.getElementById('courseImageArea').innerHTML = `
-                        <div style="text-align: center; padding: 20px;">
-                            <h3 style="color: #4caf50; margin-bottom: 20px;">Payment Confirmation</h3>
-                            <p style="margin-bottom: 20px;">Your payment details have been sent to BMY admin.</p>
-                            <img src="${imgData}" class="course-image" alt="Payment Confirmation">
-                            <p class="image-note">This image has been sent to BMY admin. Please complete your payment.</p>
+        function showPaymentAndSendWhatsApp(course, userName, userEmail, userPhone) {
+            const detailHtml = `
+                <div class="course-detail">
+                    <div class="course-header">
+                        <h2 class="course-title" style="color: var(--green-accent);">Enrolment Successful! 🎉</h2>
+                        <p style="margin-top: 10px;">Your details have been sent to BMY Admin.</p>
+                    </div>
+                    <div class="payment-details">
+                        <h4 class="payment-title">Complete Your Payment</h4>
+                        <div class="payment-method">
+                            <h4><i class="fas fa-university"></i> Bank Transfer</h4>
+                            <p><strong>Bank:</strong> UBA</p>
+                            <p><strong>Account Name:</strong> Akinsuroju Olubunmi</p>
+                            <p><strong>Account Number:</strong> 2118753131</p>
                         </div>
-                    `;
-                    
-                    // Hide the course detail view and show the image view
-                    document.getElementById('courseDetailView').style.display = 'none';
-                    document.getElementById('courseImageView').style.display = 'flex';
-                                        // Send to WhatsApp
-                    const message = `
-                        New Course Enrolment!
-
-                        Course: ${course.title}
-                        Name: ${userName}
-                        ${course.isFree ? `Email: ${userEmail}` : `Phone: ${userPhone}`}
-                        Price: ${course.isFree ? 'FREE' : `#${course.price.toLocaleString()}`}
-                        
-                        Please process this enrolment.
-                    `;
-                    
-                    const encodedMessage = encodeURIComponent(message);
-                    window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`, '_blank');
-                }
-            });
+                        <div class="payment-method">
+                            <h4><i class="fas fa-mobile-alt"></i> Mobile Payment</h4>
+                            <p><strong>Platform:</strong> Palmpay</p>
+                            <p><strong>Account Name:</strong> Akinsuroju Olubunmi</p>
+                            <p><strong>Account Number:</strong> 7033143508</p>
+                        </div>
+                        <p class="payment-note">After payment, please send the screenshot to BMY admin on WhatsApp to activate your course.</p>
+                    </div>
+                    ${!course.isFree ? `
+                    <button class="form-submit" style="margin-top: 20px; background: var(--wa-green-btn);" onclick="window.open('https://wa.me/2349159884244?text=${encodeURIComponent(`Hello BMY! I just enrolled for ${course.title}. My Name: ${userName}, Phone: ${userPhone}. I have made payment, here is my proof.`)}', '_blank')">
+                        <i class="fab fa-whatsapp"></i> Send Payment Proof on WhatsApp
+                    </button>` : `
+                    <a href="${course.link}" target="_blank" class="form-submit" style="display: block; text-decoration: none; text-align: center; margin-top: 20px; background: var(--wa-green-btn);">
+                        <i class="fas fa-external-link-alt"></i> Access Free Course Now
+                    </a>`}
+                </div>
+            `;
+            document.getElementById('courseDetailArea').innerHTML = detailHtml;
+            
+            const message = `*NEW COURSE ENROLMENT!*\n\n*Course:* ${course.title}\n*Name:* ${userName}\n*Email:* ${userEmail}\n*Phone:* ${userPhone}\n*Price:* ${course.isFree ? 'FREE' : `#${course.price.toLocaleString()}`}\n\nPlease process this enrolment.`;
+            window.open(`https://wa.me/2349159884244?text=${encodeURIComponent(message)}`, '_blank');
         }
 
         function goBackToCourses() {
             document.getElementById('courseDetailView').style.display = 'none';
-            document.getElementById('courseImageView').style.display = 'none';
+            document.getElementById('contactUsView').style.display = 'none';
             document.getElementById('detailView').style.display = 'flex';
         }
 
-        // --- MENU & DETAIL LOGIC ---
-        function renderMenu() {
-            const container = document.getElementById('menuList');
-            container.innerHTML = '';
-            menuItems.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'menu-item';
-                div.onclick = () => showDetail(item);
-                div.innerHTML = `<div class="menu-icon" style="background-color: ${item.color}"><i class="fas ${item.icon}"></i></div><div><div class="menu-title">${item.title}</div><div class="menu-subtitle">${item.subtitle}</div></div>`;
-                container.appendChild(div);
-            });
+        // --- CONTACT US LOGIC ---
+        function openContactUs() {
+            document.getElementById('contactUsView').style.display = 'flex';            const html = `
+                <div class="chat-bubble bubble-left" style="width: 100%; max-width: 100%;">
+                    <h3>How can we help you? </h3>
+                    <p>Choose an option below to reach us or join our community.</p>
+                </div>
+                <a href="https://wa.me/2349159884244?text=${encodeURIComponent('I want to make enquiry about BMY Digitals.')}" target="_blank" class="book-link" style="border-left-color: #25D366;">
+                    <i class="fab fa-whatsapp" style="color: #25D366;"></i> Chat with Admin
+                </a>
+                <a href="blog.html" target="_blank" class="book-link" style="border-left-color: #e91e63;">
+                    <i class="fas fa-newspaper" style="color: #e91e63;"></i> Read Our Blog
+                </a>
+                <a href="https://chat.whatsapp.com/E0XfmxCpkX69wMFKqhGT9U?s=cl&p=a&ilr=1" target="_blank" class="book-link" style="border-left-color: #25D366;">
+                    <i class="fab fa-whatsapp" style="color: #25D366;"></i> Join WhatsApp Group
+                </a>
+                <a href="https://t.me/capacitydotbuild" target="_blank" class="book-link" style="border-left-color: #0088cc;">
+                    <i class="fab fa-telegram" style="color: #0088cc;"></i> Join Telegram Group
+                </a>
+            `;
+            document.getElementById('contactUsArea').innerHTML = html;
         }
 
+        function closeContactUs() {
+            document.getElementById('contactUsView').style.display = 'none';
+        }
+
+        // --- OTHER MENU LOGIC ---
         function showDetail(item) {
             document.getElementById('chatIcon').style.backgroundColor = item.color;
             document.getElementById('chatIcon').innerHTML = `<i class="fas ${item.icon}"></i>`;
             document.getElementById('chatTitle').innerText = item.title;
-            
             let content = '';
             if (item.type === 'course') {
                 content = `<div class="chat-bubble bubble-left"><h3>${item.title}</h3><ul><li>✅ Full video tutorials</li><li>✅ Step-by-step guides</li><li>✅ Google Drive access</li><li>✅ Monetization strategies</li><li>✅ Prompt engineering</li></ul><div class="price-tag">💰 Price: #${item.price.toLocaleString()}</div></div><div class="chat-bubble bubble-right"><a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want to buy ${item.title} for #${item.price}" class="order-btn" target="_blank"><i class="fab fa-whatsapp"></i> Order Now</a></div>`;
@@ -782,9 +574,9 @@
                 content = `<div class="chat-bubble bubble-left"><h3>${item.title}</h3><ul><li>✅ 80% profit is yours</li><li>✅ I take 20% for hosting</li><li>✅ Full mentorship included</li><li>✅ Automatic updates</li><li>✅ I handle customer support</li></ul><div class="price-tag">💰 Setup Fee: #${item.price.toLocaleString()}</div></div><div class="chat-bubble bubble-right"><a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want the Platform (80/20 split) for #${item.price}" class="order-btn" target="_blank"><i class="fab fa-whatsapp"></i> Get My Platform</a></div>`;
             } else if (item.type === 'license') {
                 content = `<div class="chat-bubble bubble-left"><h3>${item.title}</h3><ul><li>✅ Complete platform</li><li>✅ Set up your affiliates</li><li>✅ Auto updates from my site</li><li>✅ 6 months support</li></ul><div class="price-tag">💰 License: #${item.price.toLocaleString()}</div></div><div class="chat-bubble bubble-right"><a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want Reselling License for #${item.price}" class="order-btn" target="_blank"><i class="fab fa-whatsapp"></i> Get License</a></div>`;
-            } else if (item.type === 'affiliate') {                content = `<div class="chat-bubble bubble-left"><h3>${item.title}</h3><ul><li>✅ Share your unique link</li><li>✅ Earn 40% on all sales</li><li>✅ FREE to join</li><li>✅ Fast payouts</li><li>✅ No customer support needed</li></ul><div class="price-tag"> 100% FREE to Register!</div></div><div class="chat-bubble bubble-right"><a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want to register as Affiliate (40% commission)" class="order-btn" target="_blank"><i class="fab fa-whatsapp"></i> Register as Affiliate</a></div>`;
+            } else if (item.type === 'affiliate') {
+                content = `<div class="chat-bubble bubble-left"><h3>${item.title}</h3><ul><li>✅ Share your unique link</li><li>✅ Earn 40% on all sales</li><li>✅ FREE to join</li><li>✅ Fast payouts</li><li>✅ No customer support needed</li></ul><div class="price-tag"> 100% FREE to Register!</div></div><div class="chat-bubble bubble-right"><a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want to register as Affiliate (40% commission)" class="order-btn" target="_blank"><i class="fab fa-whatsapp"></i> Register as Affiliate</a></div>`;
             }
-            
             document.getElementById('chatArea').innerHTML = content;
             document.getElementById('detailView').classList.add('active');
         }
@@ -792,16 +584,14 @@
         function goBack() { document.getElementById('detailView').classList.remove('active'); }
 
         function openAdvertPlacement() {
-            const msg = encodeURIComponent("Hello BMY! I want to place an advert:\n\n⬜ Big White Banner: $5 / 1 Week\n Premium Black Banner: $10 / 1 Month");
+            const msg = encodeURIComponent("Hello BMY! I want to place an advert:\n\n⬜ Big White Banner: $5 / 1 Week\n⬛ Premium Black Banner: $10 / 1 Month");
             window.open(`https://wa.me/${myWhatsAppNumber}?text=${msg}`, '_blank');
         }
-
         function openBottomNav(type) {
             if (type === 'books') {
                 document.getElementById('chatIcon').style.backgroundColor = '#e91e63';
                 document.getElementById('chatIcon').innerHTML = `<i class="fas fa-book"></i>`;
                 document.getElementById('chatTitle').innerText = 'Free Ebooks Library';
-                
                 const books = [
                     { name: "Personal Development Books", link: "https://drive.google.com/drive/folders/1-4m3aoHpkMC032U4HJBio1QxsEgCEYdJ" },
                     { name: "Finance and Money Making Books", link: "https://drive.google.com/drive/folders/1vUgr-Ira5WxrMO5y1y5UzLaCQ_OlJq1u" },
@@ -816,106 +606,82 @@
                     { name: "Life Building Books", link: "https://drive.google.com/drive/folders/1E7dJs3gFhcDg7-kUtVghOrpYU26fqBje" },
                     { name: "Speak and Make Money Book", link: "https://drive.google.com/file/d/1kjALH8JyQ_uefjzfu7EFXKF8itceWPFf/view" }
                 ];
-                
-                let html = `<div class="chat-bubble bubble-left" style="width: 100%; max-width: 100%;"><h3>Free Ebooks Library </h3><p>Tap any category below to open the Google Drive folder and read for free!</p></div>`;
+                let html = `<div class="chat-bubble bubble-left" style="width: 100%; max-width: 100%;"><h3>Free Ebooks Library 📖</h3><p>Tap any category below to open the Google Drive folder and read for free!</p></div>`;
                 books.forEach(book => { html += `<a href="${book.link}" target="_blank" class="book-link"><i class="fas fa-folder-open"></i> ${book.name}</a>`; });
-                
                 document.getElementById('chatArea').innerHTML = html;
                 document.getElementById('detailView').classList.add('active');
             } else if (type === 'courses') {
-                loadCoursesData();
-                renderCoursesMenu();
                 openCoursesMenu();
             }
         }
 
         // --- CBT LOGIC ---
-        function startCBT() {
-            document.getElementById('cbtOverlay').classList.add('active');            document.getElementById('cbtScore').style.display = 'none';
-            document.getElementById('cbtContent').innerHTML = `
-                <h3 style="color:var(--millionaire-gold); margin: 20px 0;">Enter Your Details</h3>
-                <input type="text" class="cbt-input" id="cbtName" placeholder="Your Full Name">
-                <input type="email" class="cbt-input" id="cbtEmail" placeholder="Your Gmail Address">
-                <button class="cbt-btn" onclick="validateCBT()">Start Game</button>
-            `;
-        }
+        const questionsDB = {
+            "General Knowledge": [{ q: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], a: 2 }, { q: "Which planet is the Red Planet?", options: ["Venus", "Mars", "Jupiter", "Saturn"], a: 1 }, { q: "What is the largest ocean?", options: ["Atlantic", "Indian", "Arctic", "Pacific"], a: 3 }, { q: "Who painted Mona Lisa?", options: ["Van Gogh", "Picasso", "Da Vinci", "Michelangelo"], a: 2 }, { q: "Chemical symbol for gold?", options: ["Au", "Ag", "Fe", "Pb"], a: 0 }, { q: "How many continents?", options: ["5", "6", "7", "8"], a: 2 }, { q: "Hardest natural substance?", options: ["Gold", "Iron", "Diamond", "Platinum"], a: 2 }, { q: "Land of the Rising Sun?", options: ["China", "Japan", "Korea", "Thailand"], a: 1 }, { q: "Smallest prime number?", options: ["0", "1", "2", "3"], a: 2 }, { q: "Who wrote Hamlet?", options: ["Dickens", "Shakespeare", "Twain", "Austen"], a: 1 }],
+            "Logic & Brain Teasers": [{ q: "What comes next: 2, 4, 8, 16, ?", options: ["24", "32", "30", "64"], a: 1 }, { q: "5 cats catch 5 mice in 5 mins. 100 cats catch 100 mice in?", options: ["100 mins", "5 mins", "50 mins", "1 min"], a: 1 }, { q: "I speak without mouth, hear without ears. What am I?", options: ["Wind", "Echo", "Shadow", "Time"], a: 1 }, { q: "Has keys but can't open locks?", options: ["Map", "Piano", "Book", "Computer"], a: 1 }, { q: "The more you take, the more you leave behind?", options: ["Steps", "Breaths", "Photos", "Memories"], a: 0 }, { q: "Travels world but stays in corner?", options: ["Stamp", "Coin", "Ant", "Dust"], a: 0 }, { q: "Rearrange 'CIFAIPC' = ?", options: ["City", "Animal", "Ocean", "Country"], a: 2 }, { q: "Has head and tail but no body?", options: ["Snake", "Coin", "Worm", "River"], a: 1 }, { q: "Odd one out: 3, 5, 11, 14, 17?", options: ["3", "5", "14", "17"], a: 2 }, { q: "Gets wetter as it dries?", options: ["Sponge", "Towel", "Sun", "Hair"], a: 1 }],
+            "Math & Numbers": [{ q: "Square root of 144?", options: ["10", "11", "12", "14"], a: 2 }, { q: "15% of 200?", options: ["20", "25", "30", "35"], a: 2 }, { q: "If x + 5 = 12, x = ?", options: ["5", "6", "7", "8"], a: 2 }, { q: "Degrees in right angle?", options: ["45", "90", "180", "360"], a: 1 }, { q: "Next prime after 7?", options: ["9", "10", "11", "13"], a: 2 }, { q: "7 x 8 = ?", options: ["54", "56", "58", "62"], a: 1 }, { q: "Sides of hexagon?", options: ["5", "6", "7", "8"], a: 1 }, { q: "100 / 4 = ?", options: ["20", "25", "30", "40"], a: 1 }, { q: "Pi to 2 decimals?", options: ["3.12", "3.14", "3.16", "3.18"], a: 1 }, { q: "Triangle: 60° + 70° + ? = 180°", options: ["40°", "50°", "60°", "70°"], a: 1 }],
+            "Tech & AI": [{ q: "AI stands for?", options: ["Automated Intelligence", "Artificial Intelligence", "Advanced Interface", "Analog Input"], a: 1 }, { q: "Microsoft co-founder?", options: ["Steve Jobs", "Bill Gates", "Zuckerberg", "Elon Musk"], a: 1 }, { q: "HTTP stands for?", options: ["HyperText Transfer Protocol", "High Tech Process", "HyperText Transmission", "Host Transfer"], a: 0 }, { q: "Created iPhone?", options: ["Samsung", "Google", "Apple", "Microsoft"], a: 2 }, { q: "Main web language?", options: ["Python", "Java", "HTML", "C++"], a: 2 }, { q: "CPU stands for?", options: ["Central Processing Unit", "Computer Personal Unit", "Central Program", "Core Processing"], a: 0 }, { q: "Which is a search engine?", options: ["Windows", "Google", "Android", "Intel"], a: 1 }, { q: "First iPhone year?", options: ["2005", "2007", "2009", "2010"], a: 1 }, { q: "What is Phishing?", options: ["Fishing type", "Cyber attack", "Programming", "Hardware"], a: 1 }, { q: "RAM stands for?", options: ["Read Access Memory", "Random Access Memory", "Run Application", "Real Active"], a: 1 }],
+            "Business & Finance": [{ q: "ROI stands for?", options: ["Rate of Interest", "Return on Investment", "Revenue Over Income", "Risk Inflation"], a: 1 }, { q: "Bull Market means?", options: ["Falling prices", "Rising prices", "Stable prices", "Closed market"], a: 1 }, { q: "Japan currency?", options: ["Yuan", "Won", "Yen", "Ringgit"], a: 2 }, { q: "CEO stands for?", options: ["Chief Executive Officer", "Central Economic", "Corporate Executive", "Chief Economic"], a: 0 }, { q: "AAPL ticker = ?", options: ["Amazon", "Apple", "Adobe", "AOL"], a: 1 }, { q: "Inflation is?", options: ["Rise in prices", "Fall in prices", "More jobs", "Less money"], a: 0 }, { q: "Dividend is?", options: ["A tax", "Share of profits", "A loan", "A bond"], a: 1 }, { q: "B2B means?", options: ["Business to Business", "Back to Basics", "Bank to Bank", "Buy to Build"], a: 0 }, { q: "Capital in business?", options: ["Main office", "Money to start", "The CEO", "The product"], a: 1 }, { q: "Monopoly is?", options: ["One seller", "Many sellers", "No sellers", "Govt control"], a: 0 }]
+        };
+        let cbtState = { name: "", email: "", category: "", questions: [], index: 0, score: 0, timer: null, time: 300 };
 
+        function startCBT() {
+            document.getElementById('cbtOverlay').classList.add('active');
+            document.getElementById('cbtScore').style.display = 'none';
+            document.getElementById('cbtContent').innerHTML = `<h3 style="color:var(--millionaire-gold); margin: 20px 0;">Enter Your Details</h3><input type="text" class="cbt-input" id="cbtName" placeholder="Your Full Name"><input type="email" class="cbt-input" id="cbtEmail" placeholder="Your Gmail Address"><button class="cbt-btn" onclick="validateCBT()">Start Game</button>`;
+        }
         function validateCBT() {
             const name = document.getElementById('cbtName').value.trim();
             const email = document.getElementById('cbtEmail').value.trim();
             if (!name || !email || !email.includes('@')) { alert('Please enter valid Name and Gmail'); return; }
             cbtState.name = name; cbtState.email = email;
-            showCategories();
-        }
-
-        function showCategories() {
-            let html = '<h3 style="color:var(--millionaire-gold); margin: 20px 0;">Select Category</h3>';
-            Object.keys(questionsDB).forEach(cat => { html += `<button class="cat-btn" onclick="startQuiz('${cat}')">${cat}</button>`; });
+            let html = '<h3 style="color:var(--millionaire-gold); margin: 20px 0;">Select Category</h3>';            Object.keys(questionsDB).forEach(cat => { html += `<button class="cat-btn" onclick="startQuiz('${cat}')">${cat}</button>`; });
             document.getElementById('cbtContent').innerHTML = html;
         }
-
         function startQuiz(category) {
             cbtState.category = category;
             cbtState.questions = [...questionsDB[category]].sort(() => 0.5 - Math.random()).slice(0, 10);
             cbtState.index = 0; cbtState.score = 0; cbtState.time = 300;
             document.getElementById('cbtScore').style.display = 'block';
             document.getElementById('cbtScore').innerText = '0/10';
-            showQuestion(); startTimer();
-        }
-
-        function startTimer() {
+            showQuestion();
             if (cbtState.timer) clearInterval(cbtState.timer);
             cbtState.timer = setInterval(() => { cbtState.time--; if (cbtState.time <= 0) { clearInterval(cbtState.timer); endQuiz(); } }, 1000);
         }
-
         function showQuestion() {
             const q = cbtState.questions[cbtState.index];
             const mins = Math.floor(cbtState.time / 60); const secs = cbtState.time % 60;
-            let html = `<div class="cbt-timer">️ ${mins}:${secs.toString().padStart(2,'0')}</div>`;
-            html += `<div class="cbt-question"><strong>Q${cbtState.index + 1}/10:</strong> ${q.q}</div>`;
+            let html = `<div class="cbt-timer">⏱️ ${mins}:${secs.toString().padStart(2,'0')}</div><div class="cbt-question"><strong>Q${cbtState.index + 1}/10:</strong> ${q.q}</div>`;
             const labels = ['A', 'B', 'C', 'D'];
             q.options.forEach((opt, idx) => { html += `<div class="cbt-option" onclick="checkAnswer(${idx}, this)"><span>${labels[idx]}.</span> ${opt}</div>`; });
             document.getElementById('cbtContent').innerHTML = html;
         }
-
         function checkAnswer(selected, element) {
             const options = document.querySelectorAll('.cbt-option');
-            options.forEach(opt => opt.style.pointerEvents = 'none');            const correct = cbtState.questions[cbtState.index].a;
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            const correct = cbtState.questions[cbtState.index].a;
             if (selected === correct) { element.classList.add('correct'); cbtState.score++; document.getElementById('cbtScore').innerText = `${cbtState.score}/10`; } 
             else { element.classList.add('wrong'); options[correct].classList.add('correct'); }
             setTimeout(() => { cbtState.index++; if (cbtState.index < 10) showQuestion(); else { clearInterval(cbtState.timer); endQuiz(); } }, 1500);
         }
-
         function endQuiz() {
             const score = cbtState.score;
-            let html = `<h3 style="color:var(--millionaire-gold); margin: 20px 0; text-align: center;">Quiz Complete!</h3>`;
-            html += `<div class="cbt-question" style="text-align: center;"><h2 style="color: white; margin-bottom: 15px;">Score: ${score}/10</h2>`;
+            let html = `<h3 style="color:var(--millionaire-gold); margin: 20px 0; text-align: center;">Quiz Complete!</h3><div class="cbt-question" style="text-align: center;"><h2 style="color: white; margin-bottom: 15px;">Score: ${score}/10</h2>`;
             if (score === 10) {
-                html += `<p style="color:var(--millionaire-gold); font-size: 1.3rem; font-weight: bold;">🏆 GRAND WINNER! 🏆</p><p>Click below to email your details for rewards!</p><a href="mailto:${adminEmail}?subject=Millionaire Winner: ${encodeURIComponent(cbtState.name)}&body=Name: ${encodeURIComponent(cbtState.name)}%0D%0AEmail: ${encodeURIComponent(cbtState.email)}%0D%0ACategory: ${encodeURIComponent(cbtState.category)}%0D%0AScore: 10/10" class="cbt-btn" style="text-decoration: none; display: inline-block; margin-top: 15px;"> Claim Reward</a>`;
+                html += `<p style="color:var(--millionaire-gold); font-size: 1.3rem; font-weight: bold;">🏆 GRAND WINNER! 🏆</p><p>Click below to email your details for rewards!</p><a href="mailto:${adminEmail}?subject=Millionaire Winner: ${encodeURIComponent(cbtState.name)}&body=Name: ${encodeURIComponent(cbtState.name)}%0D%0AEmail: ${encodeURIComponent(cbtState.email)}%0D%0ACategory: ${encodeURIComponent(cbtState.category)}%0D%0AScore: 10/10" class="cbt-btn" style="text-decoration: none; display: inline-block; margin-top: 15px;">📧 Claim Reward</a>`;
             } else if (score >= 7) {
-                html += `<p style="color:var(--green-accent); font-weight: bold;">✅ PASSED! Score above 6.</p><p>You can advance to higher level!</p><button class="cbt-btn" onclick="showCategories()">Play Another Category</button>`;
+                html += `<p style="color:var(--green-accent); font-weight: bold;">✅ PASSED! Score above 6.</p><p>You can advance to higher level!</p><button class="cbt-btn" onclick="validateCBT()">Play Another Category</button>`;
             } else {
-                html += `<p style="color:var(--red-accent); font-weight: bold;">❌ Need 7/10 to pass.</p><button class="cbt-btn" onclick="showCategories()">Try Again</button>`;
+                html += `<p style="color:var(--red-accent); font-weight: bold;">❌ Need 7/10 to pass.</p><button class="cbt-btn" onclick="validateCBT()">Try Again</button>`;
             }
             html += `</div>`;
             document.getElementById('cbtContent').innerHTML = html;
         }
-
         function closeCBT() { if (cbtState.timer) clearInterval(cbtState.timer); document.getElementById('cbtOverlay').classList.remove('active'); }
-
-        // --- MENU ITEMS ---
-        const menuItems = [
-            { title: "AI Image And Monetizations", subtitle: "Tap to view details", icon: "fa-image", color: "#e91e63", type: "course", price: 5000 },
-            { title: "AI Video Creation and Monetizations", subtitle: "Tap to view details", icon: "fa-video", color: "#2196f3", type: "course", price: 5000 },
-            { title: "Own Your Own Platform (80% Yours)", subtitle: "Tap to view details", icon: "fa-server", color: "#ff9800", type: "platform", price: 15000 },
-            { title: "Reselling License", subtitle: "Tap to view details", icon: "fa-handshake", color: "#9c27b0", type: "license", price: 20000 },
-            { title: "Become an Affiliate (Earn 40%)", subtitle: "Tap to view details", icon: "fa-percentage", color: "#4caf50", type: "affiliate", price: 0 }
-        ];
 
         // Initialize App
         renderMenu();
         initUser();
-        loadCoursesData();
     </script>
 </body>
 </html>
