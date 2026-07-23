@@ -5,58 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BMY Digital Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
     <script src="https://pl29819831.effectivecpmnetwork.com/40/ec/a6/40eca62ffa3dd47c9612d8d993c2924e.js"></script>
     <style>
         :root {
             --wa-header: #075E54; --wa-bg: #ECE5DD; --wa-white: #FFFFFF; --wa-green-btn: #25D366;
-            --wa-text: #111111; --wa-text-light: #666666; --wa-border: #E5E5E5; --wa-bubble-sent: #DCF8C6;
+            --wa-text: #111111; --wa-text-light: #666666; --wa-border: #E5E5E5;
             --red-accent: #e91e63; --black-accent: #000000; --green-accent: #4caf50;
             --millionaire-bg: #0a0a2a; --millionaire-gold: #ffd700;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background-color: #d1d7db; display: flex; justify-content: center; height: 100vh; overflow: hidden; }
-        .app-container { width: 100%; max-width: 480px; background-color: var(--wa-bg); height: 100%; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
-        .header { background-color: var(--wa-header); color: var(--wa-white); padding: 15px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.2); z-index: 10; flex-shrink: 0; }
-        .header-title { font-size: 20px; font-weight: 500; }
-        .header-icons i { margin-left: 20px; font-size: 18px; cursor: pointer; }
-        .main-view { flex: 1; overflow-y: auto; background-color: var(--wa-white); }
-        .menu-list { padding-bottom: 10px; }
-        .menu-item { display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid var(--wa-border); cursor: pointer; transition: background 0.2s; }
-        .menu-item:active { background-color: #f5f5f5; }
-        .menu-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 22px; color: white; flex-shrink: 0; }
-        .menu-details { flex: 1; overflow: hidden; }
-        .menu-title { font-size: 16px; font-weight: 500; color: var(--wa-text); margin-bottom: 4px; }
-        .menu-subtitle { font-size: 13px; color: var(--wa-text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .app-container { width: 100%; max-width: 480px; background-color: var(--wa-bg); height: 100%; display: flex; flex-direction: column; position: relative; }
         
-        .ad-banner-container { margin: 15px; padding: 15px; background: #fff; border: 2px solid #8B4513; border-radius: 8px; text-align: center; cursor: pointer; box-shadow: 2px 2px 8px rgba(0,0,0,0.15); }
-        .ad-banner-text { font-family: 'Caveat', cursive; font-size: 24px; color: #000; font-weight: 700; margin-bottom: 5px; }
-        .ad-banner-text-red { font-family: 'Caveat', cursive; font-size: 20px; color: #d32f2f; font-weight: 700; margin-bottom: 10px; }
-        .ad-banner-prices { font-size: 12px; color: #333; }
-        .ad-banner-prices div { margin: 3px 0; font-weight: 600; }
+        .header { background-color: var(--wa-header); color: var(--wa-white); padding: 15px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .header-title { font-size: 20px; font-weight: 500; }
+        
+        .main-view { flex: 1; overflow-y: auto; background-color: var(--wa-white); }
+        
+        .menu-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid var(--wa-border); cursor: pointer; background: white; }
+        .menu-item:active { background-color: #f5f5f5; }
+        .menu-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 22px; color: white; }
+        .menu-title { font-size: 16px; font-weight: 600; color: var(--wa-text); margin-bottom: 3px; }
+        .menu-subtitle { font-size: 13px; color: var(--wa-text-light); }
+        
+        .ad-small-banner { margin: 10px 15px; padding: 10px; background: #fff; border: 2px solid #8B4513; border-radius: 8px; text-align: center; cursor: pointer; }
+        .ad-text { font-family: 'Caveat', cursive; font-size: 22px; color: #000; font-weight: 700; }
+        .ad-text-red { font-family: 'Caveat', cursive; font-size: 18px; color: #d32f2f; font-weight: 700; margin: 5px 0; }
+        .ad-price { font-size: 12px; color: #333; margin: 3px 0; }
+        
+        .ad-container { text-align: center; margin: 10px auto; max-width: 320px; }
+        .ad-label { font-size: 10px; color: #999; text-transform: uppercase; }
 
-        .detail-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--wa-bg); background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E"); display: none; flex-direction: column; z-index: 20; padding-bottom: 70px; }
-        .detail-view.active { display: flex; }
-        .chat-header { background-color: var(--wa-header); color: var(--wa-white); padding: 10px 15px; display: flex; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-        .back-btn { font-size: 20px; margin-right: 15px; cursor: pointer; display: flex; align-items: center; }
-        .chat-header-info { display: flex; align-items: center; }
-        .chat-header-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 16px; color: white; }
-        .chat-header-title { font-size: 16px; font-weight: 500; }
-        .chat-area { flex: 1; padding: 20px 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .chat-bubble { max-width: 92%; padding: 12px 15px; border-radius: 8px; font-size: 14px; line-height: 1.5; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.1); }
-        .bubble-left { background-color: var(--wa-white); align-self: flex-start; border-top-left-radius: 0; }
-        .bubble-right { background-color: var(--wa-bubble-sent); align-self: flex-end; border-top-right-radius: 0; }
-        .bubble-left h3 { font-size: 17px; margin-bottom: 10px; color: var(--wa-header); font-weight: 700; }
-        .bubble-left p { margin-bottom: 10px; }        .bubble-left ul { margin-left: 20px; margin-bottom: 10px; }
-        .bubble-left li { margin-bottom: 6px; }
-        .price-tag { font-weight: bold; font-size: 18px; color: var(--wa-header); margin: 15px 0; background: #e8f5e9; padding: 10px; border-radius: 8px; border-left: 4px solid var(--wa-green-btn); }
-        .order-btn { display: inline-block; background-color: var(--wa-green-btn); color: white; text-decoration: none; padding: 12px 24px; border-radius: 25px; font-weight: 700; font-size: 15px; margin-top: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); width: 100%; border: none; cursor: pointer; }
-        .order-btn i { margin-right: 8px; }
-        .chat-time { font-size: 10px; color: #999; text-align: right; margin-top: 5px; }
-        .ad-container { text-align: center; margin: 20px auto 10px; max-width: 320px; border-top: 1px dashed #ccc; padding-top: 10px; }
-        .ad-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 480px; background: var(--wa-white); display: flex; justify-content: space-around; padding: 8px 0; border-top: 3px solid var(--wa-header); z-index: 100; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); flex-shrink: 0; }
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 480px; background: var(--wa-white); display: flex; justify-content: space-around; padding: 10px 0; border-top: 3px solid var(--wa-header); z-index: 100; }
         .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; font-size: 11px; font-weight: 600; cursor: pointer; flex: 1; }
         .nav-item i { font-size: 20px; margin-bottom: 4px; }
         .nav-item:nth-child(1) { color: var(--green-accent); }
@@ -65,335 +46,439 @@
         .nav-item:nth-child(4) { color: var(--red-accent); }
         .nav-item:nth-child(5) { color: var(--black-accent); }
 
-        .cbt-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--millionaire-bg); z-index: 200; display: none; flex-direction: column; color: white; overflow-y: auto; }
-        .cbt-overlay.active { display: flex; }
+        /* CBT Styles */
+        .cbt-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--millionaire-bg); z-index: 200; display: none; flex-direction: column; color: white; }        .cbt-overlay.active { display: flex; }
         .cbt-header { background: linear-gradient(180deg, #1a1a4a 0%, #0a0a2a 100%); padding: 20px; text-align: center; border-bottom: 2px solid var(--millionaire-gold); position: relative; }
-        .cbt-header h2 { color: var(--millionaire-gold); font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 1.2rem; }
-        .cbt-content { flex: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .cbt-input-group { width: 100%; max-width: 350px; margin-bottom: 15px; }
-        .cbt-input-group label { display: block; color: var(--millionaire-gold); margin-bottom: 5px; font-size: 14px; }
-        .cbt-input { width: 100%; padding: 12px; border-radius: 25px; border: 2px solid var(--millionaire-gold); background: rgba(255,255,255,0.1); color: white; font-size: 16px; outline: none; }
-        .cbt-btn { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 800; font-size: 16px; cursor: pointer; margin-top: 10px; width: 100%; max-width: 350px; box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3); }
-        .cbt-timer { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 20px; border: 1px solid var(--millionaire-gold); margin-bottom: 20px; font-size: 1.2rem; font-weight: bold; color: var(--millionaire-gold); }
-        .cbt-question-box { background: linear-gradient(180deg, #1a1a4a 0%, #0a0a2a 100%); border: 2px solid var(--millionaire-gold); border-radius: 15px; padding: 20px; width: 100%; max-width: 350px; text-align: center; font-size: 1.1rem; margin-bottom: 20px; min-height: 80px; display: flex; align-items: center; justify-content: center; }
-        .cbt-options { width: 100%; max-width: 350px; display: flex; flex-direction: column; gap: 12px; }
-        .cbt-option { background: linear-gradient(90deg, #0a0a2a 0%, #1a1a4a 50%, #0a0a2a 100%); border: 1px solid #4a4a8a; border-radius: 25px; padding: 12px 20px; color: white; text-align: left; cursor: pointer; transition: 0.2s; display: flex; align-items: center; }
-        .cbt-option:hover { border-color: var(--millionaire-gold); }
+        .cbt-header h2 { color: var(--millionaire-gold); font-size: 1.2rem; }
+        .cbt-content { flex: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; overflow-y: auto; }
+        .cbt-input { width: 100%; max-width: 350px; padding: 12px; margin: 10px 0; border-radius: 25px; border: 2px solid var(--millionaire-gold); background: rgba(255,255,255,0.1); color: white; }
+        .cbt-btn { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 800; margin: 10px 0; cursor: pointer; width: 100%; max-width: 350px; }
+        .cbt-timer { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 20px; border: 1px solid var(--millionaire-gold); margin: 10px 0; font-weight: bold; color: var(--millionaire-gold); }
+        .cbt-question { background: linear-gradient(180deg, #1a1a4a 0%, #0a0a2a 100%); border: 2px solid var(--millionaire-gold); border-radius: 15px; padding: 20px; width: 100%; max-width: 350px; text-align: center; margin: 10px 0; }
+        .cbt-option { background: linear-gradient(90deg, #0a0a2a, #1a1a4a); border: 1px solid #4a4a8a; border-radius: 25px; padding: 12px; margin: 8px 0; color: white; cursor: pointer; text-align: left; }
         .cbt-option span { color: var(--millionaire-gold); font-weight: bold; margin-right: 10px; }
-        .cbt-option.correct { background: var(--green-accent); border-color: var(--green-accent); }
-        .cbt-option.wrong { background: var(--red-accent); border-color: var(--red-accent); }
-        .cbt-score-display { position: absolute; top: 15px; right: 15px; background: var(--millionaire-gold); color: #000; padding: 5px 12px; border-radius: 15px; font-weight: bold; font-size: 14px; }
-        .cbt-category-select { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 350px; }
-        .cat-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--millionaire-gold); color: white; padding: 15px; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 600; }
-        .cat-btn:active { background: var(--millionaire-gold); color: #000; }
-        .winner-modal { text-align: center; animation: popIn 0.5s ease; }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .winner-modal h1 { color: var(--millionaire-gold); font-size: 2rem; margin-bottom: 10px; }
-        .winner-modal p { margin-bottom: 20px; line-height: 1.6; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+        .cbt-option.correct { background: var(--green-accent); }
+        .cbt-option.wrong { background: var(--red-accent); }
+        .cbt-score { position: absolute; top: 15px; right: 15px; background: var(--millionaire-gold); color: #000; padding: 5px 12px; border-radius: 15px; font-weight: bold; }
+        .cat-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--millionaire-gold); color: white; padding: 15px; margin: 5px 0; border-radius: 10px; cursor: pointer; width: 100%; max-width: 350px; }
+
+        /* Detail View */
+        .detail-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--wa-bg); z-index: 50; display: none; flex-direction: column; padding-bottom: 70px; }
+        .detail-view.active { display: flex; }
+        .chat-header { background-color: var(--wa-header); color: var(--wa-white); padding: 10px 15px; display: flex; align-items: center; }
+        .back-btn { font-size: 20px; margin-right: 15px; cursor: pointer; }
+        .chat-area { flex: 1; padding: 20px; overflow-y: auto; }
+        .chat-bubble { max-width: 90%; padding: 12px 15px; border-radius: 8px; margin: 10px 0; }
+        .bubble-left { background-color: var(--wa-white); align-self: flex-start; }
+        .bubble-right { background-color: #DCF8C6; align-self: flex-end; margin-left: auto; }
+        .order-btn { display: inline-block; background-color: var(--wa-green-btn); color: white; text-decoration: none; padding: 12px; border-radius: 25px; font-weight: 700; margin: 10px 0; text-align: center; width: 100%; }
+        .price-tag { font-weight: bold; font-size: 18px; color: var(--wa-header); margin: 15px 0; background: #e8f5e9; padding: 10px; border-radius: 8px; }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <div class="main-view" id="mainView">            <div class="header">
-                <div class="header-title">BMY Digital Store</div>
-                <div class="header-icons"><i class="fas fa-search"></i><i class="fas fa-ellipsis-v"></i></div>
-            </div>
+        <div class="header">
+            <div class="header-title">BMY Digital Store</div>
+        </div>
+        
+        <div class="main-view">
+            <div class="ad-container"><div class="ad-label">Sponsored</div><script>atOptions = { 'key' : '90fd5bebbb6299ffe5d07b8a539064d0', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };</script><script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script></div>
             
-            <div class="ad-container" style="margin: 10px auto;"><div class="ad-label">Sponsored</div><script>atOptions = { 'key' : '90fd5bebbb6299ffe5d07b8a539064d0', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };</script><script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script></div>
-            
-            <div class="menu-list" id="menuList"></div>
+            <!-- MENU ITEMS CONTAINER -->
+            <div id="menuContainer"></div>
             
             <!-- Small Advert Banner -->
-            <div class="ad-banner-container" onclick="openAdvertPlacement()">
-                <div class="ad-banner-text">Click Here to</div>
-                <div class="ad-banner-text-red">Place Your Advert!</div>
-                <div class="ad-banner-prices">
-                    <div> Big White Banner: $5 / 1 Week</div>
-                    <div style="background: #fffbe6; padding: 5px; border-left: 3px solid gold; margin-top: 5px;">⬛ Premium Black Banner: $10 / 1 Month</div>
-                </div>
+            <div class="ad-small-banner" onclick="openAdvertPlacement()">
+                <div class="ad-text">Click Here to</div>
+                <div class="ad-text-red">Place Your Advert!</div>
+                <div class="ad-price"> Big White Banner: $5 / 1 Week</div>
+                <div class="ad-price" style="background: #fffbe6; padding: 5px; margin-top: 5px;">⬛ Premium Black: $10 / 1 Month</div>
             </div>
         </div>
 
-        <div class="detail-view" id="detailView">
+        <!-- Detail View for Menu Items -->        <div class="detail-view" id="detailView">
             <div class="chat-header">
                 <div class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></div>
-                <div class="chat-header-info">
-                    <div class="chat-header-icon" id="chatIcon"></div>
-                    <div class="chat-header-title" id="chatTitle">Menu Title</div>
-                </div>
+                <div id="detailTitle" style="font-weight: 600;">Title</div>
             </div>
             <div class="chat-area" id="chatArea"></div>
         </div>
 
-        <!-- Millionaire CBT Overlay -->
+        <!-- CBT Overlay -->
         <div class="cbt-overlay" id="cbtOverlay">
             <div class="cbt-header">
                 <h2>Who Wants to Be a Millionaire?</h2>
-                <div class="cbt-score-display" id="cbtScoreDisplay" style="display:none;">Score: 0/10</div>
+                <div class="cbt-score" id="cbtScore" style="display:none;">0/10</div>
                 <div class="back-btn" onclick="closeCBT()" style="position:absolute; left:15px; top:15px;"><i class="fas fa-times"></i></div>
             </div>
             <div class="cbt-content" id="cbtContent"></div>
         </div>
 
+        <!-- Bottom Navigation -->
         <div class="bottom-nav">
             <div class="nav-item" onclick="window.open('https://wa.me/2349159884244', '_blank')"><i class="fas fa-comments"></i><span>Chat Admin</span></div>
-            <div class="nav-item" onclick="openBottomNav('courses')"><i class="fas fa-graduation-cap"></i><span>Courses</span></div>
-            <div class="nav-item" onclick="window.open('https://chat.whatsapp.com/E0XfmxCpkX69wMFKqhGT9U?s=cl&p=a&ilr=1', '_blank')"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></div>
+            <div class="nav-item" onclick="openCourses()"><i class="fas fa-graduation-cap"></i><span>Courses</span></div>
+            <div class="nav-item" onclick="window.open('https://chat.whatsapp.com/E0XfmxCpkX69wMFKqhGT9U', '_blank')"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></div>
             <div class="nav-item" onclick="window.open('https://t.me/capacitydotbuild', '_blank')"><i class="fab fa-telegram"></i><span>Telegram</span></div>
-            <div class="nav-item" onclick="openBottomNav('books')"><i class="fas fa-book"></i><span>Free Books</span></div>
+            <div class="nav-item" onclick="openBooks()"><i class="fas fa-book"></i><span>Free Books</span></div>
         </div>
     </div>
-    <script src="courses-data.js"></script>
+
     <script>
         const myWhatsAppNumber = "2349159884244";
         const adminEmail = "capacitydotbuild@gmail.com";
 
-        const menuData = [
-            { id: 1, title: "Digital IQ CBT (Millionaire)", subtitle: "Play, Score 10/10 & Win Rewards!", icon: "fa-brain", color: "#ffd700", isCBT: true },
-            { id: 2, title: "AI Image And Monetizations Course", subtitle: "Tap to view details and price", icon: "fa-image", color: "#e91e63", details: `<h3>AI Image And Monetizations 🎨</h3><ul><li>✅ AI Image Generation (Studio Quality)</li><li>✅ Prompt Engineering Mastery</li><li>✅ Free Prompts Library</li><li>✅ Complete Monetization Strategies</li><li>✅ Google Drive Course Access</li></ul><div class="price-tag">💰 Promo: #5,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #10,000</span></div>`, orderText: "Order on WhatsApp", orderMessage: "Hello BMY! I want to buy the AI Image And Monetizations Course for #5,000." },
-            { id: 3, title: "AI Video Creation and Monetizations Course", subtitle: "Tap to view details and price", icon: "fa-video", color: "#2196f3", details: `<h3>AI Video Creation and Monetizations 🎬</h3><ul><li>✅ AI Video Generation Course</li><li>✅ Professional Video Tools Training</li><li>✅ Prompt Engineering for Video</li><li>✅ Complete Monetization Strategies</li><li>✅ Google Drive Course Access</li></ul><div class="price-tag">💰 Promo: #5,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #10,000</span></div>`, orderText: "Order on WhatsApp", orderMessage: "Hello BMY! I want to buy the AI Video Creation and Monetizations Course for #5,000." },
-            { id: 4, title: "Own Your Own Platform (80% Yours)", subtitle: "Tap to get a clone of this website", icon: "fa-server", color: "#ff9800", details: `<h3>Get a Website Exactly Like Mine! 🚀</h3><h3>💰 The 80/20 Profit Split:</h3><ul><li>✅ <strong>You keep 80%</strong> of every sale.</li><li>✅ <strong>I take 20%</strong> for maintenance and hosting.</li></ul><h3>🎓 Full Mentorship Included:</h3><p>Anyone who buys from your platform automatically joins my communities. I handle all mentoring and follow-ups.</p><div class="price-tag">💰 Setup Fee: #15,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #50,000</span></div>`, orderText: "Get My Platform", orderMessage: "Hello BMY! I want to get my own platform (80/20 split) for #15,000." },
-            { id: 5, title: "Reselling License (Full Control)", subtitle: "Tap to become a master reseller", icon: "fa-handshake", color: "#9c27b0", details: `<h3>Reselling License Package</h3><ul><li>✅ Full platform with reselling rights</li><li>✅ You set up your own affiliates</li><li>✅ Automatic course updates</li><li>✅ 6 months priority support</li></ul><div class="price-tag">💰 License Fee: #20,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #60,000</span></div>`, orderText: "Get License", orderMessage: "Hello BMY! I want to buy the Reselling License for #20,000." },
-            { id: 6, title: "Become an Affiliate (Earn 40%)", subtitle: "Tap to learn how to earn big", icon: "fa-percentage", color: "#4caf50", details: `<h3>Affiliate Program: Earn 40% Commission! 💸</h3><ul><li>✅ Share your unique link</li><li>✅ Earn 40% on every sale (e.g., keep #2,000 from a #5,000 course)</li><li>✅ 100% FREE to join, fast payouts</li></ul><div class="price-tag">🎉 It's 100% FREE to register!</div>`, orderText: "Register as Affiliate", orderMessage: "Hello BMY! I want to register as an Affiliate to earn 40% commission." }
+        // MENU DATA
+        const menuItems = [
+            { title: "Digital IQ CBT (Millionaire)", subtitle: "Play & Win Rewards!", icon: "fa-brain", color: "#ffd700", type: "cbt" },
+            { title: "AI Image And Monetizations", subtitle: "Promo: #5,000", icon: "fa-image", color: "#e91e63", type: "course", price: 5000 },
+            { title: "AI Video Creation and Monetizations", subtitle: "Promo: #5,000", icon: "fa-video", color: "#2196f3", type: "course", price: 5000 },
+            { title: "Own Your Own Platform (80% Yours)", subtitle: "Setup: #15,000", icon: "fa-server", color: "#ff9800", type: "platform", price: 15000 },
+            { title: "Reselling License", subtitle: "License: #20,000", icon: "fa-handshake", color: "#9c27b0", type: "license", price: 20000 },
+            { title: "Become an Affiliate (Earn 40%)", subtitle: "FREE to Join", icon: "fa-percentage", color: "#4caf50", type: "affiliate", price: 0 }
         ];
 
+        // QUESTIONS DATABASE
         const questionsDB = {
             "General Knowledge": [
                 { q: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], a: 2 },
-                { q: "Which planet is known as the Red Planet?", options: ["Venus", "Mars", "Jupiter", "Saturn"], a: 1 },
-                { q: "What is the largest ocean on Earth?", options: ["Atlantic", "Indian", "Arctic", "Pacific"], a: 3 },
-                { q: "Who painted the Mona Lisa?", options: ["Van Gogh", "Picasso", "Da Vinci", "Michelangelo"], a: 2 },
-                { q: "What is the chemical symbol for gold?", options: ["Au", "Ag", "Fe", "Pb"], a: 0 },
-                { q: "How many continents are there?", options: ["5", "6", "7", "8"], a: 2 },
-                { q: "What is the hardest natural substance?", options: ["Gold", "Iron", "Diamond", "Platinum"], a: 2 },
-                { q: "Which country is known as the Land of the Rising Sun?", options: ["China", "Japan", "Korea", "Thailand"], a: 1 },
-                { q: "What is the smallest prime number?", options: ["0", "1", "2", "3"], a: 2 },
-                { q: "Who wrote 'Hamlet'?", options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"], a: 1 }
+                { q: "Which planet is the Red Planet?", options: ["Venus", "Mars", "Jupiter", "Saturn"], a: 1 },
+                { q: "What is the largest ocean?", options: ["Atlantic", "Indian", "Arctic", "Pacific"], a: 3 },
+                { q: "Who painted Mona Lisa?", options: ["Van Gogh", "Picasso", "Da Vinci", "Michelangelo"], a: 2 },
+                { q: "Chemical symbol for gold?", options: ["Au", "Ag", "Fe", "Pb"], a: 0 },                { q: "How many continents?", options: ["5", "6", "7", "8"], a: 2 },
+                { q: "Hardest natural substance?", options: ["Gold", "Iron", "Diamond", "Platinum"], a: 2 },
+                { q: "Land of the Rising Sun?", options: ["China", "Japan", "Korea", "Thailand"], a: 1 },
+                { q: "Smallest prime number?", options: ["0", "1", "2", "3"], a: 2 },
+                { q: "Who wrote Hamlet?", options: ["Dickens", "Shakespeare", "Twain", "Austen"], a: 1 }
             ],
             "Logic & Brain Teasers": [
                 { q: "What comes next: 2, 4, 8, 16, ?", options: ["24", "32", "30", "64"], a: 1 },
-                { q: "If 5 cats catch 5 mice in 5 minutes, how long for 100 cats to catch 100 mice?", options: ["100 mins", "5 mins", "50 mins", "1 min"], a: 1 },
-                { q: "I speak without a mouth and hear without ears. What am I?", options: ["Wind", "Echo", "Shadow", "Time"], a: 1 },
-                { q: "What has keys but can't open locks?", options: ["Map", "Piano", "Book", "Computer"], a: 1 },
-                { q: "The more you take, the more you leave behind. What are they?", options: ["Steps", "Breaths", "Photos", "Memories"], a: 0 },
-                { q: "What can travel around the world while staying in a corner?", options: ["Stamp", "Coin", "Ant", "Dust"], a: 0 },
-                { q: "If you rearrange 'CIFAIPC', you get the name of a(n):", options: ["City", "Animal", "Ocean", "Country"], a: 2 },
-                { q: "What has a head and a tail but no body?", options: ["Snake", "Coin", "Worm", "River"], a: 1 },
-                { q: "Which number is the odd one out: 3, 5, 11, 14, 17?", options: ["3", "5", "14", "17"], a: 2 },
-                { q: "What gets wetter the more it dries?", options: ["Sponge", "Towel", "Sun", "Hair"], a: 1 }
+                { q: "5 cats catch 5 mice in 5 mins. 100 cats catch 100 mice in?", options: ["100 mins", "5 mins", "50 mins", "1 min"], a: 1 },
+                { q: "I speak without mouth, hear without ears. What am I?", options: ["Wind", "Echo", "Shadow", "Time"], a: 1 },
+                { q: "Has keys but can't open locks?", options: ["Map", "Piano", "Book", "Computer"], a: 1 },
+                { q: "The more you take, the more you leave behind?", options: ["Steps", "Breaths", "Photos", "Memories"], a: 0 },
+                { q: "Travels world but stays in corner?", options: ["Stamp", "Coin", "Ant", "Dust"], a: 0 },
+                { q: "Rearrange 'CIFAIPC' = ?", options: ["City", "Animal", "Ocean", "Country"], a: 2 },
+                { q: "Has head and tail but no body?", options: ["Snake", "Coin", "Worm", "River"], a: 1 },
+                { q: "Odd one out: 3, 5, 11, 14, 17?", options: ["3", "5", "14", "17"], a: 2 },
+                { q: "Gets wetter as it dries?", options: ["Sponge", "Towel", "Sun", "Hair"], a: 1 }
             ],
             "Math & Numbers": [
-                { q: "What is the square root of 144?", options: ["10", "11", "12", "14"], a: 2 },
-                { q: "What is 15% of 200?", options: ["20", "25", "30", "35"], a: 2 },
-                { q: "If x + 5 = 12, what is x?", options: ["5", "6", "7", "8"], a: 2 },
-                { q: "How many degrees are in a right angle?", options: ["45", "90", "180", "360"], a: 1 },
-                { q: "What is the next prime number after 7?", options: ["9", "10", "11", "13"], a: 2 },
-                { q: "What is 7 x 8?", options: ["54", "56", "58", "62"], a: 1 },
-                { q: "How many sides does a hexagon have?", options: ["5", "6", "7", "8"], a: 1 },
-                { q: "What is 100 divided by 4?", options: ["20", "25", "30", "40"], a: 1 },
-                { q: "What is the value of Pi to two decimal places?", options: ["3.12", "3.14", "3.16", "3.18"], a: 1 },
-                { q: "If a triangle has angles 60° and 70°, what is the third?", options: ["40°", "50°", "60°", "70°"], a: 1 }            ],
+                { q: "Square root of 144?", options: ["10", "11", "12", "14"], a: 2 },
+                { q: "15% of 200?", options: ["20", "25", "30", "35"], a: 2 },
+                { q: "If x + 5 = 12, x = ?", options: ["5", "6", "7", "8"], a: 2 },
+                { q: "Degrees in right angle?", options: ["45", "90", "180", "360"], a: 1 },
+                { q: "Next prime after 7?", options: ["9", "10", "11", "13"], a: 2 },
+                { q: "7 x 8 = ?", options: ["54", "56", "58", "62"], a: 1 },
+                { q: "Sides of hexagon?", options: ["5", "6", "7", "8"], a: 1 },
+                { q: "100  4 = ?", options: ["20", "25", "30", "40"], a: 1 },
+                { q: "Pi to 2 decimals?", options: ["3.12", "3.14", "3.16", "3.18"], a: 1 },
+                { q: "Triangle: 60° + 70° + ? = 180°", options: ["40°", "50°", "60°", "70°"], a: 1 }
+            ],
             "Tech & AI": [
-                { q: "What does 'AI' stand for?", options: ["Automated Intelligence", "Artificial Intelligence", "Advanced Interface", "Analog Input"], a: 1 },
-                { q: "Who is the co-founder of Microsoft?", options: ["Steve Jobs", "Bill Gates", "Mark Zuckerberg", "Elon Musk"], a: 1 },
-                { q: "What does 'HTTP' stand for?", options: ["HyperText Transfer Protocol", "High Tech Transfer Process", "HyperText Transmission Process", "Host Text Transfer Protocol"], a: 0 },
-                { q: "Which company created the iPhone?", options: ["Samsung", "Google", "Apple", "Microsoft"], a: 2 },
-                { q: "What is the main language of the web?", options: ["Python", "Java", "HTML", "C++"], a: 2 },
-                { q: "What does 'CPU' stand for?", options: ["Central Processing Unit", "Computer Personal Unit", "Central Program Utility", "Core Processing Unit"], a: 0 },
-                { q: "Which of these is a search engine?", options: ["Windows", "Google", "Android", "Intel"], a: 1 },
-                { q: "What year was the first iPhone released?", options: ["2005", "2007", "2009", "2010"], a: 1 },
-                { q: "What is 'Phishing'?", options: ["A type of fishing", "A cyber attack to steal data", "A programming language", "A hardware component"], a: 1 },
-                { q: "What does 'RAM' stand for?", options: ["Read Access Memory", "Random Access Memory", "Run Application Memory", "Real Active Memory"], a: 1 }
+                { q: "AI stands for?", options: ["Automated Intelligence", "Artificial Intelligence", "Advanced Interface", "Analog Input"], a: 1 },
+                { q: "Microsoft co-founder?", options: ["Steve Jobs", "Bill Gates", "Zuckerberg", "Elon Musk"], a: 1 },
+                { q: "HTTP stands for?", options: ["HyperText Transfer Protocol", "High Tech Process", "HyperText Transmission", "Host Transfer"], a: 0 },
+                { q: "Created iPhone?", options: ["Samsung", "Google", "Apple", "Microsoft"], a: 2 },
+                { q: "Main web language?", options: ["Python", "Java", "HTML", "C++"], a: 2 },
+                { q: "CPU stands for?", options: ["Central Processing Unit", "Computer Personal Unit", "Central Program", "Core Processing"], a: 0 },
+                { q: "Which is a search engine?", options: ["Windows", "Google", "Android", "Intel"], a: 1 },
+                { q: "First iPhone year?", options: ["2005", "2007", "2009", "2010"], a: 1 },
+                { q: "What is Phishing?", options: ["Fishing type", "Cyber attack", "Programming", "Hardware"], a: 1 },
+                { q: "RAM stands for?", options: ["Read Access Memory", "Random Access Memory", "Run Application", "Real Active"], a: 1 }
             ],
             "Business & Finance": [
-                { q: "What does 'ROI' stand for?", options: ["Rate of Interest", "Return on Investment", "Revenue Over Income", "Risk of Inflation"], a: 1 },
-                { q: "What is a 'Bull Market'?", options: ["Falling prices", "Rising prices", "Stable prices", "Closed market"], a: 1 },
-                { q: "What is the currency of Japan?", options: ["Yuan", "Won", "Yen", "Ringgit"], a: 2 },
-                { q: "What does 'CEO' stand for?", options: ["Chief Executive Officer", "Central Economic Operator", "Corporate Executive Office", "Chief Economic Officer"], a: 0 },
-                { q: "Which company has the ticker symbol 'AAPL'?", options: ["Amazon", "Apple", "Adobe", "AOL"], a: 1 },
-                { q: "What is 'Inflation'?", options: ["Rise in general price levels", "Fall in prices", "Increase in employment", "Decrease in money supply"], a: 0 },
-                { q: "What is a 'Dividend'?", options: ["A tax", "A share of profits paid to shareholders", "A loan", "A type of bond"], a: 1 },
-                { q: "What does 'B2B' mean?", options: ["Business to Business", "Back to Basics", "Bank to Bank", "Buy to Build"], a: 0 },
-                { q: "What is 'Capital' in business?", options: ["The main office", "Wealth/money used to start a business", "The CEO", "The product"], a: 1 },
-                { q: "What is a 'Monopoly'?", options: ["One seller dominates the market", "Many sellers", "No sellers", "Government control only"], a: 0 }
+                { q: "ROI stands for?", options: ["Rate of Interest", "Return on Investment", "Revenue Over Income", "Risk Inflation"], a: 1 },
+                { q: "Bull Market means?", options: ["Falling prices", "Rising prices", "Stable prices", "Closed market"], a: 1 },
+                { q: "Japan currency?", options: ["Yuan", "Won", "Yen", "Ringgit"], a: 2 },
+                { q: "CEO stands for?", options: ["Chief Executive Officer", "Central Economic", "Corporate Executive", "Chief Economic"], a: 0 },
+                { q: "AAPL ticker = ?", options: ["Amazon", "Apple", "Adobe", "AOL"], a: 1 },
+                { q: "Inflation is?", options: ["Rise in prices", "Fall in prices", "More jobs", "Less money"], a: 0 },
+                { q: "Dividend is?", options: ["A tax", "Share of profits", "A loan", "A bond"], a: 1 },                { q: "B2B means?", options: ["Business to Business", "Back to Basics", "Bank to Bank", "Buy to Build"], a: 0 },
+                { q: "Capital in business?", options: ["Main office", "Money to start", "The CEO", "The product"], a: 1 },
+                { q: "Monopoly is?", options: ["One seller", "Many sellers", "No sellers", "Govt control"], a: 0 }
             ]
         };
 
-        let cbtState = { playerName: "", playerEmail: "", category: "", questions: [], currentIndex: 0, score: 0, timer: null, timeLeft: 300 };
+        let cbtState = { name: "", email: "", category: "", questions: [], index: 0, score: 0, timer: null, time: 300 };
 
+        // RENDER MENU ITEMS
         function renderMenu() {
-            const menuList = document.getElementById('menuList');
-            menuList.innerHTML = '';
-            menuData.forEach(item => {
-                const menuItem = document.createElement('div');
-                menuItem.className = 'menu-item';
-                menuItem.onclick = () => item.isCBT ? startCBTRegistration() : openDetail(item, false);
-                menuItem.innerHTML = `<div class="menu-icon" style="background-color: ${item.color}"><i class="fas ${item.icon}"></i></div><div class="menu-details"><div class="menu-title">${item.title}</div><div class="menu-subtitle">${item.subtitle}</div></div>`;
-                menuList.appendChild(menuItem);
+            const container = document.getElementById('menuContainer');
+            container.innerHTML = '';
+            
+            menuItems.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = 'menu-item';
+                div.onclick = () => handleMenuClick(item);
+                div.innerHTML = `
+                    <div class="menu-icon" style="background-color: ${item.color}">
+                        <i class="fas ${item.icon}"></i>
+                    </div>
+                    <div>
+                        <div class="menu-title">${item.title}</div>
+                        <div class="menu-subtitle">${item.subtitle}</div>
+                    </div>
+                `;
+                container.appendChild(div);
             });
         }
 
-        function openAdvertPlacement() {
-            const msg = encodeURIComponent("Hello BMY! I want to place an advert on your app. I am interested in:\n\n⬜ Big White Banner: $5 / 1 Week\n⬛ Premium Black Banner: $10 / 1 Month\n\nPlease give me more details on how to proceed.");
-            window.open(`https://wa.me/${myWhatsAppNumber}?text=${msg}`, '_blank');
+        function handleMenuClick(item) {
+            if (item.type === 'cbt') {
+                startCBT();
+            } else {
+                showDetail(item);
+            }
         }
 
-        function getAdBannerHTML() {
-            return `<div class="ad-container"><div class="ad-label">Sponsored</div><script>atOptions = { 'key' : '90fd5bebbb6299ffe5d07b8a539064d0', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };</script><script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"><\/script></div>`;
-        }
-        function openDetail(item, triggerAds = false) {
-            document.getElementById('chatIcon').style.backgroundColor = item.color;
-            document.getElementById('chatIcon').innerHTML = `<i class="fas ${item.icon}"></i>`;
-            document.getElementById('chatTitle').innerText = item.title;
-            const waLink = `https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(item.orderMessage)}`;
+        function showDetail(item) {
+            document.getElementById('detailTitle').innerText = item.title;
+            const chatArea = document.getElementById('chatArea');
             
-            let html = `<div class="chat-bubble bubble-left">${item.details}<div class="chat-time">BMY Store • Just now</div></div>`;
-            html += `<div class="chat-bubble bubble-right"><a href="${waLink}" class="order-btn" target="_blank"><i class="fab fa-whatsapp"></i> ${item.orderText}</a><div class="chat-time">Just now <i class="fas fa-check-double" style="color: #4fc3f7; margin-left: 3px;"></i></div></div>`;
-            html += getAdBannerHTML();
-            
-            if (triggerAds) {
-                html += `<div class="ad-container"><div class="ad-label">Sponsored</div><script async="async" data-cfasync="false" src="https://pl29820186.effectivecpmnetwork.com/31f16fc7913263f00e93a85356f6e7d6/invoke.js"><\/script><div id="container-31f16fc7913263f00e93a85356f6e7d6"></div></div>`;
+            let content = '';
+            if (item.type === 'course') {
+                content = `
+                    <div class="chat-bubble bubble-left">
+                        <h3>${item.title}</h3>
+                        <p>Complete course with:</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>✅ Full video tutorials</li>                            <li>✅ Step-by-step guides</li>
+                            <li>✅ Google Drive access</li>
+                            <li>✅ Monetization strategies</li>
+                            <li>✅ Prompt engineering</li>
+                        </ul>
+                        <div class="price-tag">💰 Price: #${item.price.toLocaleString()}</div>
+                    </div>
+                    <div class="chat-bubble bubble-right">
+                        <a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want to buy ${item.title} for #${item.price}" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Order Now on WhatsApp
+                        </a>
+                    </div>
+                `;
+            } else if (item.type === 'platform') {
+                content = `
+                    <div class="chat-bubble bubble-left">
+                        <h3>${item.title}</h3>
+                        <p>Get a complete website like mine!</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>✅ 80% profit is yours</li>
+                            <li>✅ I take 20% for hosting</li>
+                            <li>✅ Full mentorship included</li>
+                            <li>✅ Automatic updates</li>
+                            <li>✅ I handle customer support</li>
+                        </ul>
+                        <div class="price-tag"> Setup Fee: #${item.price.toLocaleString()}</div>
+                    </div>
+                    <div class="chat-bubble bubble-right">
+                        <a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want the Platform (80/20 split) for #${item.price}" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Get My Platform
+                        </a>
+                    </div>
+                `;
+            } else if (item.type === 'license') {
+                content = `
+                    <div class="chat-bubble bubble-left">
+                        <h3>${item.title}</h3>
+                        <p>Full reselling rights included:</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>✅ Complete platform</li>
+                            <li>✅ Set up your affiliates</li>
+                            <li>✅ Auto updates from my site</li>
+                            <li>✅ 6 months support</li>
+                        </ul>
+                        <div class="price-tag">💰 License: #${item.price.toLocaleString()}</div>
+                    </div>
+                    <div class="chat-bubble bubble-right">
+                        <a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want Reselling License for #${item.price}" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Get License
+                        </a>                    </div>
+                `;
+            } else if (item.type === 'affiliate') {
+                content = `
+                    <div class="chat-bubble bubble-left">
+                        <h3>${item.title}</h3>
+                        <p>Earn 40% commission on every sale!</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>✅ Share your unique link</li>
+                            <li>✅ Earn 40% on all sales</li>
+                            <li>✅ FREE to join</li>
+                            <li>✅ Fast payouts</li>
+                            <li>✅ No customer support needed</li>
+                        </ul>
+                        <div class="price-tag"> 100% FREE to Register!</div>
+                    </div>
+                    <div class="chat-bubble bubble-right">
+                        <a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want to register as Affiliate (40% commission)" class="order-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Register as Affiliate
+                        </a>
+                    </div>
+                `;
             }
-            document.getElementById('chatArea').innerHTML = html;
-            document.getElementById('mainView').style.display = 'none';
+            
+            chatArea.innerHTML = content;
             document.getElementById('detailView').classList.add('active');
-            setTimeout(() => { document.getElementById('chatArea').scrollTop = document.getElementById('chatArea').scrollHeight; }, 100);
         }
 
         function goBack() {
             document.getElementById('detailView').classList.remove('active');
-            document.getElementById('mainView').style.display = 'block';
         }
 
-        function openBottomNav(type) {
-            if (type === 'courses') {
-                openDetail({ id: 99, title: "Digital Courses", icon: "fa-graduation-cap", color: "#000000", details: generateCoursesHTML(), orderText: "Chat for Course Access", orderMessage: "Hello BMY! I am interested in the Digital Courses." }, true);
-            } else if (type === 'books') {
-                openDetail({ id: 100, title: "Read Free Ebooks", icon: "fa-book", color: "#e91e63", details: generateBooksHTML(), orderText: "Chat for More Free Resources", orderMessage: "Hello BMY! I want more free resources." }, true);
-            }
+        function openAdvertPlacement() {
+            const msg = encodeURIComponent("Hello BMY! I want to place an advert:\n\n⬜ Big White Banner: $5 / 1 Week\n⬛ Premium Black Banner: $10 / 1 Month");
+            window.open(`https://wa.me/${myWhatsAppNumber}?text=${msg}`, '_blank');
         }
 
-        function generateCoursesHTML() {
-            let html = `<h3>Digital Courses Library </h3>`;
-            if (typeof coursesData !== 'undefined' && coursesData.length > 0) {
-                coursesData.forEach(course => {
-                    html += `<div style="background:#f9f9f9; padding:15px; border-radius:8px; margin-bottom:10px; border-left: 4px solid ${course.color};"><h4 style="margin-bottom:5px;">${course.title}</h4><p style="font-size:13px; color:#666;">${course.description}</p>${course.link ? `<a href="${course.link}" target="_blank" class="book-link" style="margin-top:10px; display:inline-block; text-align:center; background:#f0f0f0; padding:10px; border-radius:8px; text-decoration:none; color:#111; font-weight:500;"><i class="fas fa-external-link-alt" style="color:#e91e63; margin-right:8px;"></i> Access Course</a>` : `<span style="font-size:12px; color:#ff9800; font-weight:bold;">${course.status}</span>`}</div>`;
-                });
-            }
-            return html + getAdBannerHTML();
-        }
-
-        function generateBooksHTML() {
-            const books = [
-                { name: "Personal Development Books", link: "https://drive.google.com/drive/folders/1-4m3aoHpkMC032U4HJBio1QxsEgCEYdJ" },
-                { name: "Finance and Money Making Books", link: "https://drive.google.com/drive/folders/1vUgr-Ira5WxrMO5y1y5UzLaCQ_OlJq1u" },
-                { name: "Social Media Marketing Books", link: "https://drive.google.com/drive/folders/1-s3TQVx_tiOf0q_5InPUfnWh1b4kz7cN" },
-                { name: "Copywriting Books", link: "https://drive.google.com/drive/folders/1-4lr1gypDbKPNwl_efq6k1JQWd_CQhqA" },
-                { name: "Freelance Books", link: "https://drive.google.com/drive/folders/1-RQh1In2UchBjMOwY_rQu-O1dsXwRex2" },
-                { name: "Goal Settings Books", link: "https://drive.google.com/drive/folders/1g81fBkWA30w5GqiqNeJS9WBHSlJBxZnU" },                { name: "Special Books", link: "https://drive.google.com/drive/folders/10lyKgfjhOEhOoDlcspmULX2T6wsAqukQ" },
-                { name: "Swipe File Books", link: "https://drive.google.com/drive/folders/1-7R4qxmkJdEAj8eKG6wQpzIBo_cLJLqu" },
-                { name: "Christian Books", link: "https://drive.google.com/drive/folders/1NWQi8XbWn9wx4fxR36PdZtBYnvHWQycX" },
-                { name: "Financial Market Trading Books", link: "https://drive.google.com/drive/folders/1Qbn3ugXYf0y_U6C2jPkSR7VM5A1kLf4U" },
-                { name: "Life Building Books", link: "https://drive.google.com/drive/folders/1E7dJs3gFhcDg7-kUtVghOrpYU26fqBje" },
-                { name: "Speak and Make Money Book", link: "https://drive.google.com/file/d/1kjALH8JyQ_uefjzfu7EFXKF8itceWPFf/view?usp=drivesdk" }
-            ];
-            let html = `<h3>Free Ebooks Library 📖</h3><p style="margin-bottom:15px;">Click any category below to open the Google Drive folder!</p>`;
-            books.forEach(book => { html += `<a href="${book.link}" target="_blank" style="display:block; background:#f0f0f0; padding:12px; border-radius:8px; margin-bottom:8px; text-decoration:none; color:#111; font-weight:500; border-left:4px solid #4caf50;"><i class="fas fa-folder-open" style="color:#e91e63; margin-right:8px;"></i> ${book.name}</a>`; });
-            return html + getAdBannerHTML();
-        }
-
-        function startCBTRegistration() {
+        // CBT Functions
+        function startCBT() {
             document.getElementById('cbtOverlay').classList.add('active');
-            document.getElementById('cbtScoreDisplay').style.display = 'none';
+            document.getElementById('cbtScore').style.display = 'none';
             document.getElementById('cbtContent').innerHTML = `
-                <h3 style="color:var(--millionaire-gold); margin-bottom:20px; text-align:center;">Enter Your Details to Play</h3>
-                <div class="cbt-input-group"><label>Full Name</label><input type="text" id="cbtName" class="cbt-input" placeholder="Enter your name"></div>
-                <div class="cbt-input-group"><label>Gmail Address</label><input type="email" id="cbtEmail" class="cbt-input" placeholder="example@gmail.com"></div>
-                <button class="cbt-btn" onclick="validateAndStart()">Start Game</button>
+                <h3 style="color:var(--millionaire-gold); margin: 20px 0;">Enter Your Details</h3>
+                <input type="text" class="cbt-input" id="cbtName" placeholder="Your Full Name">
+                <input type="email" class="cbt-input" id="cbtEmail" placeholder="Your Gmail Address">
+                <button class="cbt-btn" onclick="validateCBT()">Start Game</button>
             `;
         }
 
-        function validateAndStart() {
-            const name = document.getElementById('cbtName').value.trim();
+        function validateCBT() {            const name = document.getElementById('cbtName').value.trim();
             const email = document.getElementById('cbtEmail').value.trim();
-            if (!name || !email || !email.includes('@')) { alert("Please enter a valid Name and Gmail address."); return; }
-            cbtState.playerName = name; cbtState.playerEmail = email;
-            showCategorySelection();
+            if (!name || !email || !email.includes('@')) {
+                alert('Please enter valid Name and Gmail');
+                return;
+            }
+            cbtState.name = name;
+            cbtState.email = email;
+            showCategories();
         }
 
-        function showCategorySelection() {
-            let html = `<h3 style="color:var(--millionaire-gold); margin-bottom:20px; text-align:center;">Select a Category</h3><div class="cbt-category-select">`;
-            Object.keys(questionsDB).forEach(cat => { html += `<div class="cat-btn" onclick="startStage('${cat}')">${cat}</div>`; });
-            html += `</div>`;
+        function showCategories() {
+            let html = '<h3 style="color:var(--millionaire-gold); margin: 20px 0;">Select Category</h3>';
+            Object.keys(questionsDB).forEach(cat => {
+                html += `<button class="cat-btn" onclick="startQuiz('${cat}')">${cat}</button>`;
+            });
             document.getElementById('cbtContent').innerHTML = html;
         }
 
-        function startStage(category) {
+        function startQuiz(category) {
             cbtState.category = category;
             cbtState.questions = [...questionsDB[category]].sort(() => 0.5 - Math.random()).slice(0, 10);
-            cbtState.currentIndex = 0; cbtState.score = 0; cbtState.timeLeft = 300;
-            document.getElementById('cbtScoreDisplay').style.display = 'block';
-            document.getElementById('cbtScoreDisplay').innerText = `Score: 0/10`;
-            renderQuestion(); startTimer();
+            cbtState.index = 0;
+            cbtState.score = 0;
+            cbtState.time = 300;
+            document.getElementById('cbtScore').style.display = 'block';
+            document.getElementById('cbtScore').innerText = '0/10';
+            showQuestion();
+            startTimer();
         }
 
         function startTimer() {
             if (cbtState.timer) clearInterval(cbtState.timer);
-            cbtState.timer = setInterval(() => {                cbtState.timeLeft--;
-                if (cbtState.timeLeft <= 0) { clearInterval(cbtState.timer); endStage(false); }
+            cbtState.timer = setInterval(() => {
+                cbtState.time--;
+                if (cbtState.time <= 0) {
+                    clearInterval(cbtState.timer);
+                    endQuiz();
+                }
             }, 1000);
         }
 
-        function renderQuestion() {
-            const q = cbtState.questions[cbtState.currentIndex];
-            let html = `<div class="cbt-timer">⏱️ ${Math.floor(cbtState.timeLeft/60)}:${(cbtState.timeLeft%60).toString().padStart(2, '0')}</div>`;
-            html += `<div class="cbt-question-box">Question ${cbtState.currentIndex + 1}/10: ${q.q}</div><div class="cbt-options">`;
-            const labels = ['A', 'B', 'C', 'D'];
-            q.options.forEach((opt, idx) => { html += `<div class="cbt-option" onclick="checkAnswer(${idx}, this)"><span>${labels[idx]}.</span> ${opt}</div>`; });
-            html += `</div>`;
+        function showQuestion() {
+            const q = cbtState.questions[cbtState.index];
+            const mins = Math.floor(cbtState.time / 60);
+            const secs = cbtState.time % 60;
+            
+            let html = `<div class="cbt-timer">⏱️ ${mins}:${secs.toString().padStart(2,'0')}</div>`;
+            html += `<div class="cbt-question"><strong>Q${cbtState.index + 1}/10:</strong> ${q.q}</div>`;
+                        const labels = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, idx) => {
+                html += `<div class="cbt-option" onclick="checkAnswer(${idx}, this)"><span>${labels[idx]}.</span> ${opt}</div>`;
+            });
+            
             document.getElementById('cbtContent').innerHTML = html;
         }
 
-        function checkAnswer(selectedIdx, element) {
+        function checkAnswer(selected, element) {
             const options = document.querySelectorAll('.cbt-option');
             options.forEach(opt => opt.style.pointerEvents = 'none');
-            const correctIdx = cbtState.questions[cbtState.currentIndex].a;
-            if (selectedIdx === correctIdx) {
-                element.classList.add('correct'); cbtState.score++;
-                document.getElementById('cbtScoreDisplay').innerText = `Score: ${cbtState.score}/10`;
-            } else { element.classList.add('wrong'); options[correctIdx].classList.add('correct'); }
+            
+            const correct = cbtState.questions[cbtState.index].a;
+            if (selected === correct) {
+                element.classList.add('correct');
+                cbtState.score++;
+                document.getElementById('cbtScore').innerText = `${cbtState.score}/10`;
+            } else {
+                element.classList.add('wrong');
+                options[correct].classList.add('correct');
+            }
+            
             setTimeout(() => {
-                cbtState.currentIndex++;
-                if (cbtState.currentIndex < 10) renderQuestion();
-                else { clearInterval(cbtState.timer); endStage(true); }
+                cbtState.index++;
+                if (cbtState.index < 10) {
+                    showQuestion();
+                } else {
+                    clearInterval(cbtState.timer);
+                    endQuiz();
+                }
             }, 1500);
         }
 
-        function endStage(completed) {
+        function endQuiz() {
             const score = cbtState.score;
-            let html = `<h3 style="color:var(--millionaire-gold); text-align:center; margin-bottom:20px;">Stage Complete!</h3>`;
-            html += `<div class="cbt-question-box" style="flex-direction:column;"><h2 style="color:white; margin-bottom:10px;">Your Score: ${score}/10</h2>`;
+            let html = `<h3 style="color:var(--millionaire-gold); margin: 20px 0; text-align: center;">Quiz Complete!</h3>`;
+            html += `<div class="cbt-question" style="text-align: center;"><h2 style="color: white; margin-bottom: 15px;">Score: ${score}/10</h2>`;
             
             if (score === 10) {
-                html += `<p style="color:var(--millionaire-gold); font-weight:bold; font-size:1.2rem;">🏆 GRAND WINNER! 🏆</p><p>You scored 10/10! Your details are being sent to the admin for your reward and honor.</p>`;
-                html += `<a href="mailto:${adminEmail}?subject=Millionaire Winner: ${encodeURIComponent(cbtState.playerName)}&body=Name: ${encodeURIComponent(cbtState.playerName)}%0D%0AEmail: ${encodeURIComponent(cbtState.playerEmail)}%0D%0ACategory: ${encodeURIComponent(cbtState.category)}%0D%0AScore: 10/10" class="cbt-btn" style="text-decoration:none; display:inline-block; margin-top:15px;">Claim Reward (Open Email)</a>`;
+                html += `<p style="color:var(--millionaire-gold); font-size: 1.3rem; font-weight: bold;">🏆 GRAND WINNER! 🏆</p>
+                         <p>Click below to email your details for rewards!</p>
+                         <a href="mailto:${adminEmail}?subject=Millionaire Winner: ${encodeURIComponent(cbtState.name)}&body=Name: ${encodeURIComponent(cbtState.name)}%0D%0AEmail: ${encodeURIComponent(cbtState.email)}%0D%0ACategory: ${encodeURIComponent(cbtState.category)}%0D%0AScore: 10/10" class="cbt-btn" style="text-decoration: none; display: inline-block; margin-top: 15px;">📧 Claim Reward</a>`;
             } else if (score >= 7) {
-                html += `<p style="color:var(--green-accent); font-weight:bold;">✅ PASSED! You scored above 6.</p><p>You can now advance to a higher level of Brain Teasing IQ questions!</p>`;
-                html += `<button class="cbt-btn" onclick="showCategorySelection()" style="margin-top:15px;">Play Another Category</button>`;
+                html += `<p style="color:var(--green-accent); font-weight: bold;">✅ PASSED! Score above 6.</p>
+                         <p>You can advance to higher level!</p>
+                         <button class="cbt-btn" onclick="showCategories()">Play Another Category</button>`;
             } else {
-                html += `<p style="color:var(--red-accent); font-weight:bold;">❌ FAILED. You need 7/10 to advance.</p><p>Don't give up! Try again.</p>`;
-                html += `<button class="cbt-btn" onclick="showCategorySelection()" style="margin-top:15px;">Try Again</button>`;
-            }
-            html += `</div>`;
+                html += `<p style="color:var(--red-accent); font-weight: bold;">❌ Need 7/10 to pass.</p>
+                         <button class="cbt-btn" onclick="showCategories()">Try Again</button>`;
+            }            html += `</div>`;
             document.getElementById('cbtContent').innerHTML = html;
         }
 
-        function closeCBT() {            if (cbtState.timer) clearInterval(cbtState.timer);
+        function closeCBT() {
+            if (cbtState.timer) clearInterval(cbtState.timer);
             document.getElementById('cbtOverlay').classList.remove('active');
         }
 
+        // Bottom Nav Functions
+        function openCourses() {
+            alert('Digital Courses coming soon! Check back later.');
+        }
+
+        function openBooks() {
+            const books = [
+                { name: "Personal Development", link: "https://drive.google.com/drive/folders/1-4m3aoHpkMC032U4HJBio1QxsEgCEYdJ" },
+                { name: "Finance & Money Making", link: "https://drive.google.com/drive/folders/1vUgr-Ira5WxrMO5y1y5UzLaCQ_OlJq1u" },
+                { name: "Social Media Marketing", link: "https://drive.google.com/drive/folders/1-s3TQVx_tiOf0q_5InPUfnWh1b4kz7cN" },
+                { name: "Copywriting", link: "https://drive.google.com/drive/folders/1-4lr1gypDbKPNwl_efq6k1JQWd_CQhqA" },
+                { name: "Freelance", link: "https://drive.google.com/drive/folders/1-RQh1In2UchBjMOwY_rQu-O1dsXwRex2" },
+                { name: "Goal Settings", link: "https://drive.google.com/drive/folders/1g81fBkWA30w5GqiqNeJS9WBHSlJBxZnU" },
+                { name: "Special Books", link: "https://drive.google.com/drive/folders/10lyKgfjhOEhOoDlcspmULX2T6wsAqukQ" },
+                { name: "Swipe File", link: "https://drive.google.com/drive/folders/1-7R4qxmkJdEAj8eKG6wQpzIBo_cLJLqu" },
+                { name: "Christian Books", link: "https://drive.google.com/drive/folders/1NWQi8XbWn9wx4fxR36PdZtBYnvHWQycX" },
+                { name: "Trading Books", link: "https://drive.google.com/drive/folders/1Qbn3ugXYf0y_U6C2jPkSR7VM5A1kLf4U" },
+                { name: "Life Building", link: "https://drive.google.com/drive/folders/1E7dJs3gFhcDg7-kUtVghOrpYU26fqBje" },
+                { name: "Speak & Make Money", link: "https://drive.google.com/file/d/1kjALH8JyQ_uefjzfu7EFXKF8itceWPFf/view" }
+            ];
+            
+            let msg = "📚 FREE EBOOKS LIBRARY:\n\n";
+            books.forEach((b, i) => {
+                msg += `${i+1}. ${b.name}\n${b.link}\n\n`;
+            });
+            
+            alert('Opening Free Books List... Check your WhatsApp!');
+            window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // Initialize
         renderMenu();
     </script>
 </body>
