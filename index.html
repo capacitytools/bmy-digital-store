@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BMY Digital Store</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#075E54">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BMY Store">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
-    <script src="https://pl29819831.effectivecpmnetwork.com/40/ec/a6/40eca62ffa3dd47c9612d8d993c2924e.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --wa-header: #075E54; --wa-bg: #ECE5DD; --wa-white: #FFFFFF; --wa-green-btn: #25D366;
@@ -16,30 +23,80 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background-color: #d1d7db; display: flex; justify-content: center; height: 100vh; overflow: hidden; }
-        .app-container { width: 100%; max-width: 480px; background-color: var(--wa-bg); height: 100%; display: flex; flex-direction: column; position: relative; }
         
-        .header { background-color: var(--wa-header); color: var(--wa-white); padding: 15px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .app-container { width: 100%; max-width: 480px; background-color: var(--wa-white); height: 100%; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        .header { background-color: var(--wa-header); color: var(--wa-white); padding: 15px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.2); flex-shrink: 0; z-index: 10; }
         .header-title { font-size: 20px; font-weight: 500; }
+        .install-btn-header { background: var(--millionaire-gold); color: #000; border: none; padding: 5px 12px; border-radius: 15px; font-weight: bold; font-size: 12px; cursor: pointer; display: none; }
         
-        .main-view { flex: 1; overflow-y: auto; background-color: var(--wa-white); }
+        .main-view { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; background-color: var(--wa-white); position: relative; }
         
-        .menu-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid var(--wa-border); cursor: pointer; background: white; }
+        /* User Profile Bar */
+        .user-profile { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #f8f9fa; border-bottom: 1px solid var(--wa-border); }
+        .user-info { display: flex; align-items: center; gap: 10px; }
+        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--wa-header); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; }
+        .user-name { font-weight: 600; font-size: 15px; color: var(--wa-text); }
+        .user-stats { display: flex; gap: 15px; }
+        .stat-box { display: flex; flex-direction: column; align-items: center; }
+        .stat-value { font-weight: 800; font-size: 16px; color: var(--wa-text); }
+        .stat-label { font-size: 10px; color: var(--wa-text-light); text-transform: uppercase; }
+        
+        /* Wikicat Banner */
+        .wikicat-banner { background: linear-gradient(90deg, #0a0a2a, #1a1a4a); color: var(--millionaire-gold); padding: 10px 15px; text-align: center; font-size: 13px; font-weight: 600; border-bottom: 2px solid var(--millionaire-gold); }
+        .wikicat-banner i { margin-right: 5px; }
+
+        /* Millionaire Banner Ad Style */
+        .millionaire-banner { margin: 15px; padding: 20px; background: linear-gradient(135deg, #1a1a4a 0%, #0a0a2a 100%); border: 3px solid var(--millionaire-gold); border-radius: 12px; text-align: center; cursor: pointer; box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3); transition: transform 0.2s; position: relative; overflow: hidden; }
+        .millionaire-banner:active { transform: scale(0.98); }        .millionaire-banner::before { content: 'SPONSORED'; position: absolute; top: 5px; left: 10px; font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 600; }
+        .millionaire-title { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; color: var(--millionaire-gold); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .millionaire-subtitle { color: white; font-size: 15px; margin-bottom: 15px; }
+        .millionaire-cta { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #000; padding: 10px 25px; border-radius: 25px; font-weight: 700; font-size: 14px; display: inline-block; }
+        
+        .menu-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid var(--wa-border); cursor: pointer; transition: background 0.2s; }
         .menu-item:active { background-color: #f5f5f5; }
-        .menu-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 22px; color: white; }
+        .menu-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 22px; color: white; flex-shrink: 0; }
         .menu-title { font-size: 16px; font-weight: 600; color: var(--wa-text); margin-bottom: 3px; }
         .menu-subtitle { font-size: 13px; color: var(--wa-text-light); }
         
-        .ad-small-banner { margin: 10px 15px; padding: 10px; background: #fff; border: 2px solid #8B4513; border-radius: 8px; text-align: center; cursor: pointer; }
-        .ad-text { font-family: 'Caveat', cursive; font-size: 22px; color: #000; font-weight: 700; }
-        .ad-text-red { font-family: 'Caveat', cursive; font-size: 18px; color: #d32f2f; font-weight: 700; margin: 5px 0; }
-        .ad-price { font-size: 12px; color: #333; margin: 3px 0; }
-        
-        .ad-container { text-align: center; margin: 10px auto; max-width: 320px; }
-        .ad-label { font-size: 10px; color: #999; text-transform: uppercase; }
+        /* Advert Banners */
+        .ad-banner { margin: 15px; padding: 20px; border-radius: 10px; text-align: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; }
+        .ad-banner:active { transform: scale(0.98); }
+        .ad-banner-white { background: #ffffff; border: 2px solid #8B4513; }
+        .ad-banner-black { background: #1a1a1a; border: 2px solid var(--millionaire-gold); }
+        .ad-handwritten { font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; margin-bottom: 5px; }
+        .ad-handwritten-red { font-family: 'Caveat', cursive; font-size: 24px; color: #d32f2f; font-weight: 700; margin-bottom: 15px; }
+        .ad-handwritten-white { font-family: 'Caveat', cursive; font-size: 24px; color: #ffffff; font-weight: 700; margin-bottom: 15px; }
+        .ad-price-box { padding: 10px; border-radius: 6px; font-weight: 600; font-size: 15px; }
+        .price-white { background: #f9f9f9; color: #333; border-left: 4px solid #8B4513; }
+        .price-black { background: #333; color: var(--millionaire-gold); border-left: 4px solid var(--millionaire-gold); }
 
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 480px; background: var(--wa-white); display: flex; justify-content: space-around; padding: 10px 0; border-top: 3px solid var(--wa-header); z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; font-size: 11px; font-weight: 600; cursor: pointer; flex: 1; }
-        .nav-item i { font-size: 20px; margin-bottom: 4px; }
+        /* Detail View */
+        .detail-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--wa-bg); background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E"); display: none; flex-direction: column; z-index: 50; }
+        .detail-view.active { display: flex; }
+        .chat-header { background-color: var(--wa-header); color: var(--wa-white); padding: 10px 15px; display: flex; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.2); flex-shrink: 0; }
+        .back-btn { font-size: 20px; margin-right: 15px; cursor: pointer; display: flex; align-items: center; }
+        .chat-header-info { display: flex; align-items: center; }
+        .chat-header-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 16px; color: white; }
+        .chat-header-title { font-size: 16px; font-weight: 500; }
+        .chat-area { flex: 1; padding: 20px 15px; overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; gap: 10px; }
+        .chat-bubble { max-width: 92%; padding: 12px 15px; border-radius: 8px; font-size: 14px; line-height: 1.5; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+        .bubble-left { background-color: var(--wa-white); align-self: flex-start; border-top-left-radius: 0; }
+        .bubble-right { background-color: #DCF8C6; align-self: flex-end; border-top-right-radius: 0; }
+        .bubble-left h3 { font-size: 17px; margin-bottom: 10px; color: var(--wa-header); font-weight: 700; }
+        .bubble-left p { margin-bottom: 10px; }
+        .bubble-left ul { margin-left: 20px; margin-bottom: 10px; }
+        .bubble-left li { margin-bottom: 6px; }
+        .price-tag { font-weight: bold; font-size: 18px; color: var(--wa-header); margin: 15px 0; background: #e8f5e9; padding: 10px; border-radius: 8px; border-left: 4px solid var(--wa-green-btn); }
+        .order-btn { display: inline-block; background-color: var(--wa-green-btn); color: white; text-decoration: none; padding: 12px 24px; border-radius: 25px; font-weight: 700; font-size: 15px; margin-top: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); width: 100%; border: none; cursor: pointer; }
+        .order-btn i { margin-right: 8px; }
+        .chat-time { font-size: 10px; color: #999; text-align: right; margin-top: 5px; }
+        .book-link { display: block; background: #f0f0f0; padding: 15px; border-radius: 8px; margin-bottom: 10px; text-decoration: none; color: #111; font-weight: 500; border-left: 4px solid var(--green-accent); transition: 0.2s; }
+        .book-link:active { background: #e0e0e0; transform: translateX(5px); }
+        .book-link i { margin-right: 10px; color: var(--red-accent); font-size: 18px; }
+
+        /* Bottom Navigation */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 480px; background: var(--wa-white); display: flex; justify-content: space-around; padding: 10px 0; border-top: 3px solid var(--wa-header); z-index: 100; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); flex-shrink: 0; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; font-size: 11px; font-weight: 600; cursor: pointer; flex: 1; }        .nav-item i { font-size: 20px; margin-bottom: 4px; }
         .nav-item:nth-child(1) { color: var(--green-accent); }
         .nav-item:nth-child(2) { color: var(--black-accent); }
         .nav-item:nth-child(3) { color: var(--green-accent); }
@@ -47,9 +104,10 @@
         .nav-item:nth-child(5) { color: var(--black-accent); }
 
         /* CBT Styles */
-        .cbt-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--millionaire-bg); z-index: 200; display: none; flex-direction: column; color: white; }        .cbt-overlay.active { display: flex; }
-        .cbt-header { background: linear-gradient(180deg, #1a1a4a 0%, #0a0a2a 100%); padding: 20px; text-align: center; border-bottom: 2px solid var(--millionaire-gold); position: relative; }
-        .cbt-header h2 { color: var(--millionaire-gold); font-size: 1.2rem; }
+        .cbt-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--millionaire-bg); z-index: 200; display: none; flex-direction: column; color: white; }
+        .cbt-overlay.active { display: flex; }
+        .cbt-header { background: linear-gradient(180deg, #1a1a4a 0%, #0a0a2a 100%); padding: 20px; text-align: center; border-bottom: 2px solid var(--millionaire-gold); position: relative; flex-shrink: 0; }
+        .cbt-header h2 { color: var(--millionaire-gold); font-family: 'Montserrat', sans-serif; font-size: 1.2rem; }
         .cbt-content { flex: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; overflow-y: auto; }
         .cbt-input { width: 100%; max-width: 350px; padding: 12px; margin: 10px 0; border-radius: 25px; border: 2px solid var(--millionaire-gold); background: rgba(255,255,255,0.1); color: white; }
         .cbt-btn { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #000; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 800; margin: 10px 0; cursor: pointer; width: 100%; max-width: 350px; }
@@ -62,46 +120,81 @@
         .cbt-score { position: absolute; top: 15px; right: 15px; background: var(--millionaire-gold); color: #000; padding: 5px 12px; border-radius: 15px; font-weight: bold; }
         .cat-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--millionaire-gold); color: white; padding: 15px; margin: 5px 0; border-radius: 10px; cursor: pointer; width: 100%; max-width: 350px; }
 
-        /* Detail View */
-        .detail-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--wa-bg); z-index: 50; display: none; flex-direction: column; padding-bottom: 70px; }
-        .detail-view.active { display: flex; }
-        .chat-header { background-color: var(--wa-header); color: var(--wa-white); padding: 10px 15px; display: flex; align-items: center; }
-        .back-btn { font-size: 20px; margin-right: 15px; cursor: pointer; }
-        .chat-area { flex: 1; padding: 20px; overflow-y: auto; }
-        .chat-bubble { max-width: 90%; padding: 12px 15px; border-radius: 8px; margin: 10px 0; }
-        .bubble-left { background-color: var(--wa-white); align-self: flex-start; }
-        .bubble-right { background-color: #DCF8C6; align-self: flex-end; margin-left: auto; }
-        .order-btn { display: inline-block; background-color: var(--wa-green-btn); color: white; text-decoration: none; padding: 12px; border-radius: 25px; font-weight: 700; margin: 10px 0; text-align: center; width: 100%; }
-        .price-tag { font-weight: bold; font-size: 18px; color: var(--wa-header); margin: 15px 0; background: #e8f5e9; padding: 10px; border-radius: 8px; }
+        /* Modals */
+        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 300; display: none; align-items: center; justify-content: center; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: white; width: 90%; max-width: 350px; border-radius: 15px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .modal-box h2 { color: var(--wa-header); margin-bottom: 15px; }
+        .modal-box p { margin-bottom: 20px; color: #555; }
+        .modal-input { width: 100%; padding: 12px; border: 2px solid var(--wa-border); border-radius: 25px; margin-bottom: 15px; font-size: 16px; text-align: center; }
+        .modal-btn { background: var(--wa-green-btn); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; font-size: 16px; cursor: pointer; width: 100%; }
+        
+        .reward-coin { font-size: 50px; margin: 10px 0; animation: bounce 1s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
 </head>
 <body>
     <div class="app-container">
         <div class="header">
             <div class="header-title">BMY Digital Store</div>
+            <button class="install-btn-header" id="installBtn" onclick="installApp()"><i class="fas fa-download"></i> Install App</button>
         </div>
         
-        <div class="main-view">
-            <div class="ad-container"><div class="ad-label">Sponsored</div><script>atOptions = { 'key' : '90fd5bebbb6299ffe5d07b8a539064d0', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };</script><script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></script></div>
+        <div class="main-view" id="mainView">
+            <!-- User Profile & Stats -->
+            <div class="user-profile">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">?</div>
+                    <div class="user-name" id="userName">Guest</div>                </div>
+                <div class="user-stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="userStreak">0 🔥</div>
+                        <div class="stat-label">Streak</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="userCoins">0 🪙</div>
+                        <div class="stat-label">BMY</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wikicat Coin Banner -->
+            <div class="wikicat-banner">
+                <i class="fas fa-rocket"></i> Coming Soon: 1 BMY = 1 Wikicat Coin! Keep using the app daily to earn more!
+            </div>
             
-            <!-- MENU ITEMS CONTAINER -->
-            <div id="menuContainer"></div>
+            <!-- Millionaire Banner Ad -->
+            <div class="millionaire-banner" onclick="startCBT()">
+                <div class="millionaire-title">🏆 Who Wants to Be a Millionaire?</div>
+                <div class="millionaire-subtitle">IQ Questions & Brain Teasers</div>
+                <div class="millionaire-cta">Play Now & Win Rewards!</div>
+            </div>
             
-            <!-- Small Advert Banner -->
-            <div class="ad-small-banner" onclick="openAdvertPlacement()">
-                <div class="ad-text">Click Here to</div>
-                <div class="ad-text-red">Place Your Advert!</div>
-                <div class="ad-price"> Big White Banner: $5 / 1 Week</div>
-                <div class="ad-price" style="background: #fffbe6; padding: 5px; margin-top: 5px;">⬛ Premium Black: $10 / 1 Month</div>
+            <!-- Regular Menu Items -->
+            <div id="menuList"></div>
+            
+            <!-- Two Advert Banners -->
+            <div class="ad-banner ad-banner-white" onclick="openAdvertPlacement()">
+                <div class="ad-handwritten">Click Here to</div>
+                <div class="ad-handwritten-red">Place Your Advert!</div>
+                <div class="ad-price-box price-white">⬜ Big White Banner: $5 / 1 Week</div>
+            </div>
+            <div class="ad-banner ad-banner-black" onclick="openAdvertPlacement()">
+                <div class="ad-handwritten" style="color: white;">Premium Spot</div>
+                <div class="ad-handwritten-white">Place Your Advert!</div>
+                <div class="ad-price-box price-black">⬛ Premium Black Banner: $10 / 1 Month</div>
             </div>
         </div>
 
-        <!-- Detail View for Menu Items -->        <div class="detail-view" id="detailView">
+        <!-- Detail View -->
+        <div class="detail-view" id="detailView">
             <div class="chat-header">
                 <div class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></div>
-                <div id="detailTitle" style="font-weight: 600;">Title</div>
-            </div>
-            <div class="chat-area" id="chatArea"></div>
+                <div class="chat-header-info">
+                    <div class="chat-header-icon" id="chatIcon"></div>
+                    <div class="chat-header-title" id="chatTitle">Title</div>
+                </div>
+            </div>            <div class="chat-area" id="chatArea"></div>
         </div>
 
         <!-- CBT Overlay -->
@@ -114,46 +207,92 @@
             <div class="cbt-content" id="cbtContent"></div>
         </div>
 
+        <!-- Setup Modal (First Time) -->
+        <div class="modal-overlay" id="setupModal">
+            <div class="modal-box">
+                <h2>Welcome to BMY Store! </h2>
+                <p>Enter your name to start earning daily BMY Coins and build your streak!</p>
+                <input type="text" class="modal-input" id="setupName" placeholder="Your Name">
+                <button class="modal-btn" onclick="completeSetup()">Start Earning!</button>
+            </div>
+        </div>
+
+        <!-- Daily Reward Modal -->
+        <div class="modal-overlay" id="rewardModal">
+            <div class="modal-box">
+                <div class="reward-coin">🪙</div>
+                <h2>Daily Reward Claimed!</h2>
+                <p>You earned <strong>1 BMY Coin</strong> for logging in today!</p>
+                <p style="font-size: 14px; color: #888;">Current Streak: <span id="rewardStreak" style="color: #ff9800; font-weight: bold;">0</span> days 🔥</p>
+                <button class="modal-btn" onclick="closeRewardModal()">Awesome!</button>
+            </div>
+        </div>
+
         <!-- Bottom Navigation -->
         <div class="bottom-nav">
             <div class="nav-item" onclick="window.open('https://wa.me/2349159884244', '_blank')"><i class="fas fa-comments"></i><span>Chat Admin</span></div>
-            <div class="nav-item" onclick="openCourses()"><i class="fas fa-graduation-cap"></i><span>Courses</span></div>
+            <div class="nav-item" onclick="openBottomNav('courses')"><i class="fas fa-graduation-cap"></i><span>Courses</span></div>
             <div class="nav-item" onclick="window.open('https://chat.whatsapp.com/E0XfmxCpkX69wMFKqhGT9U', '_blank')"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></div>
             <div class="nav-item" onclick="window.open('https://t.me/capacitydotbuild', '_blank')"><i class="fab fa-telegram"></i><span>Telegram</span></div>
-            <div class="nav-item" onclick="openBooks()"><i class="fas fa-book"></i><span>Free Books</span></div>
+            <div class="nav-item" onclick="openBottomNav('books')"><i class="fas fa-book"></i><span>Free Books</span></div>
         </div>
     </div>
 
     <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').catch(err => console.log('SW registration failed'));
+            });        }
+
+        // PWA Install Prompt Logic
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installBtn').style.display = 'block';
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        document.getElementById('installBtn').style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                alert("To install: Tap your browser menu (⋮) and select 'Add to Home Screen' or 'Install App'.");
+            }
+        }
+
         const myWhatsAppNumber = "2349159884244";
         const adminEmail = "capacitydotbuild@gmail.com";
 
-        // MENU DATA
         const menuItems = [
-            { title: "Digital IQ CBT (Millionaire)", subtitle: "Play & Win Rewards!", icon: "fa-brain", color: "#ffd700", type: "cbt" },
-            { title: "AI Image And Monetizations", subtitle: "Promo: #5,000", icon: "fa-image", color: "#e91e63", type: "course", price: 5000 },
-            { title: "AI Video Creation and Monetizations", subtitle: "Promo: #5,000", icon: "fa-video", color: "#2196f3", type: "course", price: 5000 },
-            { title: "Own Your Own Platform (80% Yours)", subtitle: "Setup: #15,000", icon: "fa-server", color: "#ff9800", type: "platform", price: 15000 },
-            { title: "Reselling License", subtitle: "License: #20,000", icon: "fa-handshake", color: "#9c27b0", type: "license", price: 20000 },
-            { title: "Become an Affiliate (Earn 40%)", subtitle: "FREE to Join", icon: "fa-percentage", color: "#4caf50", type: "affiliate", price: 0 }
+            { title: "AI Image And Monetizations", subtitle: "Tap to view details", icon: "fa-image", color: "#e91e63", type: "course", price: 5000 },
+            { title: "AI Video Creation and Monetizations", subtitle: "Tap to view details", icon: "fa-video", color: "#2196f3", type: "course", price: 5000 },
+            { title: "Own Your Own Platform (80% Yours)", subtitle: "Tap to view details", icon: "fa-server", color: "#ff9800", type: "platform", price: 15000 },
+            { title: "Reselling License", subtitle: "Tap to view details", icon: "fa-handshake", color: "#9c27b0", type: "license", price: 20000 },
+            { title: "Become an Affiliate (Earn 40%)", subtitle: "Tap to view details", icon: "fa-percentage", color: "#4caf50", type: "affiliate", price: 0 }
         ];
 
-        // QUESTIONS DATABASE
         const questionsDB = {
             "General Knowledge": [
                 { q: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], a: 2 },
                 { q: "Which planet is the Red Planet?", options: ["Venus", "Mars", "Jupiter", "Saturn"], a: 1 },
                 { q: "What is the largest ocean?", options: ["Atlantic", "Indian", "Arctic", "Pacific"], a: 3 },
                 { q: "Who painted Mona Lisa?", options: ["Van Gogh", "Picasso", "Da Vinci", "Michelangelo"], a: 2 },
-                { q: "Chemical symbol for gold?", options: ["Au", "Ag", "Fe", "Pb"], a: 0 },                { q: "How many continents?", options: ["5", "6", "7", "8"], a: 2 },
+                { q: "Chemical symbol for gold?", options: ["Au", "Ag", "Fe", "Pb"], a: 0 },
+                { q: "How many continents?", options: ["5", "6", "7", "8"], a: 2 },
                 { q: "Hardest natural substance?", options: ["Gold", "Iron", "Diamond", "Platinum"], a: 2 },
                 { q: "Land of the Rising Sun?", options: ["China", "Japan", "Korea", "Thailand"], a: 1 },
                 { q: "Smallest prime number?", options: ["0", "1", "2", "3"], a: 2 },
                 { q: "Who wrote Hamlet?", options: ["Dickens", "Shakespeare", "Twain", "Austen"], a: 1 }
             ],
             "Logic & Brain Teasers": [
-                { q: "What comes next: 2, 4, 8, 16, ?", options: ["24", "32", "30", "64"], a: 1 },
-                { q: "5 cats catch 5 mice in 5 mins. 100 cats catch 100 mice in?", options: ["100 mins", "5 mins", "50 mins", "1 min"], a: 1 },
+                { q: "What comes next: 2, 4, 8, 16, ?", options: ["24", "32", "30", "64"], a: 1 },                { q: "5 cats catch 5 mice in 5 mins. 100 cats catch 100 mice in?", options: ["100 mins", "5 mins", "50 mins", "1 min"], a: 1 },
                 { q: "I speak without mouth, hear without ears. What am I?", options: ["Wind", "Echo", "Shadow", "Time"], a: 1 },
                 { q: "Has keys but can't open locks?", options: ["Map", "Piano", "Book", "Computer"], a: 1 },
                 { q: "The more you take, the more you leave behind?", options: ["Steps", "Breaths", "Photos", "Memories"], a: 0 },
@@ -171,7 +310,7 @@
                 { q: "Next prime after 7?", options: ["9", "10", "11", "13"], a: 2 },
                 { q: "7 x 8 = ?", options: ["54", "56", "58", "62"], a: 1 },
                 { q: "Sides of hexagon?", options: ["5", "6", "7", "8"], a: 1 },
-                { q: "100  4 = ?", options: ["20", "25", "30", "40"], a: 1 },
+                { q: "100 / 4 = ?", options: ["20", "25", "30", "40"], a: 1 },
                 { q: "Pi to 2 decimals?", options: ["3.12", "3.14", "3.16", "3.18"], a: 1 },
                 { q: "Triangle: 60° + 70° + ? = 180°", options: ["40°", "50°", "60°", "70°"], a: 1 }
             ],
@@ -194,292 +333,233 @@
                 { q: "CEO stands for?", options: ["Chief Executive Officer", "Central Economic", "Corporate Executive", "Chief Economic"], a: 0 },
                 { q: "AAPL ticker = ?", options: ["Amazon", "Apple", "Adobe", "AOL"], a: 1 },
                 { q: "Inflation is?", options: ["Rise in prices", "Fall in prices", "More jobs", "Less money"], a: 0 },
-                { q: "Dividend is?", options: ["A tax", "Share of profits", "A loan", "A bond"], a: 1 },                { q: "B2B means?", options: ["Business to Business", "Back to Basics", "Bank to Bank", "Buy to Build"], a: 0 },
+                { q: "Dividend is?", options: ["A tax", "Share of profits", "A loan", "A bond"], a: 1 },
+                { q: "B2B means?", options: ["Business to Business", "Back to Basics", "Bank to Bank", "Buy to Build"], a: 0 },
                 { q: "Capital in business?", options: ["Main office", "Money to start", "The CEO", "The product"], a: 1 },
                 { q: "Monopoly is?", options: ["One seller", "Many sellers", "No sellers", "Govt control"], a: 0 }
             ]
         };
 
         let cbtState = { name: "", email: "", category: "", questions: [], index: 0, score: 0, timer: null, time: 300 };
+        // --- USER & STREAK LOGIC ---
+        function initUser() {
+            let user = JSON.parse(localStorage.getItem('bmy_user'));
+            if (!user) {
+                document.getElementById('setupModal').classList.add('active');
+            } else {
+                processDailyLogin(user);
+            }
+        }
 
-        // RENDER MENU ITEMS
-        function renderMenu() {
-            const container = document.getElementById('menuContainer');
-            container.innerHTML = '';
+        function completeSetup() {
+            const name = document.getElementById('setupName').value.trim();
+            if (!name) { alert('Please enter your name'); return; }
             
-            menuItems.forEach((item, idx) => {
+            const newUser = {
+                name: name,
+                streak: 1,
+                coins: 1,
+                lastLogin: new Date().toISOString()
+            };
+            localStorage.setItem('bmy_user', JSON.stringify(newUser));
+            document.getElementById('setupModal').classList.remove('active');
+            updateUserUI(newUser);
+            showDailyReward(newUser.streak);
+        }
+
+        function processDailyLogin(user) {
+            const today = new Date().toDateString();
+            const lastLogin = new Date(user.lastLogin).toDateString();
+            const yesterday = new Date(Date.now() - 86400000).toDateString();
+
+            if (lastLogin === today) {
+                // Already logged in today, just show UI
+                updateUserUI(user);
+            } else if (lastLogin === yesterday) {
+                // Consecutive day!
+                user.streak++;
+                user.coins++;
+                user.lastLogin = new Date().toISOString();
+                localStorage.setItem('bmy_user', JSON.stringify(user));
+                updateUserUI(user);
+                showDailyReward(user.streak);
+            } else {
+                // Missed a day, reset streak but keep coins
+                user.streak = 1;
+                user.coins++;
+                user.lastLogin = new Date().toISOString();
+                localStorage.setItem('bmy_user', JSON.stringify(user));
+                updateUserUI(user);
+                showDailyReward(user.streak);            }
+        }
+
+        function updateUserUI(user) {
+            document.getElementById('userName').innerText = user.name;
+            document.getElementById('userAvatar').innerText = user.name.charAt(0).toUpperCase();
+            document.getElementById('userStreak').innerText = `${user.streak} 🔥`;
+            document.getElementById('userCoins').innerText = `${user.coins} 🪙`;
+        }
+
+        function showDailyReward(streak) {
+            document.getElementById('rewardStreak').innerText = streak;
+            document.getElementById('rewardModal').classList.add('active');
+        }
+
+        function closeRewardModal() {
+            document.getElementById('rewardModal').classList.remove('active');
+        }
+
+        // --- MENU & DETAIL LOGIC ---
+        function renderMenu() {
+            const container = document.getElementById('menuList');
+            container.innerHTML = '';
+            menuItems.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'menu-item';
-                div.onclick = () => handleMenuClick(item);
-                div.innerHTML = `
-                    <div class="menu-icon" style="background-color: ${item.color}">
-                        <i class="fas ${item.icon}"></i>
-                    </div>
-                    <div>
-                        <div class="menu-title">${item.title}</div>
-                        <div class="menu-subtitle">${item.subtitle}</div>
-                    </div>
-                `;
+                div.onclick = () => showDetail(item);
+                div.innerHTML = `<div class="menu-icon" style="background-color: ${item.color}"><i class="fas ${item.icon}"></i></div><div><div class="menu-title">${item.title}</div><div class="menu-subtitle">${item.subtitle}</div></div>`;
                 container.appendChild(div);
             });
         }
 
-        function handleMenuClick(item) {
-            if (item.type === 'cbt') {
-                startCBT();
-            } else {
-                showDetail(item);
-            }
-        }
-
         function showDetail(item) {
-            document.getElementById('detailTitle').innerText = item.title;
-            const chatArea = document.getElementById('chatArea');
+            document.getElementById('chatIcon').style.backgroundColor = item.color;
+            document.getElementById('chatIcon').innerHTML = `<i class="fas ${item.icon}"></i>`;
+            document.getElementById('chatTitle').innerText = item.title;
             
             let content = '';
             if (item.type === 'course') {
-                content = `
-                    <div class="chat-bubble bubble-left">
-                        <h3>${item.title}</h3>
-                        <p>Complete course with:</p>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>✅ Full video tutorials</li>                            <li>✅ Step-by-step guides</li>
-                            <li>✅ Google Drive access</li>
-                            <li>✅ Monetization strategies</li>
-                            <li>✅ Prompt engineering</li>
-                        </ul>
-                        <div class="price-tag">💰 Price: #${item.price.toLocaleString()}</div>
-                    </div>
-                    <div class="chat-bubble bubble-right">
-                        <a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want to buy ${item.title} for #${item.price}" class="order-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Order Now on WhatsApp
-                        </a>
-                    </div>
-                `;
+                content = `<div class="chat-bubble bubble-left"><h3>${item.title}</h3><ul><li>✅ Full video tutorials</li><li>✅ Step-by-step guides</li><li>✅ Google Drive access</li><li>✅ Monetization strategies</li><li>✅ Prompt engineering</li></ul><div class="price-tag">💰 Price: #${item.price.toLocaleString()}</div></div><div class="chat-bubble bubble-right"><a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want to buy ${item.title} for #${item.price}" class="order-btn" target="_blank"><i class="fab fa-whatsapp"></i> Order Now</a></div>`;
             } else if (item.type === 'platform') {
-                content = `
-                    <div class="chat-bubble bubble-left">
-                        <h3>${item.title}</h3>
-                        <p>Get a complete website like mine!</p>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>✅ 80% profit is yours</li>
-                            <li>✅ I take 20% for hosting</li>
-                            <li>✅ Full mentorship included</li>
-                            <li>✅ Automatic updates</li>
-                            <li>✅ I handle customer support</li>
-                        </ul>
-                        <div class="price-tag"> Setup Fee: #${item.price.toLocaleString()}</div>
-                    </div>
-                    <div class="chat-bubble bubble-right">
-                        <a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want the Platform (80/20 split) for #${item.price}" class="order-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Get My Platform
-                        </a>
-                    </div>
-                `;
+                content = `<div class="chat-bubble bubble-left"><h3>${item.title}</h3><ul><li>✅ 80% profit is yours</li><li>✅ I take 20% for hosting</li><li>✅ Full mentorship included</li><li>✅ Automatic updates</li><li>✅ I handle customer support</li></ul><div class="price-tag">💰 Setup Fee: #${item.price.toLocaleString()}</div></div><div class="chat-bubble bubble-right"><a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want the Platform (80/20 split) for #${item.price}" class="order-btn" target="_blank"><i class="fab fa-whatsapp"></i> Get My Platform</a></div>`;
             } else if (item.type === 'license') {
-                content = `
-                    <div class="chat-bubble bubble-left">
-                        <h3>${item.title}</h3>
-                        <p>Full reselling rights included:</p>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>✅ Complete platform</li>
-                            <li>✅ Set up your affiliates</li>
-                            <li>✅ Auto updates from my site</li>
-                            <li>✅ 6 months support</li>
-                        </ul>
-                        <div class="price-tag">💰 License: #${item.price.toLocaleString()}</div>
-                    </div>
-                    <div class="chat-bubble bubble-right">
-                        <a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want Reselling License for #${item.price}" class="order-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Get License
-                        </a>                    </div>
-                `;
+                content = `<div class="chat-bubble bubble-left"><h3>${item.title}</h3><ul><li>✅ Complete platform</li><li>✅ Set up your affiliates</li><li>✅ Auto updates from my site</li><li>✅ 6 months support</li></ul><div class="price-tag">💰 License: #${item.price.toLocaleString()}</div></div><div class="chat-bubble bubble-right"><a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want Reselling License for #${item.price}" class="order-btn" target="_blank"><i class="fab fa-whatsapp"></i> Get License</a></div>`;
             } else if (item.type === 'affiliate') {
-                content = `
-                    <div class="chat-bubble bubble-left">
-                        <h3>${item.title}</h3>
-                        <p>Earn 40% commission on every sale!</p>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>✅ Share your unique link</li>
-                            <li>✅ Earn 40% on all sales</li>
-                            <li>✅ FREE to join</li>
-                            <li>✅ Fast payouts</li>
-                            <li>✅ No customer support needed</li>
-                        </ul>
-                        <div class="price-tag"> 100% FREE to Register!</div>
-                    </div>
-                    <div class="chat-bubble bubble-right">
-                        <a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want to register as Affiliate (40% commission)" class="order-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Register as Affiliate
-                        </a>
-                    </div>
-                `;
+                content = `<div class="chat-bubble bubble-left"><h3>${item.title}</h3><ul><li>✅ Share your unique link</li><li>✅ Earn 40% on all sales</li><li>✅ FREE to join</li><li>✅ Fast payouts</li><li>✅ No customer support needed</li></ul><div class="price-tag"> 100% FREE to Register!</div></div><div class="chat-bubble bubble-right"><a href="https://wa.me/${myWhatsAppNumber}?text=Hello! I want to register as Affiliate (40% commission)" class="order-btn" target="_blank"><i class="fab fa-whatsapp"></i> Register as Affiliate</a></div>`;
             }
             
-            chatArea.innerHTML = content;
-            document.getElementById('detailView').classList.add('active');
-        }
+            document.getElementById('chatArea').innerHTML = content;
+            document.getElementById('detailView').classList.add('active');        }
 
-        function goBack() {
-            document.getElementById('detailView').classList.remove('active');
-        }
+        function goBack() { document.getElementById('detailView').classList.remove('active'); }
 
         function openAdvertPlacement() {
-            const msg = encodeURIComponent("Hello BMY! I want to place an advert:\n\n⬜ Big White Banner: $5 / 1 Week\n⬛ Premium Black Banner: $10 / 1 Month");
+            const msg = encodeURIComponent("Hello BMY! I want to place an advert:\n\n⬜ Big White Banner: $5 / 1 Week\n Premium Black Banner: $10 / 1 Month");
             window.open(`https://wa.me/${myWhatsAppNumber}?text=${msg}`, '_blank');
         }
 
-        // CBT Functions
+        function openBottomNav(type) {
+            if (type === 'books') {
+                document.getElementById('chatIcon').style.backgroundColor = '#e91e63';
+                document.getElementById('chatIcon').innerHTML = `<i class="fas fa-book"></i>`;
+                document.getElementById('chatTitle').innerText = 'Free Ebooks Library';
+                
+                const books = [
+                    { name: "Personal Development Books", link: "https://drive.google.com/drive/folders/1-4m3aoHpkMC032U4HJBio1QxsEgCEYdJ" },
+                    { name: "Finance and Money Making Books", link: "https://drive.google.com/drive/folders/1vUgr-Ira5WxrMO5y1y5UzLaCQ_OlJq1u" },
+                    { name: "Social Media Marketing Books", link: "https://drive.google.com/drive/folders/1-s3TQVx_tiOf0q_5InPUfnWh1b4kz7cN" },
+                    { name: "Copywriting Books", link: "https://drive.google.com/drive/folders/1-4lr1gypDbKPNwl_efq6k1JQWd_CQhqA" },
+                    { name: "Freelance Books", link: "https://drive.google.com/drive/folders/1-RQh1In2UchBjMOwY_rQu-O1dsXwRex2" },
+                    { name: "Goal Settings Books", link: "https://drive.google.com/drive/folders/1g81fBkWA30w5GqiqNeJS9WBHSlJBxZnU" },
+                    { name: "Special Books", link: "https://drive.google.com/drive/folders/10lyKgfjhOEhOoDlcspmULX2T6wsAqukQ" },
+                    { name: "Swipe File Books", link: "https://drive.google.com/drive/folders/1-7R4qxmkJdEAj8eKG6wQpzIBo_cLJLqu" },
+                    { name: "Christian Books", link: "https://drive.google.com/drive/folders/1NWQi8XbWn9wx4fxR36PdZtBYnvHWQycX" },
+                    { name: "Financial Market Trading Books", link: "https://drive.google.com/drive/folders/1Qbn3ugXYf0y_U6C2jPkSR7VM5A1kLf4U" },
+                    { name: "Life Building Books", link: "https://drive.google.com/drive/folders/1E7dJs3gFhcDg7-kUtVghOrpYU26fqBje" },
+                    { name: "Speak and Make Money Book", link: "https://drive.google.com/file/d/1kjALH8JyQ_uefjzfu7EFXKF8itceWPFf/view" }
+                ];
+                
+                let html = `<div class="chat-bubble bubble-left" style="width: 100%; max-width: 100%;"><h3>Free Ebooks Library </h3><p>Tap any category below to open the Google Drive folder and read for free!</p></div>`;
+                books.forEach(book => { html += `<a href="${book.link}" target="_blank" class="book-link"><i class="fas fa-folder-open"></i> ${book.name}</a>`; });
+                
+                document.getElementById('chatArea').innerHTML = html;
+                document.getElementById('detailView').classList.add('active');
+            } else if (type === 'courses') {
+                document.getElementById('chatIcon').style.backgroundColor = '#000000';
+                document.getElementById('chatIcon').innerHTML = `<i class="fas fa-graduation-cap"></i>`;
+                document.getElementById('chatTitle').innerText = 'Digital Courses';
+                document.getElementById('chatArea').innerHTML = `<div class="chat-bubble bubble-left"><h3>Digital Courses Coming Soon! 🚀</h3><p>We are currently building the largest library of digital courses. Over 5000 courses will be available soon. Stay tuned!</p></div>`;
+                document.getElementById('detailView').classList.add('active');
+            }
+        }
+
+        // --- CBT LOGIC ---
         function startCBT() {
             document.getElementById('cbtOverlay').classList.add('active');
             document.getElementById('cbtScore').style.display = 'none';
             document.getElementById('cbtContent').innerHTML = `
-                <h3 style="color:var(--millionaire-gold); margin: 20px 0;">Enter Your Details</h3>
-                <input type="text" class="cbt-input" id="cbtName" placeholder="Your Full Name">
+                <h3 style="color:var(--millionaire-gold); margin: 20px 0;">Enter Your Details</h3>                <input type="text" class="cbt-input" id="cbtName" placeholder="Your Full Name">
                 <input type="email" class="cbt-input" id="cbtEmail" placeholder="Your Gmail Address">
                 <button class="cbt-btn" onclick="validateCBT()">Start Game</button>
             `;
         }
 
-        function validateCBT() {            const name = document.getElementById('cbtName').value.trim();
+        function validateCBT() {
+            const name = document.getElementById('cbtName').value.trim();
             const email = document.getElementById('cbtEmail').value.trim();
-            if (!name || !email || !email.includes('@')) {
-                alert('Please enter valid Name and Gmail');
-                return;
-            }
-            cbtState.name = name;
-            cbtState.email = email;
+            if (!name || !email || !email.includes('@')) { alert('Please enter valid Name and Gmail'); return; }
+            cbtState.name = name; cbtState.email = email;
             showCategories();
         }
 
         function showCategories() {
             let html = '<h3 style="color:var(--millionaire-gold); margin: 20px 0;">Select Category</h3>';
-            Object.keys(questionsDB).forEach(cat => {
-                html += `<button class="cat-btn" onclick="startQuiz('${cat}')">${cat}</button>`;
-            });
+            Object.keys(questionsDB).forEach(cat => { html += `<button class="cat-btn" onclick="startQuiz('${cat}')">${cat}</button>`; });
             document.getElementById('cbtContent').innerHTML = html;
         }
 
         function startQuiz(category) {
             cbtState.category = category;
             cbtState.questions = [...questionsDB[category]].sort(() => 0.5 - Math.random()).slice(0, 10);
-            cbtState.index = 0;
-            cbtState.score = 0;
-            cbtState.time = 300;
+            cbtState.index = 0; cbtState.score = 0; cbtState.time = 300;
             document.getElementById('cbtScore').style.display = 'block';
             document.getElementById('cbtScore').innerText = '0/10';
-            showQuestion();
-            startTimer();
+            showQuestion(); startTimer();
         }
 
         function startTimer() {
             if (cbtState.timer) clearInterval(cbtState.timer);
-            cbtState.timer = setInterval(() => {
-                cbtState.time--;
-                if (cbtState.time <= 0) {
-                    clearInterval(cbtState.timer);
-                    endQuiz();
-                }
-            }, 1000);
+            cbtState.timer = setInterval(() => { cbtState.time--; if (cbtState.time <= 0) { clearInterval(cbtState.timer); endQuiz(); } }, 1000);
         }
 
         function showQuestion() {
             const q = cbtState.questions[cbtState.index];
-            const mins = Math.floor(cbtState.time / 60);
-            const secs = cbtState.time % 60;
-            
-            let html = `<div class="cbt-timer">⏱️ ${mins}:${secs.toString().padStart(2,'0')}</div>`;
+            const mins = Math.floor(cbtState.time / 60); const secs = cbtState.time % 60;
+            let html = `<div class="cbt-timer">️ ${mins}:${secs.toString().padStart(2,'0')}</div>`;
             html += `<div class="cbt-question"><strong>Q${cbtState.index + 1}/10:</strong> ${q.q}</div>`;
-                        const labels = ['A', 'B', 'C', 'D'];
-            q.options.forEach((opt, idx) => {
-                html += `<div class="cbt-option" onclick="checkAnswer(${idx}, this)"><span>${labels[idx]}.</span> ${opt}</div>`;
-            });
-            
+            const labels = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, idx) => { html += `<div class="cbt-option" onclick="checkAnswer(${idx}, this)"><span>${labels[idx]}.</span> ${opt}</div>`; });
             document.getElementById('cbtContent').innerHTML = html;
         }
 
         function checkAnswer(selected, element) {
             const options = document.querySelectorAll('.cbt-option');
             options.forEach(opt => opt.style.pointerEvents = 'none');
-            
             const correct = cbtState.questions[cbtState.index].a;
-            if (selected === correct) {
-                element.classList.add('correct');
-                cbtState.score++;
-                document.getElementById('cbtScore').innerText = `${cbtState.score}/10`;
-            } else {
-                element.classList.add('wrong');
-                options[correct].classList.add('correct');
-            }
-            
-            setTimeout(() => {
-                cbtState.index++;
-                if (cbtState.index < 10) {
-                    showQuestion();
-                } else {
-                    clearInterval(cbtState.timer);
-                    endQuiz();
-                }
-            }, 1500);
+            if (selected === correct) { element.classList.add('correct'); cbtState.score++; document.getElementById('cbtScore').innerText = `${cbtState.score}/10`; } 
+            else { element.classList.add('wrong'); options[correct].classList.add('correct'); }            setTimeout(() => { cbtState.index++; if (cbtState.index < 10) showQuestion(); else { clearInterval(cbtState.timer); endQuiz(); } }, 1500);
         }
 
         function endQuiz() {
             const score = cbtState.score;
             let html = `<h3 style="color:var(--millionaire-gold); margin: 20px 0; text-align: center;">Quiz Complete!</h3>`;
             html += `<div class="cbt-question" style="text-align: center;"><h2 style="color: white; margin-bottom: 15px;">Score: ${score}/10</h2>`;
-            
             if (score === 10) {
-                html += `<p style="color:var(--millionaire-gold); font-size: 1.3rem; font-weight: bold;">🏆 GRAND WINNER! 🏆</p>
-                         <p>Click below to email your details for rewards!</p>
-                         <a href="mailto:${adminEmail}?subject=Millionaire Winner: ${encodeURIComponent(cbtState.name)}&body=Name: ${encodeURIComponent(cbtState.name)}%0D%0AEmail: ${encodeURIComponent(cbtState.email)}%0D%0ACategory: ${encodeURIComponent(cbtState.category)}%0D%0AScore: 10/10" class="cbt-btn" style="text-decoration: none; display: inline-block; margin-top: 15px;">📧 Claim Reward</a>`;
+                html += `<p style="color:var(--millionaire-gold); font-size: 1.3rem; font-weight: bold;">🏆 GRAND WINNER! 🏆</p><p>Click below to email your details for rewards!</p><a href="mailto:${adminEmail}?subject=Millionaire Winner: ${encodeURIComponent(cbtState.name)}&body=Name: ${encodeURIComponent(cbtState.name)}%0D%0AEmail: ${encodeURIComponent(cbtState.email)}%0D%0ACategory: ${encodeURIComponent(cbtState.category)}%0D%0AScore: 10/10" class="cbt-btn" style="text-decoration: none; display: inline-block; margin-top: 15px;"> Claim Reward</a>`;
             } else if (score >= 7) {
-                html += `<p style="color:var(--green-accent); font-weight: bold;">✅ PASSED! Score above 6.</p>
-                         <p>You can advance to higher level!</p>
-                         <button class="cbt-btn" onclick="showCategories()">Play Another Category</button>`;
+                html += `<p style="color:var(--green-accent); font-weight: bold;">✅ PASSED! Score above 6.</p><p>You can advance to higher level!</p><button class="cbt-btn" onclick="showCategories()">Play Another Category</button>`;
             } else {
-                html += `<p style="color:var(--red-accent); font-weight: bold;">❌ Need 7/10 to pass.</p>
-                         <button class="cbt-btn" onclick="showCategories()">Try Again</button>`;
-            }            html += `</div>`;
+                html += `<p style="color:var(--red-accent); font-weight: bold;">❌ Need 7/10 to pass.</p><button class="cbt-btn" onclick="showCategories()">Try Again</button>`;
+            }
+            html += `</div>`;
             document.getElementById('cbtContent').innerHTML = html;
         }
 
-        function closeCBT() {
-            if (cbtState.timer) clearInterval(cbtState.timer);
-            document.getElementById('cbtOverlay').classList.remove('active');
-        }
+        function closeCBT() { if (cbtState.timer) clearInterval(cbtState.timer); document.getElementById('cbtOverlay').classList.remove('active'); }
 
-        // Bottom Nav Functions
-        function openCourses() {
-            alert('Digital Courses coming soon! Check back later.');
-        }
-
-        function openBooks() {
-            const books = [
-                { name: "Personal Development", link: "https://drive.google.com/drive/folders/1-4m3aoHpkMC032U4HJBio1QxsEgCEYdJ" },
-                { name: "Finance & Money Making", link: "https://drive.google.com/drive/folders/1vUgr-Ira5WxrMO5y1y5UzLaCQ_OlJq1u" },
-                { name: "Social Media Marketing", link: "https://drive.google.com/drive/folders/1-s3TQVx_tiOf0q_5InPUfnWh1b4kz7cN" },
-                { name: "Copywriting", link: "https://drive.google.com/drive/folders/1-4lr1gypDbKPNwl_efq6k1JQWd_CQhqA" },
-                { name: "Freelance", link: "https://drive.google.com/drive/folders/1-RQh1In2UchBjMOwY_rQu-O1dsXwRex2" },
-                { name: "Goal Settings", link: "https://drive.google.com/drive/folders/1g81fBkWA30w5GqiqNeJS9WBHSlJBxZnU" },
-                { name: "Special Books", link: "https://drive.google.com/drive/folders/10lyKgfjhOEhOoDlcspmULX2T6wsAqukQ" },
-                { name: "Swipe File", link: "https://drive.google.com/drive/folders/1-7R4qxmkJdEAj8eKG6wQpzIBo_cLJLqu" },
-                { name: "Christian Books", link: "https://drive.google.com/drive/folders/1NWQi8XbWn9wx4fxR36PdZtBYnvHWQycX" },
-                { name: "Trading Books", link: "https://drive.google.com/drive/folders/1Qbn3ugXYf0y_U6C2jPkSR7VM5A1kLf4U" },
-                { name: "Life Building", link: "https://drive.google.com/drive/folders/1E7dJs3gFhcDg7-kUtVghOrpYU26fqBje" },
-                { name: "Speak & Make Money", link: "https://drive.google.com/file/d/1kjALH8JyQ_uefjzfu7EFXKF8itceWPFf/view" }
-            ];
-            
-            let msg = "📚 FREE EBOOKS LIBRARY:\n\n";
-            books.forEach((b, i) => {
-                msg += `${i+1}. ${b.name}\n${b.link}\n\n`;
-            });
-            
-            alert('Opening Free Books List... Check your WhatsApp!');
-            window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        // Initialize
+        // Initialize App
         renderMenu();
+        initUser();
     </script>
 </body>
 </html>
