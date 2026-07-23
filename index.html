@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BMY Digital Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Adsterra Social Bar (Runs quietly in background) -->
+    <script src="https://pl29819831.effectivecpmnetwork.com/40/ec/a6/40eca62ffa3dd47c9612d8d993c2924e.js"></script>
+
     <style>
-        /* WhatsApp Exact Colors & Base Styles */
         :root {
             --wa-header: #075E54;
-            --wa-header-light: #128C7E;
             --wa-bg: #ECE5DD;
             --wa-white: #FFFFFF;
             --wa-green-btn: #25D366;
-            --wa-green-dark: #128C7E;
             --wa-text: #111111;
             --wa-text-light: #666666;
             --wa-border: #E5E5E5;
             --wa-bubble-sent: #DCF8C6;
+            --red-accent: #e91e63;
+            --black-accent: #000000;
+            --green-accent: #4caf50;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
@@ -29,7 +33,7 @@
         .header-title { font-size: 20px; font-weight: 500; }
         .header-icons i { margin-left: 20px; font-size: 18px; cursor: pointer; }
 
-        .main-view { flex: 1; overflow-y: auto; background-color: var(--wa-white); }
+        .main-view { flex: 1; overflow-y: auto; background-color: var(--wa-white); padding-bottom: 70px; }
         .menu-item { display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid var(--wa-border); cursor: pointer; transition: background 0.2s; }
         .menu-item:active { background-color: #f5f5f5; }
         .menu-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 22px; color: white; flex-shrink: 0; }
@@ -37,17 +41,17 @@
         .menu-title { font-size: 16px; font-weight: 500; color: var(--wa-text); margin-bottom: 4px; }
         .menu-subtitle { font-size: 13px; color: var(--wa-text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .detail-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--wa-bg); background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E"); display: none; flex-direction: column; z-index: 20; }
+        .detail-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--wa-bg); background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E"); display: none; flex-direction: column; z-index: 20; padding-bottom: 70px; }
         .detail-view.active { display: flex; }
 
         .chat-header { background-color: var(--wa-header); color: var(--wa-white); padding: 10px 15px; display: flex; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
         .back-btn { font-size: 20px; margin-right: 15px; cursor: pointer; display: flex; align-items: center; }
         .chat-header-info { display: flex; align-items: center; }
-        .chat-header-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 16px; color: white; }
-        .chat-header-title { font-size: 16px; font-weight: 500; }
+        .chat-header-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 16px; color: white; }        .chat-header-title { font-size: 16px; font-weight: 500; }
 
         .chat-area { flex: 1; padding: 20px 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .chat-bubble { max-width: 90%; padding: 12px 15px; border-radius: 8px; font-size: 14px; line-height: 1.5; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.1); }        .bubble-left { background-color: var(--wa-white); align-self: flex-start; border-top-left-radius: 0; }
+        .chat-bubble { max-width: 92%; padding: 12px 15px; border-radius: 8px; font-size: 14px; line-height: 1.5; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+        .bubble-left { background-color: var(--wa-white); align-self: flex-start; border-top-left-radius: 0; }
         .bubble-right { background-color: var(--wa-bubble-sent); align-self: flex-end; border-top-right-radius: 0; }
         
         .bubble-left h3 { font-size: 17px; margin-bottom: 10px; color: var(--wa-header); font-weight: 700; }
@@ -55,11 +59,50 @@
         .bubble-left ul { margin-left: 20px; margin-bottom: 10px; }
         .bubble-left li { margin-bottom: 6px; }
         
-        .price-tag { font-weight: bold; font-size: 18px; color: var(--wa-green-dark); margin: 15px 0; background: #e8f5e9; padding: 10px; border-radius: 8px; border-left: 4px solid var(--wa-green-btn); }
+        .book-link { display: block; background: #f0f0f0; padding: 10px; border-radius: 8px; margin-bottom: 8px; text-decoration: none; color: var(--wa-text); font-weight: 500; border-left: 4px solid var(--green-accent); transition: 0.2s; }
+        .book-link:hover { background: #e0e0e0; transform: translateX(3px); }
+        .book-link i { margin-right: 8px; color: var(--red-accent); }
+
+        .price-tag { font-weight: bold; font-size: 18px; color: var(--wa-header); margin: 15px 0; background: #e8f5e9; padding: 10px; border-radius: 8px; border-left: 4px solid var(--wa-green-btn); }
         
         .order-btn { display: inline-block; background-color: var(--wa-green-btn); color: white; text-decoration: none; padding: 12px 24px; border-radius: 25px; font-weight: 700; font-size: 15px; margin-top: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); width: 100%; }
         .order-btn i { margin-right: 8px; }
         .chat-time { font-size: 10px; color: #999; text-align: right; margin-top: 5px; }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background: var(--wa-white);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            border-top: 3px solid var(--wa-header);
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+        }
+        .nav-item i { font-size: 20px; margin-bottom: 4px; }
+        
+        /* Red, Black, Green Mixed Design for Bottom Nav */
+        .nav-item:nth-child(1) { color: var(--green-accent); } /* Chat - Green */        .nav-item:nth-child(2) { color: var(--black-accent); } /* Courses - Black */
+        .nav-item:nth-child(3) { color: var(--green-accent); } /* WhatsApp - Green */
+        .nav-item:nth-child(4) { color: var(--red-accent); }   /* Telegram - Red */
+        .nav-item:nth-child(5) { color: var(--black-accent); } /* Books - Black */
+
+        .ad-container { text-align: center; margin: 15px auto; max-width: 320px; }
+        .ad-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
 
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
@@ -76,6 +119,16 @@
                     <i class="fas fa-ellipsis-v"></i>
                 </div>
             </div>
+            
+            <!-- Tiny Homepage Ad (320x50) -->
+            <div class="ad-container">
+                <div class="ad-label">Sponsored</div>
+                <script>
+                  atOptions = { 'key' : '90fd5bebbb6299ffe5d07b8a539064d0', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+                </script>
+                <script src="https://www.highperformanceformat.com/90fd5bebbb6299ffe5d07b8a539064d0/invoke.js"></a></script>
+            </div>
+
             <div id="menuList"></div>
         </div>
 
@@ -89,200 +142,64 @@
             </div>
             <div class="chat-area" id="chatArea"></div>
         </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="openBottomNav('chat')">                <i class="fas fa-comments"></i>
+                <span>Chat Admin</span>
+            </div>
+            <div class="nav-item" onclick="openBottomNav('courses')">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Courses</span>
+            </div>
+            <div class="nav-item" onclick="openBottomNav('whatsapp')">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </div>
+            <div class="nav-item" onclick="openBottomNav('telegram')">
+                <i class="fab fa-telegram"></i>
+                <span>Telegram</span>
+            </div>
+            <div class="nav-item" onclick="openBottomNav('books')">
+                <i class="fas fa-book"></i>
+                <span>Free Books</span>
+            </div>
+        </div>
     </div>
 
+    <!-- Load External Courses Data -->
+    <script src="courses-data.js"></script>
+
     <script>
-        // ==========================================
-        // YOUR MENU DATA - EDIT THIS TO CHANGE CONTENT
-        // ==========================================
-        
         const myWhatsAppNumber = "2349159884244"; 
+
+        // Main Menu Data
         const menuData = [
             {
-                id: 1,
-                title: "AI Image Generation Course",
-                subtitle: "Tap to view course details and price",
-                icon: "fa-image",
-                color: "#e91e63",
-                details: `
-                    <h3>AI Image Generation & Monetization 🎨</h3>
-                    <p>Welcome! Here is everything you will learn in this course:</p>
-                    <ul>
-                        <li>✅ AI Image Generation (Studio Quality & Standard)</li>
-                        <li>✅ Prompt Engineering Mastery</li>
-                        <li>✅ Free Prompts Library</li>
-                        <li>✅ Complete Monetization Strategies</li>
-                        <li>✅ Google Drive Course Access</li>
-                        <li>✅ Step-by-Step Workflow Guide</li>
-                    </ul>
-                    <div class="price-tag">💰 Promo Price: #5,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #10,000</span></div>
-                `,
-                orderText: "Order on WhatsApp",
-                orderMessage: "Hello BMY! I want to buy the AI Image Generation Course for #5,000."
+                id: 1, title: "AI Image Generation Course", subtitle: "Tap to view details and price", icon: "fa-image", color: "#e91e63",
+                details: `<h3>AI Image Generation & Monetization 🎨</h3><p>Everything you will learn:</p><ul><li>✅ AI Image Generation (Studio Quality)</li><li>✅ Prompt Engineering Mastery</li><li>✅ Free Prompts Library</li><li>✅ Complete Monetization Strategies</li><li>✅ Google Drive Course Access</li></ul><div class="price-tag">💰 Promo: #5,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #10,000</span></div>`,
+                orderText: "Order on WhatsApp", orderMessage: "Hello BMY! I want to buy the AI Image Generation Course for #5,000."
             },
             {
-                id: 2,
-                title: "AI Video Generation Course",
-                subtitle: "Tap to view course details and price",
-                icon: "fa-video",
-                color: "#2196f3",
-                details: `
-                    <h3>AI Video Generation & Monetization 🎬</h3>
-                    <p>Welcome! Here is everything you will learn in this course:</p>
-                    <ul>
-                        <li>✅ AI Video Generation Course</li>
-                        <li>✅ Professional Video Tools Training</li>
-                        <li>✅ Prompt Engineering for Video</li>
-                        <li>✅ Complete Monetization Strategies</li>
-                        <li>✅ Google Drive Course Access</li>
-                        <li>✅ Full Production Workflow Guide</li>
-                    </ul>
-                    <div class="price-tag">💰 Promo Price: #5,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #10,000</span></div>
-                `,
-                orderText: "Order on WhatsApp",
-                orderMessage: "Hello BMY! I want to buy the AI Video Generation Course for #5,000."
+                id: 2, title: "AI Video Generation Course", subtitle: "Tap to view details and price", icon: "fa-video", color: "#2196f3",
+                details: `<h3>AI Video Generation & Monetization 🎬</h3><p>Everything you will learn:</p><ul><li>✅ AI Video Generation Course</li><li>✅ Professional Video Tools Training</li><li>✅ Prompt Engineering for Video</li><li>✅ Complete Monetization Strategies</li><li>✅ Google Drive Course Access</li></ul><div class="price-tag">💰 Promo: #5,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #10,000</span></div>`,
+                orderText: "Order on WhatsApp", orderMessage: "Hello BMY! I want to buy the AI Video Generation Course for #5,000."
             },
             {
-                id: 3,
-                title: "Own Your Own Platform (80% Yours)",
-                subtitle: "Tap to get a clone of this website",                icon: "fa-server",
-                color: "#ff9800",
-                details: `
-                    <h3>Get a Website Exactly Like Mine! 🚀</h3>
-                    <p>Why start from scratch? Get a fully built, hosted, and managed digital store just like this one.</p>
-                    
-                    <h3>💰 The 80/20 Profit Split:</h3>
-                    <ul>
-                        <li>✅ <strong>You keep 80%</strong> of every sale made on your platform.</li>
-                        <li>✅ <strong>I take 20%</strong> for platform maintenance, hosting, and technical support.</li>
-                    </ul>
-
-                    <h3> Full Mentorship Included:</h3>
-                    <p>You don't need to worry about guiding buyers! Anyone who buys from your platform automatically joins <strong>my</strong> WhatsApp and Telegram communities. I will handle all the mentoring, updates, and follow-ups for your customers.</p>
-                    
-                    <h3>What You Get:</h3>
-                    <ul>
-                        <li>✅ A clone of my website in your name</li>
-                        <li>✅ Both AI Courses pre-loaded</li>
-                        <li>✅ Your own Affiliate Program setup</li>
-                        <li>✅ Automatic updates (if I add a course, it appears on your site too!)</li>
-                    </ul>
-                    <div class="price-tag">💰 Setup Fee: #15,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #50,000</span></div>
-                `,
-                orderText: "Get My Platform on WhatsApp",
-                orderMessage: "Hello BMY! I want to get my own platform (80/20 split) for #15,000."
+                id: 3, title: "Own Your Own Platform (80% Yours)", subtitle: "Tap to get a clone of this website", icon: "fa-server", color: "#ff9800",
+                details: `<h3>Get a Website Exactly Like Mine! 🚀</h3><p>Why start from scratch? Get a fully built, hosted, and managed digital store.</p><h3>💰 The 80/20 Profit Split:</h3><ul><li>✅ <strong>You keep 80%</strong> of every sale.</li><li>✅ <strong>I take 20%</strong> for maintenance and hosting.</li></ul><h3>🎓 Full Mentorship Included:</h3><p>Anyone who buys from your platform automatically joins <strong>my</strong> WhatsApp and Telegram communities. I handle all mentoring, updates, and follow-ups for your customers.</p><ul><li>✅ A clone of my website in your name</li><li>✅ Both AI Courses pre-loaded</li><li>✅ Automatic updates from my main site</li></ul><div class="price-tag">💰 Setup Fee: #15,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #50,000</span></div>`,
+                orderText: "Get My Platform on WhatsApp", orderMessage: "Hello BMY! I want to get my own platform (80/20 split) for #15,000."
             },
             {
-                id: 4,
-                title: "Reselling License (Full Control)",
-                subtitle: "Tap to become a master reseller",
-                icon: "fa-handshake",
-                color: "#9c27b0",
-                details: `
-                    <h3>Reselling License Package </h3>
-                    <p>Want full control? Get the ultimate reselling license.</p>
-                    <ul>
-                        <li>✅ Full platform with reselling rights</li>
-                        <li>✅ You set up your own affiliates</li>
-                        <li>✅ Automatic course updates from my main site</li>
-                        <li>✅ Your buyers join my mentorship community</li>
-                        <li>✅ 6 months priority support</li>
-                    </ul>
-                    <div class="price-tag">💰 License Fee: #20,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #60,000</span></div>
-                `,
-                orderText: "Get License on WhatsApp",
-                orderMessage: "Hello BMY! I want to buy the Reselling License for #20,000."
-            },
-            {
-                id: 5,                title: "Become an Affiliate (Earn 40%)",
-                subtitle: "Tap to learn how to earn big",
-                icon: "fa-percentage",
-                color: "#4caf50",
-                details: `
-                    <h3>Affiliate Program: Earn 40% Commission! 💸</h3>
-                    <p>Do you have friends, followers, or a network? Turn them into cash! You don't need to create any products. Just share your link and earn.</p>
-                    
-                    <h3>How It Works:</h3>
-                    <ul>
-                        <li>✅ <strong>You Promote:</strong> Share your unique link for our AI courses or platforms.</li>
-                        <li>✅ <strong>They Buy:</strong> When someone buys through your link, the system tracks it.</li>
-                        <li>✅ <strong>You Earn 40%:</strong> For every #5,000 course sold, you keep #2,000. For every #15,000 platform sold, you keep #6,000!</li>
-                    </ul>
-
-                    <h3>Why Join?</h3>
-                    <ul>
-                        <li>✅ 100% FREE to join</li>
-                        <li>✅ No customer support needed (I handle it!)</li>
-                        <li>✅ Real-time tracking of your sales</li>
-                        <li>✅ Fast payouts directly to your bank</li>
-                    </ul>
-                    <div class="price-tag"> It's 100% FREE to register!</div>
-                `,
-                orderText: "Register as Affiliate on WhatsApp",
-                orderMessage: "Hello BMY! I want to register as an Affiliate to earn 40% commission."
-            },
-            {
-                id: 6,
-                title: "Free & Discounted Courses",
-                subtitle: "Tap to see free skills",
-                icon: "fa-gift",
-                color: "#00bcd4",
-                details: `
-                    <h3>Free & Discounted Skills 🎁</h3>
-                    <p>Start learning today with our free resources!</p>
-                    <ul>
-                        <li>✅ <strong>FREE:</strong> Digital Marketing Basics (Worth #5,000)</li>
-                        <li>✅ <strong>50% OFF:</strong> Canva for Beginners (Now #2,500)</li>
-                        <li>✅ Access to exclusive free prompts</li>
-                    </ul>
-                    <div class="price-tag">💰 Prices: FREE & #2,500</div>
-                `,
-                orderText: "Claim on WhatsApp",
-                orderMessage: "Hello BMY! I want access to the Free and Discounted courses."
-            },
-            {
-                id: 7,
-                title: "BMY Content Tools",
-                subtitle: "Tap to see our tools",                icon: "fa-tools",
-                color: "#795548",
-                details: `
-                    <h3>BMY Content Tools 🛠️</h3>
-                    <p>Essential digital tools to enhance your workflow:</p>
-                    <ul>
-                        <li>✅ AI Image Generator</li>
-                        <li>✅ AI Video Creator</li>
-                        <li>✅ Prompt Optimizer</li>
-                        <li>✅ Monetization Calculator</li>
-                    </ul>
-                    <p>These tools are available inside our courses and platform!</p>
-                `,
-                orderText: "Chat about Tools",
-                orderMessage: "Hello BMY! I want to know more about the BMY Content Tools."
-            },
-            {
-                id: 8,
-                title: "Join Community",
-                subtitle: "WhatsApp & Telegram groups",
-                icon: "fa-users",
-                color: "#607d8b",
-                details: `
-                    <h3>Join Our Creator Community </h3>
-                    <p>Connect with thousands of creators, get mentorship, and stay updated!</p>
-                    <ul>
-                        <li>✅ WhatsApp Group (5,000+ members)</li>
-                        <li>✅ Telegram Channel (10,000+ subscribers)</li>
-                        <li>✅ 24/7 Creator Forum Support</li>
-                    </ul>
-                    <p>All platform buyers automatically join our exclusive community.</p>
-                `,
-                orderText: "Join Community on WhatsApp",
-                orderMessage: "Hello BMY! I want to join the WhatsApp and Telegram community."
+                id: 4, title: "Reselling License (Full Control)", subtitle: "Tap to become a master reseller", icon: "fa-handshake", color: "#9c27b0",
+                details: `<h3>Reselling License Package </h3><ul><li>✅ Full platform with reselling rights</li><li>✅ You set up your own affiliates</li><li>✅ Automatic course updates from my main site</li><li>✅ Your buyers join my mentorship community</li><li>✅ 6 months priority support</li></ul><div class="price-tag">💰 License Fee: #20,000 <br><span style="text-decoration: line-through; color: #999; font-size: 14px;">Original: #60,000</span></div>`,
+                orderText: "Get License on WhatsApp", orderMessage: "Hello BMY! I want to buy the Reselling License for #20,000."
+            },            {
+                id: 5, title: "Become an Affiliate (Earn 40%)", subtitle: "Tap to learn how to earn big", icon: "fa-percentage", color: "#4caf50",
+                details: `<h3>Affiliate Program: Earn 40% Commission! 💸</h3><p>Turn your network into cash! You don't need to create products. Just share your link and earn.</p><h3>How It Works:</h3><ul><li>✅ <strong>You Promote:</strong> Share your unique link.</li><li>✅ <strong>They Buy:</strong> System tracks the sale.</li><li>✅ <strong>You Earn 40%:</strong> For every #5,000 course, you keep #2,000!</li></ul><h3>Why Join?</h3><ul><li>✅ 100% FREE to join</li><li>✅ No customer support needed (I handle it!)</li><li>✅ Fast payouts directly to your bank</li></ul><div class="price-tag">🎉 It's 100% FREE to register!</div>`,
+                orderText: "Register as Affiliate on WhatsApp", orderMessage: "Hello BMY! I want to register as an Affiliate to earn 40% commission."
             }
         ];
-
-        // ==========================================
-        // APP LOGIC (DO NOT EDIT BELOW THIS LINE)
-        // ==========================================
 
         const menuList = document.getElementById('menuList');
         const mainView = document.getElementById('mainView');
@@ -291,11 +208,13 @@
         const chatTitle = document.getElementById('chatTitle');
         const chatArea = document.getElementById('chatArea');
 
+        // Render Main Menu
         function renderMenu() {
-            menuList.innerHTML = '';            menuData.forEach(item => {
+            menuList.innerHTML = '';
+            menuData.forEach(item => {
                 const menuItem = document.createElement('div');
                 menuItem.className = 'menu-item';
-                menuItem.onclick = () => openDetail(item);
+                menuItem.onclick = () => openDetail(item, false);
                 menuItem.innerHTML = `
                     <div class="menu-icon" style="background-color: ${item.color}"><i class="fas ${item.icon}"></i></div>
                     <div class="menu-details">
@@ -307,7 +226,109 @@
             });
         }
 
-        function openDetail(item) {
+        // Special Bottom Nav Handler
+        function openBottomNav(type) {
+            if (type === 'chat') {
+                window.open(`https://wa.me/${myWhatsAppNumber}`, '_blank');
+                return;
+            }
+            if (type === 'whatsapp') {
+                window.open('https://chat.whatsapp.com/E0XfmxCpkX69wMFKqhGT9U?s=cl&p=a&ilr=1', '_blank');
+                return;
+            }
+            if (type === 'telegram') {
+                window.open('https://t.me/capacitydotbuild', '_blank');
+                return;
+            }
+            if (type === 'courses') {
+                openDetail({
+                    id: 99, title: "Digital Courses", icon: "fa-graduation-cap", color: "#000000",
+                    details: generateCoursesHTML(),                    orderText: "Chat for Course Access", orderMessage: "Hello BMY! I am interested in the Digital Courses."
+                }, true); // true = trigger ads
+                return;
+            }
+            if (type === 'books') {
+                openDetail({
+                    id: 100, title: "Read Free Ebooks", icon: "fa-book", color: "#e91e63",
+                    details: generateBooksHTML(),
+                    orderText: "Chat for More Free Resources", orderMessage: "Hello BMY! I want more free resources."
+                }, true); // true = trigger ads
+                return;
+            }
+        }
+
+        function generateCoursesHTML() {
+            let html = `<h3>Digital Courses Library 📚</h3>`;
+            if (typeof coursesData !== 'undefined' && coursesData.length > 0) {
+                coursesData.forEach(course => {
+                    html += `<div style="background:#f9f9f9; padding:15px; border-radius:8px; margin-bottom:10px; border-left: 4px solid ${course.color};">
+                        <h4 style="margin-bottom:5px;">${course.title}</h4>
+                        <p style="font-size:13px; color:#666;">${course.description}</p>
+                        ${course.link ? `<a href="${course.link}" target="_blank" class="book-link" style="margin-top:10px; display:inline-block; text-align:center;"><i class="fas fa-external-link-alt"></i> Access Course</a>` : `<span style="font-size:12px; color:#ff9800; font-weight:bold;">${course.status}</span>`}
+                    </div>`;
+                });
+            } else {
+                html += `<p>Loading courses...</p>`;
+            }
+            
+            // Add Ads to Courses Page
+            html += `
+                <div class="ad-container">
+                    <div class="ad-label">Sponsored</div>
+                    <script async="async" data-cfasync="false" src="https://pl29820186.effectivecpmnetwork.com/31f16fc7913263f00e93a85356f6e7d6/invoke.js"><\/script>
+                    <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+                </div>
+                <div class="ad-container">
+                    <div class="ad-label">Sponsored</div>
+                    <script>
+                      atOptions = { 'key' : '265a3e3f0e948dc63fad891d2f0216ac', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                    <\/script>
+                    <script src="https://www.highperformanceformat.com/265a3e3f0e948dc63fad891d2f0216ac/invoke.js"><\/script>
+                </div>
+            `;
+            return html;
+        }
+
+        function generateBooksHTML() {
+            const books = [
+                { name: "Personal Development Books", link: "https://drive.google.com/drive/folders/1-4m3aoHpkMC032U4HJBio1QxsEgCEYdJ" },
+                { name: "Finance and Money Making Books", link: "https://drive.google.com/drive/folders/1vUgr-Ira5WxrMO5y1y5UzLaCQ_OlJq1u" },                { name: "Social Media Marketing Books", link: "https://drive.google.com/drive/folders/1-s3TQVx_tiOf0q_5InPUfnWh1b4kz7cN" },
+                { name: "Copywriting Books", link: "https://drive.google.com/drive/folders/1-4lr1gypDbKPNwl_efq6k1JQWd_CQhqA" },
+                { name: "Freelance Books", link: "https://drive.google.com/drive/folders/1-RQh1In2UchBjMOwY_rQu-O1dsXwRex2" },
+                { name: "Goal Settings Books", link: "https://drive.google.com/drive/folders/1g81fBkWA30w5GqiqNeJS9WBHSlJBxZnU" },
+                { name: "Special Books", link: "https://drive.google.com/drive/folders/10lyKgfjhOEhOoDlcspmULX2T6wsAqukQ" },
+                { name: "Swipe File Books", link: "https://drive.google.com/drive/folders/1-7R4qxmkJdEAj8eKG6wQpzIBo_cLJLqu" },
+                { name: "Christian Books", link: "https://drive.google.com/drive/folders/1NWQi8XbWn9wx4fxR36PdZtBYnvHWQycX" },
+                { name: "Financial Market Trading Books", link: "https://drive.google.com/drive/folders/1Qbn3ugXYf0y_U6C2jPkSR7VM5A1kLf4U" },
+                { name: "Life Building Books", link: "https://drive.google.com/drive/folders/1E7dJs3gFhcDg7-kUtVghOrpYU26fqBje" },
+                { name: "Speak and Make Money Book", link: "https://drive.google.com/file/d/1kjALH8JyQ_uefjzfu7EFXKF8itceWPFf/view?usp=drivesdk" }
+            ];
+
+            let html = `<h3>Free Ebooks Library 📖</h3><p>Click any category below to open the Google Drive folder and read for free!</p>`;
+            books.forEach(book => {
+                html += `<a href="${book.link}" target="_blank" class="book-link"><i class="fas fa-folder-open"></i> ${book.name}</a>`;
+            });
+
+            // Add Ads to Books Page
+            html += `
+                <div class="ad-container">
+                    <div class="ad-label">Sponsored</div>
+                    <script async="async" data-cfasync="false" src="https://pl29820186.effectivecpmnetwork.com/31f16fc7913263f00e93a85356f6e7d6/invoke.js"><\/script>
+                    <div id="container-31f16fc7913263f00e93a85356f6e7d6"></div>
+                </div>
+                <div class="ad-container">
+                    <div class="ad-label">Sponsored</div>
+                    <script>
+                      atOptions = { 'key' : '265a3e3f0e948dc63fad891d2f0216ac', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                    <\/script>
+                    <script src="https://www.highperformanceformat.com/265a3e3f0e948dc63fad891d2f0216ac/invoke.js"><\/script>
+                </div>
+            `;
+            return html;
+        }
+
+        // Open Detail View
+        function openDetail(item, triggerAds = false) {
             chatIcon.style.backgroundColor = item.color;
             chatIcon.innerHTML = `<i class="fas ${item.icon}"></i>`;
             chatTitle.innerText = item.title;
@@ -320,8 +341,7 @@
                     ${item.details}
                     <div class="chat-time">BMY Store • Just now</div>
                 </div>
-                <div class="chat-bubble bubble-right">
-                    <a href="${waLink}" class="order-btn" target="_blank">
+                <div class="chat-bubble bubble-right">                    <a href="${waLink}" class="order-btn" target="_blank">
                         <i class="fab fa-whatsapp"></i> ${item.orderText}
                     </a>
                     <div class="chat-time">Just now <i class="fas fa-check-double" style="color: #4fc3f7; margin-left: 3px;"></i></div>
@@ -331,6 +351,20 @@
             mainView.style.display = 'none';
             detailView.classList.add('active');
             setTimeout(() => { chatArea.scrollTop = chatArea.scrollHeight; }, 100);
+
+            // TRIGGER POPUNDER ONLY FOR BOOKS AND COURSES
+            if (triggerAds) {
+                loadPopunder();
+            }
+        }
+
+        // Dynamically load Popunder ONLY when needed
+        function loadPopunder() {
+            if (document.getElementById('adsterra-popunder-loaded')) return;
+            const script = document.createElement('script');
+            script.src = "https://pl29820228.effectivecpmnetwork.com/7f/63/83/7f638315da085a860c6d66deecc31bcd.js";
+            script.id = "adsterra-popunder-loaded";
+            document.body.appendChild(script);
         }
 
         function goBack() {
